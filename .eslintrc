@@ -41,6 +41,12 @@
       }
     ],
     "eqeqeq": "error",
-    "dot-notation": "warn"
+    "dot-notation": "warn",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   }
 }
