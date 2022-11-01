@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
+import Sidebar from '../components/layout/sidebar';
 import { ROUTE } from '../constants/routes';
 import Account from '../pages/Account';
 import AccountDetail from '../pages/AccountDetail';
@@ -10,7 +11,7 @@ import { UserToken } from '../utils/auth';
 
 const Auth = () => {
   const token = UserToken.get();
-  return token ? <Navigate to={ROUTE.MAIN} replace /> : <Navigate to={ROUTE.LOGIN} replace />;
+  return token ? <Outlet /> : <Navigate to={ROUTE.LOGIN} replace />;
 };
 
 function Router() {
@@ -18,11 +19,13 @@ function Router() {
     <Routes>
       <Route path={ROUTE.LOGIN} element={<Login />} />
       <Route element={<Auth />}>
-        <Route path={ROUTE.MAIN} element={<Main />} />
-        <Route path={ROUTE.USER} element={<User />} />
-        <Route path={ROUTE.USER_DETAIL} element={<UserDetail />} />
-        <Route path={ROUTE.ACCOUNT} element={<Account />} />
-        <Route path={ROUTE.ACCOUNT_DETAIL} element={<AccountDetail />} />
+        <Route element={<Sidebar />}>
+          <Route path={ROUTE.MAIN} element={<Main />} />
+          <Route path={ROUTE.USER} element={<User />} />
+          <Route path={ROUTE.USER_DETAIL} element={<UserDetail />} />
+          <Route path={ROUTE.ACCOUNT} element={<Account />} />
+          <Route path={ROUTE.ACCOUNT_DETAIL} element={<AccountDetail />} />
+        </Route>
       </Route>
     </Routes>
   );
