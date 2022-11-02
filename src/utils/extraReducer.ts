@@ -14,7 +14,7 @@ export const extraReducerStatus = {
   },
   fulfilled: (state: State, action: any) => {
     state.isLoading = false;
-    state.data = action.payload.data;
+    state.data = action.payload;
   },
   rejected: (state: State, action: any) => {
     state.isLoading = false;
@@ -25,7 +25,8 @@ export const extraReducerStatus = {
 export const extraReducerUtils = (
   thunk:
     | AsyncThunk<AxiosResponse<any, any> | undefined, number, {}>
-    | AsyncThunk<AxiosResponse<any, any> | undefined, void, {}>,
+    | AsyncThunk<AxiosResponse<any, any> | undefined, void, {}>
+    | AsyncThunk<AxiosResponse<any, any> | undefined, Users, {}>,
 ) => {
   return {
     [thunk.pending.type]: extraReducerStatus.pending,
