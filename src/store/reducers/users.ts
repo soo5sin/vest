@@ -27,13 +27,21 @@ export const updateUserThunk = createAsyncThunk(
   async ({ id, newName }: { id: number | null; newName: string }) => {
     try {
       const response = await baseApi.patch(`/users/${id}`, { name: newName });
-      console.log(response);
       return response;
     } catch (error) {
       console.log(error);
     }
   },
 );
+
+export const deleteUserThunk = createAsyncThunk(USERS.DELETE, async (id: number | null) => {
+  try {
+    const response = await baseApi.delete(`/users/${id}`);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const initialState: InitialState = {
   isLoading: false,

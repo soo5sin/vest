@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../../store';
-import { getUsersThunk, updateUserThunk } from '../../../store/reducers/users';
+import { deleteUserThunk, getUsersThunk, updateUserThunk } from '../../../store/reducers/users';
 
 import { Users } from '../../../types/user';
 import { useGetAccountsById } from '../hooks/useGetAccountsById';
@@ -31,6 +31,11 @@ function Tbody({ users }: { users: Users }) {
     dispatch(getUsersThunk());
   };
 
+  const deleteUserHandler = () => {
+    dispatch(deleteUserThunk(id));
+    dispatch(getUsersThunk());
+  };
+
   useEffect(() => {
     const getAccounts = async () => {
       try {
@@ -47,7 +52,9 @@ function Tbody({ users }: { users: Users }) {
 
   return (
     <tr>
-      <td>X</td>
+      <td>
+        <button onClick={deleteUserHandler}>X</button>
+      </td>
       <td>
         {isEditing ? (
           <>
