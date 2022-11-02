@@ -58,6 +58,7 @@ function NewUserModal() {
         id="name"
         name="name"
         value={name}
+        required
         placeholder="김핀트"
         onChange={onChangeInputHandler}
       />
@@ -67,6 +68,7 @@ function NewUserModal() {
         id="email"
         name="email"
         value={email}
+        required
         placeholder="example@email.com"
         onChange={onChangeInputHandler}
       />

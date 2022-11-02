@@ -22,6 +22,19 @@ export const addUserThunk = createAsyncThunk(USERS.NEW, async (newUser: Users) =
   }
 });
 
+export const updateUserThunk = createAsyncThunk(
+  USERS.UPDATE,
+  async ({ id, newName }: { id: number | null; newName: string }) => {
+    try {
+      const response = await baseApi.patch(`/users/${id}`, { name: newName });
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  },
+);
+
 const initialState: InitialState = {
   isLoading: false,
   data: [],
