@@ -1,5 +1,7 @@
+import DetailTable from './components/DetailTable';
+
 function UserDetail() {
-  return <div>User Detail page</div>;
+  return <DetailTable />;
 }
 
 export default UserDetail;

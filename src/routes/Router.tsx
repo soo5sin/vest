@@ -22,7 +22,7 @@ function Router() {
         <Route element={<Sidebar />}>
           <Route path={ROUTE.MAIN} element={<Main />} />
           <Route path={ROUTE.USER} element={<User />} />
-          <Route path={ROUTE.USER_DETAIL} element={<UserDetail />} />
+          <Route path={`${ROUTE.USER_DETAIL}/:id`} element={<UserDetail />} />
           <Route path={ROUTE.ACCOUNT} element={<Account />} />
           <Route path={ROUTE.ACCOUNT_DETAIL} element={<AccountDetail />} />
         </Route>

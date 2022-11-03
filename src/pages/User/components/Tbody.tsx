@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ROUTE } from '../../../constants/routes';
 import { useAppDispatch } from '../../../store';
 import { deleteUserThunk, getUsersThunk, updateUserThunk } from '../../../store/reducers/users';
 
 import { Users } from '../../../types/user';
+import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetAccountsById } from '../hooks/useGetAccountsById';
 
 function Tbody({ users }: { users: Users }) {
@@ -64,7 +67,7 @@ function Tbody({ users }: { users: Users }) {
           </>
         ) : (
           <>
-            {users.name}
+            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{users.name}</Link>}
             <button onClick={() => setIsEditing(true)}>수정</button>
           </>
         )}
@@ -72,13 +75,13 @@ function Tbody({ users }: { users: Users }) {
       <td>{accountCount}</td>
       <td>{email}</td>
       <td>{gender_origin}</td>
-      <td>{birth_date}</td>
+      <td>{useFormatDate(birth_date)}</td>
       <td>{phone_number}</td>
-      <td>{last_login}</td>
+      <td>{useFormatDate(last_login)}</td>
       <td>{allow_marketing_push ? 'O' : 'X'}</td>
       <td>{is_staff ? 'O' : 'X'}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
-      <td>{created_at}</td>
+      <td>{useFormatDate(created_at)}</td>
     </tr>
   );
 }
