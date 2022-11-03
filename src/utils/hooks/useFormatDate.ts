@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
 export const useFormatDate = (date: string) => {
-  return dayjs(date).format('YYYY-MM-DD');
+  const formattedDate = dayjs(date).format('YYYY-MM-DD');
+  if (formattedDate !== 'Invalid Date') return formattedDate;
+  return '입력 없음';
 };

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useAppDispatch } from '../../../store';
 import { addUserThunk, getUsersThunk } from '../../../store/reducers/users';
+import { useStringToBoolean } from '../hooks/useStringToBoolean';
 
 function NewUserModal() {
   const INITIAL_USER = {
@@ -11,7 +12,7 @@ function NewUserModal() {
     email: '',
     password: '0000',
     age: null,
-    gender_origin: 0,
+    gender_origin: 1,
     birth_date: '',
     phone_number: '',
     address: '',
@@ -19,10 +20,10 @@ function NewUserModal() {
     last_login: '',
     created_at: '',
     updated_at: '',
-    allow_marketing_push: 'X',
+    allow_marketing_push: false,
     allow_invest_push: false,
-    is_active: 'X',
-    is_staff: 'X',
+    is_active: false,
+    is_staff: false,
   };
 
   const [newUser, setNewUser] = useState(INITIAL_USER);
@@ -32,9 +33,9 @@ function NewUserModal() {
     gender_origin,
     birth_date,
     phone_number,
+    is_active,
     allow_marketing_push,
     is_staff,
-    is_active,
   } = newUser;
   const dispatch = useAppDispatch();
 
@@ -47,7 +48,7 @@ function NewUserModal() {
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: value });
+    setNewUser({ ...newUser, [name]: useStringToBoolean(value) });
   };
 
   return (
@@ -74,7 +75,6 @@ function NewUserModal() {
       />
       <label htmlFor="gender_origin">성별 코드</label>
       <select name="gender_origin" onChange={onChangeInputHandler} value={gender_origin}>
-        <option value={0}>----</option>
         <option value={1}>1</option>
         <option value={2}>2</option>
         <option value={3}>3</option>
@@ -101,20 +101,20 @@ function NewUserModal() {
       <select
         name="allow_marketing_push"
         onChange={onChangeInputHandler}
-        value={allow_marketing_push}
+        value={String(allow_marketing_push)}
       >
-        <option value="O">O</option>
-        <option value="X">x</option>
+        <option value="true">O</option>
+        <option value="false">X</option>
       </select>
       <label htmlFor="is_staff">임직원 여부</label>
-      <select name="is_staff" onChange={onChangeInputHandler} value={is_staff}>
-        <option value="O">O</option>
-        <option value="X">x</option>
+      <select name="is_staff" onChange={onChangeInputHandler} value={String(is_staff)}>
+        <option value="true">O</option>
+        <option value="false">X</option>
       </select>
       <label htmlFor="is_active">활성화 여부</label>
-      <select name="is_active" onChange={onChangeInputHandler} value={is_active}>
-        <option value="O">O</option>
-        <option value="X">x</option>
+      <select name="is_active" onChange={onChangeInputHandler} value={String(is_active)}>
+        <option value="true">O</option>
+        <option value="false">X</option>
       </select>
       <button type="submit">등록</button>
     </form>
