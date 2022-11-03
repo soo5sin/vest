@@ -7,6 +7,8 @@ import { deleteUserThunk, getUsersThunk, updateUserThunk } from '../../../store/
 import { Users } from '../../../types/user';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetAccountsById } from '../hooks/useGetAccountsById';
+import { useMaskingName } from '../hooks/useMaskingName';
+import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 
 function Tbody({ users }: { users: Users }) {
   const {
@@ -67,7 +69,7 @@ function Tbody({ users }: { users: Users }) {
           </>
         ) : (
           <>
-            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{users.name}</Link>}
+            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(users.name)}</Link>}
             <button onClick={() => setIsEditing(true)}>수정</button>
           </>
         )}
@@ -76,7 +78,7 @@ function Tbody({ users }: { users: Users }) {
       <td>{email}</td>
       <td>{gender_origin}</td>
       <td>{useFormatDate(birth_date)}</td>
-      <td>{phone_number}</td>
+      <td>{useMaskingPhoneNumber(phone_number)}</td>
       <td>{useFormatDate(last_login)}</td>
       <td>{allow_marketing_push ? 'O' : 'X'}</td>
       <td>{is_staff ? 'O' : 'X'}</td>
