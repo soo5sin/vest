@@ -1,6 +1,6 @@
-import baseApi from '../../../api/base';
+import api from '../../../api/base';
 
 export const useGetAccountsById = async (id: number | null) => {
-  const response = await baseApi.get(`/accounts/?user_id=${id}`);
+  const response = await api.get(`/accounts/?user_id=${id}`);
   return response;
 };

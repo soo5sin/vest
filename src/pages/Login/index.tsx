@@ -24,7 +24,6 @@ function Login() {
       const response = await signIn(loginInput);
       UserToken.set(response.data.accessToken);
       navigate(ROUTE.MAIN);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }

@@ -1,13 +1,16 @@
 import axios from 'axios';
 import { UserToken } from '../utils/auth';
 
-const token = UserToken.get();
-
-const baseApi = axios.create({
+const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
 });
 
-export default baseApi;
+api.interceptors.request.use((config) => {
+  const token = UserToken.get();
+  config.headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  return config;
+});
+
+export default api;

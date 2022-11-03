@@ -1,4 +1,4 @@
-import baseApi from '../../api/base';
+import api from '../../api/base';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { USERS } from '../../constants/user';
 import { extraReducerUtils } from '../../utils/extraReducer';
@@ -6,7 +6,7 @@ import { Users } from '../../types/user';
 
 export const getUsersThunk = createAsyncThunk(USERS.GET, async () => {
   try {
-    const response = await baseApi.get('/users');
+    const response = await api.get('/users');
     return response.data;
   } catch (error) {
     console.log(error);
@@ -15,7 +15,7 @@ export const getUsersThunk = createAsyncThunk(USERS.GET, async () => {
 
 export const addUserThunk = createAsyncThunk(USERS.NEW, async (newUser: Users) => {
   try {
-    const response = await baseApi.post('/users', newUser);
+    const response = await api.post('/users', newUser);
     return response.data;
   } catch (error) {
     console.log(error);
@@ -26,7 +26,7 @@ export const updateUserThunk = createAsyncThunk(
   USERS.UPDATE,
   async ({ id, newName }: { id: number | null; newName: string }) => {
     try {
-      const response = await baseApi.patch(`/users/${id}`, { name: newName });
+      const response = await api.patch(`/users/${id}`, { name: newName });
       return response;
     } catch (error) {
       console.log(error);
@@ -36,7 +36,7 @@ export const updateUserThunk = createAsyncThunk(
 
 export const deleteUserThunk = createAsyncThunk(USERS.DELETE, async (id: number | null) => {
   try {
-    const response = await baseApi.delete(`/users/${id}`);
+    const response = await api.delete(`/users/${id}`);
     return response.data;
   } catch (error) {
     console.log(error);

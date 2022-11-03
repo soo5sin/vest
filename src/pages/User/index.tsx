@@ -14,6 +14,8 @@ function User() {
     dispatch(getUsersThunk());
   }, [dispatch]);
 
+  if (!data) return <div>로딩 중</div>;
+
   return (
     <>
       <NewUserModal />
