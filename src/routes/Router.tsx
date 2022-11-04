@@ -24,7 +24,7 @@ function Router() {
           <Route path={ROUTE.USER} element={<User />} />
           <Route path={`${ROUTE.USER_DETAIL}/:id`} element={<UserDetail />} />
           <Route path={ROUTE.ACCOUNT} element={<Account />} />
-          <Route path={ROUTE.ACCOUNT_DETAIL} element={<AccountDetail />} />
+          <Route path={`${ROUTE.ACCOUNT_DETAIL}/:uuid`} element={<AccountDetail />} />
         </Route>
       </Route>
     </Routes>

@@ -10,8 +10,19 @@ import { useGetUserByUserId } from '../hooks/useGetUserById';
 import { useMaskingNumber } from '../hooks/useMaskingNumber';
 
 function Tbody({ accounts }: { accounts: Accounts }) {
-  const { id, user_id, broker_id, number, status, name, assets, payments, is_active, created_at } =
-    accounts;
+  const {
+    uuid,
+    id,
+    user_id,
+    broker_id,
+    number,
+    status,
+    name,
+    assets,
+    payments,
+    is_active,
+    created_at,
+  } = accounts;
 
   const [user, setUser] = useState<Users | undefined>();
   const brokers: Brokers = BROKERS;
@@ -30,7 +41,9 @@ function Tbody({ accounts }: { accounts: Accounts }) {
         <Link to={`/user-detail/${id}`}>{user?.name}</Link>
       </td>
       <td>{brokers[broker_id]}</td>
-      <td>{useMaskingNumber(number)}</td>
+      <td>
+        <Link to={`/account-detail/${uuid}`}>{useMaskingNumber(number)}</Link>
+      </td>
       <td>{useGetStatus(status)}</td>
       <td>{name}</td>
       <td>{useFormatPrice(assets)}</td>

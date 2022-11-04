@@ -1,5 +1,7 @@
+import { DetailTable } from './components/DetailTable';
+
 function AccountDetail() {
-  return <div>account detail page</div>;
+  return <DetailTable />;
 }
 
 export default AccountDetail;
