@@ -1,3 +1,3 @@
-export const ACCOUNT = {
+export const ACCOUNTS = {
   GET: 'accounts/getAccounts',
 };

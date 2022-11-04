@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import usersReducer from './reducers/users';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import logger from 'redux-logger';
+import accountsReducer from './reducers/accounts';
 
 const store = configureStore({
   reducer: {
     users: usersReducer,
+    accounts: accountsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
