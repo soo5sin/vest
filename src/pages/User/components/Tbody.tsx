@@ -6,7 +6,7 @@ import { deleteUserThunk, getUsersThunk, updateUserThunk } from '../../../store/
 
 import { Users } from '../../../types/user';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
-import { useGetAccountsById } from '../hooks/useGetAccountsById';
+import { useGetAccountsById } from '../../../utils/hooks/useGetAccountsById';
 import { useMaskingName } from '../hooks/useMaskingName';
 import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 

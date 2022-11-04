@@ -1,34 +1,33 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Accounts, Brokers } from '../../../types/accounts';
+import { Accounts } from '../../../types/accounts';
 import { useGetAccountByUuid } from '../hooks/useGetAccountById';
-import BROKERS from '../../../assets/brokers.json';
 import { useFormatPrice } from '../../Account/hooks/useFormatPrice';
 import { useGetStatus } from '../../Account/hooks/useGetStatus';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUsersThunk } from '../../../store/reducers/users';
+import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 
 export function DetailTable() {
   const { uuid } = useParams();
   const [account, setAccount] = useState<Accounts>();
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.users);
-  const brokers: Brokers = BROKERS;
 
   const getAccount = async () => {
     const accountDetail = await useGetAccountByUuid(uuid);
     setAccount(accountDetail);
   };
 
-  const getUserName = () => {
-    return data.find((user) => user.id === account?.user_id)?.name;
-  };
-
   useEffect(() => {
     getAccount();
     dispatch(getUsersThunk());
   }, []);
+
+  const getUserName = () => {
+    return data.find((user) => user.id === account?.user_id)?.name;
+  };
 
   if (!account || !data) return <div>로딩중</div>;
 
@@ -41,7 +40,7 @@ export function DetailTable() {
           <th>계좌명</th>
           <td>{account.name}</td>
           <th>브로커명</th>
-          <td>{brokers[account.broker_id]}</td>
+          <td>{useGetBrokerName(account.broker_id)}</td>
         </tr>
         <tr>
           <th>계좌번호</th>
