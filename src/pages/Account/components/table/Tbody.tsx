@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import BROKERS from '../../../assets/brokers.json';
-import { Accounts, Brokers } from '../../../types/accounts';
-import { Users } from '../../../types/user';
-import { useFormatDate } from '../../../utils/hooks/useFormatDate';
-import { useFormatPrice } from '../hooks/useFormatPrice';
-import { useGetStatus } from '../hooks/useGetStatus';
-import { useGetUserByUserId } from '../hooks/useGetUserById';
-import { useMaskingNumber } from '../hooks/useMaskingNumber';
+import BROKERS from '../../../../assets/brokers.json';
+import { Accounts, Brokers } from '../../../../types/accounts';
+import { Users } from '../../../../types/user';
+import { useFormatDate } from '../../../../utils/hooks/useFormatDate';
+import { useFormatPrice } from '../../hooks/useFormatPrice';
+import { useGetStatus } from '../../hooks/useGetStatus';
+import { useGetUserByUserId } from '../../hooks/useGetUserById';
+import { useMaskingNumber } from '../../hooks/useMaskingNumber';
 
 function Tbody({ accounts }: { accounts: Accounts }) {
   const {
