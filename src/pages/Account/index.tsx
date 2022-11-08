@@ -4,11 +4,17 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { getAccountsThunk } from '../../store/reducers/accounts';
 import { Accounts } from '../../types/accounts';
 import Tbody from './components/table/Tbody';
+import Pagination from 'react-js-pagination';
 
 function Account() {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.accounts);
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
 
   const onChangeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -39,11 +45,18 @@ function Account() {
       <table>
         <Thead type="account" />
         <tbody>
-          {data.map((accounts: Accounts, index) => (
-            <Tbody accounts={accounts} key={index} />
+          {data.slice(20 * (page - 1), 20 * (page - 1) + 20).map((accounts: Accounts, index) => (
+            <Tbody accounts={accounts} key={index} page={page} />
           ))}
         </tbody>
       </table>
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={20}
+        totalItemsCount={data.length - 1}
+        pageRangeDisplayed={5}
+        onChange={handlePageChange}
+      ></Pagination>
     </>
   );
 }

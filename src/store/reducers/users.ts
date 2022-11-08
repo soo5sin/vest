@@ -4,18 +4,14 @@ import { USERS } from '../../constants/user';
 import { extraReducerUtils } from '../../utils/extraReducer';
 import { Users } from '../../types/user';
 
-export const getUsersThunk = createAsyncThunk(
-  USERS.GET,
-  async (params?: Record<string, string>) => {
-    try {
-      const serializedParams = params ? `?${new URLSearchParams(params).toString()}` : '';
-      const response = await api.get(`/users${serializedParams}`);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  },
-);
+export const getUsersThunk = createAsyncThunk(USERS.GET, async (params?: object) => {
+  try {
+    const response = await api.get(`/users`, { params });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 export const addUserThunk = createAsyncThunk(USERS.NEW, async (newUser: Users) => {
   try {

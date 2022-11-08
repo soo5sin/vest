@@ -4,19 +4,14 @@ import { ACCOUNTS } from '../../constants/account';
 
 import { extraReducerUtils } from '../../utils/extraReducer';
 
-export const getAccountsThunk = createAsyncThunk(
-  ACCOUNTS.GET,
-  async (params?: Record<string, string>) => {
-    try {
-      const serializedParams = params ? `?${new URLSearchParams(params).toString()}` : '';
-      const response = await api.get(`/accounts${serializedParams}`);
-      console.log(response);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
-  },
-);
+export const getAccountsThunk = createAsyncThunk(ACCOUNTS.GET, async (params?: object) => {
+  try {
+    const response = await api.get(`/accounts`, { params });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 const initialState = {
   isLoading: false,

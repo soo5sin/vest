@@ -5,11 +5,17 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { getUsersThunk } from '../../store/reducers/users';
 import { Users } from '../../types/user';
 import NewUserModal from './components/NewUserModal';
+import Pagination from 'react-js-pagination';
 
 function User() {
   const dispatch = useAppDispatch();
   const { data } = useAppSelector((state) => state.users);
   const [search, setSearch] = useState('');
+  const [page, setPage] = useState(1);
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+  };
 
   const onChangeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -41,11 +47,18 @@ function User() {
       <table>
         <Thead type="user" />
         <tbody>
-          {data.map((users: Users, index) => (
+          {data.slice(20 * (page - 1), 20 * (page - 1) + 20).map((users: Users, index) => (
             <Tbody users={users} key={index} />
           ))}
         </tbody>
       </table>
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={20}
+        totalItemsCount={data.length - 1}
+        pageRangeDisplayed={5}
+        onChange={handlePageChange}
+      ></Pagination>
     </>
   );
 }

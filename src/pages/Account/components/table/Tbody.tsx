@@ -9,7 +9,7 @@ import { useGetStatus } from '../../hooks/useGetStatus';
 import { useGetUserByUserId } from '../../hooks/useGetUserById';
 import { useMaskingNumber } from '../../hooks/useMaskingNumber';
 
-function Tbody({ accounts }: { accounts: Accounts }) {
+function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
   const {
     uuid,
     id,
@@ -29,11 +29,11 @@ function Tbody({ accounts }: { accounts: Accounts }) {
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await useGetUserByUserId(user_id);
+      const user = await useGetUserByUserId(user_id, { _page: page });
       setUser(user);
     };
     getUser();
-  }, []);
+  }, [accounts]);
 
   return (
     <tr>

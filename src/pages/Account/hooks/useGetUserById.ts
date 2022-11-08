@@ -1,6 +1,6 @@
 import api from '../../../api/base';
 
-export const useGetUserByUserId = async (userId: number | undefined) => {
-  const response = await api.get(`/users/${userId}`);
+export const useGetUserByUserId = async (userId: number | undefined, params?: object) => {
+  const response = await api.get(`/users/${userId}`, { params });
   return response.data;
 };
