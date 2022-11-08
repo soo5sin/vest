@@ -7,20 +7,29 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(
+  (response) => {
+    return response;
+  },
   (config) => {
     const token = UserToken.get();
     config.headers = {
       Authorization: `Bearer ${token}`,
     };
     config.paramsSerializer = {
-      serialize: (params) => {
+      serialize: (params: Record<string, string>) => {
         return new URLSearchParams(params).toString();
       },
     };
     return config;
   },
+);
+
+api.interceptors.response.use(
+  (response) => {
+    return response;
+  },
   (error) => {
-    const errorStatus = error.response.status;
+    const errorStatus = error.response?.status;
 
     if (errorStatus === 401) {
       UserToken.remove();

@@ -1,4 +1,4 @@
-import api from '../../api/base';
+import api from '../../api/instance';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { USERS } from '../../constants/user';
 import { extraReducerUtils } from '../../utils/extraReducer';

@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import api from '../../api/base';
+import api from '../../api/instance';
 import { ACCOUNTS } from '../../constants/account';
 
 import { extraReducerUtils } from '../../utils/extraReducer';
