@@ -5,6 +5,7 @@ import { getAccountsThunk } from '../../store/reducers/accounts';
 import { Accounts } from '../../types/accounts';
 import Tbody from './components/table/Tbody';
 import Pagination from 'react-js-pagination';
+import styled from 'styled-components';
 
 function Account() {
   const dispatch = useAppDispatch();
@@ -32,8 +33,8 @@ function Account() {
   if (!data) return <div>로딩 중</div>;
 
   return (
-    <>
-      <form onSubmit={onSubmitSearchFormHandler}>
+    <Container>
+      <Search onSubmit={onSubmitSearchFormHandler}>
         <input
           type="text"
           value={search}
@@ -41,7 +42,9 @@ function Account() {
           placeholder="검색어를 입력해주세요."
         ></input>
         <button type="submit">검색</button>
-      </form>
+      </Search>
+      <Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</Ref>
+      <Ref>※ 계좌 번호를 클릭하면 해당 계좌의 상세 페이지로 이동합니다.</Ref>
       <table>
         <Thead type="account" />
         <tbody>
@@ -57,8 +60,37 @@ function Account() {
         pageRangeDisplayed={5}
         onChange={handlePageChange}
       ></Pagination>
-    </>
+    </Container>
   );
 }
 
 export default Account;
+
+const Container = styled.main`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 30px;
+`;
+
+const Search = styled.form`
+  & > input {
+    padding: 3px;
+    width: 26rem;
+    margin-right: 10px;
+  }
+  & > button {
+    background-color: ${({ theme }) => theme.palette.SUB_200};
+    height: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    color: ${({ theme }) => theme.palette.WHITE};
+  }
+  margin: 0 auto 20px auto;
+`;
+
+const Ref = styled.div`
+  font-size: 13px;
+  text-align: right;
+  color: ${({ theme }) => theme.palette.GRAY_300};
+`;

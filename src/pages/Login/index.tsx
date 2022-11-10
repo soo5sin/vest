@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { signIn } from '../../api/auth';
 import { ROUTE } from '../../constants/routes';
 import { UserToken } from '../../utils/auth';
+import styled from 'styled-components';
+import logo from '../../assets/logo.jpg';
 
 function Login() {
   const navigate = useNavigate();
@@ -30,30 +32,59 @@ function Login() {
   };
 
   return (
-    <form onSubmit={onSubmitLoginHandler}>
-      <header>로그인</header>
-      <label htmlFor="email">이메일</label>
-      <input
-        type="text"
-        id="email"
-        name="email"
-        placeholder="email"
-        onChange={onChangeInputHandler}
-        value={loginInput.email}
-        required
-      />
-      <label htmlFor="password">비밀번호</label>
-      <input
-        type="text"
-        id="password"
-        name="password"
-        placeholder="password"
-        onChange={onChangeInputHandler}
-        required
-      />
-      <button type="submit">로그인</button>
-    </form>
+    <>
+      <Img src={logo} alt="fint logo" />
+      <Form onSubmit={onSubmitLoginHandler}>
+        <h1>LOGIN</h1>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="이메일"
+          onChange={onChangeInputHandler}
+          value={loginInput.email}
+          required
+        />
+        <input
+          type="text"
+          id="password"
+          name="password"
+          placeholder="비밀번호"
+          onChange={onChangeInputHandler}
+          required
+        />
+        <button type="submit">로그인</button>
+      </Form>
+    </>
   );
 }
 
 export default Login;
+
+const Img = styled.img`
+  margin: 0 auto;
+  height: 10rem;
+  object-fit: cover;
+`;
+
+const Form = styled.form`
+  & > h1 {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+  }
+  & > input {
+    margin-bottom: 1.5rem;
+    padding: 7px;
+  }
+  & > button {
+    background: ${({ theme }) => theme.palette.MAIN_COLOR};
+    height: 50px;
+    color: ${({ theme }) => theme.palette.WHITE};
+  }
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  margin: 0 auto;
+`;

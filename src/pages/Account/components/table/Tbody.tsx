@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import BROKERS from '../../../../assets/brokers.json';
 import { Accounts, Brokers } from '../../../../types/accounts';
 import { Users } from '../../../../types/user';
@@ -36,7 +37,7 @@ function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
   }, [accounts]);
 
   return (
-    <tr>
+    <Tr>
       <td>
         <Link to={`/user-detail/${id}`}>{user?.name}</Link>
       </td>
@@ -50,8 +51,15 @@ function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
       <td>{useFormatPrice(payments)}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
       <td>{useFormatDate(created_at)}</td>
-    </tr>
+    </Tr>
   );
 }
 
 export default Tbody;
+const Tr = styled.tr`
+  & > td {
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid #444444;
+  }
+`;

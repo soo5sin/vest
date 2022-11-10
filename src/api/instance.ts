@@ -6,23 +6,18 @@ const api = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 });
 
-api.interceptors.request.use(
-  (response) => {
-    return response;
-  },
-  (config) => {
-    const token = UserToken.get();
-    config.headers = {
-      Authorization: `Bearer ${token}`,
-    };
-    config.paramsSerializer = {
-      serialize: (params: Record<string, string>) => {
-        return new URLSearchParams(params).toString();
-      },
-    };
-    return config;
-  },
-);
+api.interceptors.request.use((config) => {
+  const token = UserToken.get();
+  config.headers = {
+    Authorization: `Bearer ${token}`,
+  };
+  config.paramsSerializer = {
+    serialize: (params: Record<string, string>) => {
+      return new URLSearchParams(params).toString();
+    },
+  };
+  return config;
+});
 
 api.interceptors.response.use(
   (response) => {
