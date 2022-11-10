@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../../styles/paging.css';
 import Thead from '../../components/table/thead';
 import Tbody from './components/Tbody';
 import { useAppDispatch, useAppSelector } from '../../store';
@@ -63,7 +64,7 @@ function User() {
         totalItemsCount={data.length - 1}
         pageRangeDisplayed={5}
         onChange={handlePageChange}
-      ></Pagination>
+      />
     </Container>
   );
 }
