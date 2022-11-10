@@ -45,6 +45,7 @@ function User() {
         ></input>
         <button type="submit">검색</button>
       </Search>
+
       <AddButton onClick={() => setIsOpenModal(true)}>고객 추가</AddButton>
       <Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</Ref>
       {isOpenModal && <NewUserModal setIsOpenModal={setIsOpenModal} />}
