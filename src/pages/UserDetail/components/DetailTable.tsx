@@ -17,7 +17,7 @@ function DetailTable() {
     getUser();
   }, []);
 
-  if (!user) return <div>로딩중</div>;
+  if (!user) return <Error>고객 정보가 없습니다.</Error>;
 
   return (
     <>
@@ -66,6 +66,12 @@ function DetailTable() {
 }
 
 export default DetailTable;
+
+const Error = styled.div`
+  text-align: center;
+  min-height: 100vh;
+  margin-top: 10rem;
+`;
 
 const Img = styled.div`
   margin: 20px auto;

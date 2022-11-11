@@ -25,7 +25,6 @@ function UserDetail() {
   return (
     <Container>
       <DetailTable />
-      <Title>유저의 계좌 목록</Title>
       {accounts?.map((account, index) => (
         <UserAccounts account={account} key={index} />
       ))}
@@ -40,10 +39,4 @@ const Container = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 30px;
-`;
-
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px 0;
 `;

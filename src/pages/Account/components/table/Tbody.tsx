@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import BROKERS from '../../../../assets/brokers.json';
-import { Accounts, Brokers } from '../../../../types/accounts';
-import { Users } from '../../../../types/user';
+import { useAppDispatch, useAppSelector } from '../../../../store';
+import { getUsersThunk } from '../../../../store/reducers/users';
+import { Accounts } from '../../../../types/accounts';
 import { useFormatDate } from '../../../../utils/hooks/useFormatDate';
+import { useGetBrokerName } from '../../../../utils/hooks/useGetBrokerName';
 import { useFormatPrice } from '../../hooks/useFormatPrice';
 import { useGetStatus } from '../../hooks/useGetStatus';
-import { useGetUserByUserId } from '../../hooks/useGetUserById';
 import { useMaskingNumber } from '../../hooks/useMaskingNumber';
 
-function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
+function Tbody({ accounts }: { accounts: Accounts }) {
   const {
     uuid,
     id,
@@ -25,23 +25,24 @@ function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
     created_at,
   } = accounts;
 
-  const [user, setUser] = useState<Users | undefined>();
-  const brokers: Brokers = BROKERS;
+  const dispatch = useAppDispatch();
+  const users = useAppSelector((state) => state.users.data);
+
+  const getUserName = (userId: number) => {
+    const userName = users.find((user) => user.id === userId)?.name;
+    return userName ? userName : '-';
+  };
 
   useEffect(() => {
-    const getUser = async () => {
-      const user = await useGetUserByUserId(user_id, { _page: page });
-      setUser(user);
-    };
-    getUser();
+    dispatch(getUsersThunk());
   }, [accounts]);
 
   return (
     <Tr>
       <td>
-        <Link to={`/user-detail/${id}`}>{user?.name}</Link>
+        <Link to={`/user-detail/${id}`}>{getUserName(user_id)}</Link>
       </td>
-      <td>{brokers[broker_id]}</td>
+      <td>{useGetBrokerName(broker_id)}</td>
       <td>
         <Link to={`/account-detail/${uuid}`}>{useMaskingNumber(number)}</Link>
       </td>

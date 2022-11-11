@@ -14,7 +14,7 @@ export function DetailTable() {
   const { uuid } = useParams();
   const [account, setAccount] = useState<Accounts>();
   const dispatch = useAppDispatch();
-  const { data } = useAppSelector((state) => state.users);
+  const users = useAppSelector((state) => state.users.data);
 
   const getAccount = async () => {
     const accountDetail = await useGetAccountByUuid(uuid);
@@ -27,10 +27,11 @@ export function DetailTable() {
   }, []);
 
   const getUserName = () => {
-    return data.find((user) => user.id === account?.user_id)?.name;
+    const userName = users.find((user) => user.id === account?.user_id)?.name;
+    return userName ? userName : '-';
   };
 
-  if (!account || !data) return <div>로딩중</div>;
+  if (!account || !users) return <div>로딩중</div>;
 
   return (
     <table>

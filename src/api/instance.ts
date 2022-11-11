@@ -26,9 +26,9 @@ api.interceptors.response.use(
   (error) => {
     const errorStatus = error.response?.status;
     if (errorStatus === 401) {
-      alert('유효한 인증 정보가 없습니다. 다시 로그인해 주세요.');
       UserToken.remove();
       window.location.replace(ROUTE.LOGIN);
+      alert('유효한 인증 정보가 없습니다. 다시 로그인해 주세요.');
     }
 
     return Promise.reject(error);
