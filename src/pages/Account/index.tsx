@@ -71,6 +71,7 @@ const Container = styled.main`
   flex-direction: column;
   width: 100%;
   margin: 30px;
+  min-height: 100vh;
 `;
 
 const Search = styled.form`

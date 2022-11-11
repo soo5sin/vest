@@ -5,6 +5,7 @@ import { ROUTE } from '../../constants/routes';
 import { UserToken } from '../../utils/auth';
 import styled from 'styled-components';
 import logo from '../../assets/logo.jpg';
+import { AxiosError } from 'axios';
 
 function Login() {
   const navigate = useNavigate();
@@ -27,7 +28,11 @@ function Login() {
       UserToken.set(response.data.accessToken);
       navigate(ROUTE.MAIN);
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError && error.response) {
+        alert(error.response.data);
+      } else {
+        alert('로그인에 실패했습니다.');
+      }
     }
   };
 

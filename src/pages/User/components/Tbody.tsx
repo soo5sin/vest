@@ -39,6 +39,7 @@ function Tbody({ users }: { users: Users }) {
   };
 
   const deleteUserHandler = () => {
+    if (!confirm('정말로 해당 고객을 삭제하시겠습니까?')) return;
     dispatch(deleteUserThunk(id));
     dispatch(getUsersThunk());
   };

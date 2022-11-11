@@ -19,6 +19,7 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
+    if (!confirm('로그아웃 하시겠습니까?')) return;
     UserToken.remove();
     navigate(ROUTE.LOGIN);
   };
