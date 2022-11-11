@@ -53,9 +53,15 @@ function User() {
       <table>
         <Thead type="user" />
         <tbody>
-          {data.slice(20 * (page - 1), 20 * (page - 1) + 20).map((users: Users, index) => (
-            <Tbody users={users} key={index} />
-          ))}
+          {data.length ? (
+            data
+              .slice(20 * (page - 1), 20 * (page - 1) + 20)
+              .map((users: Users, index) => <Tbody users={users} key={index} />)
+          ) : (
+            <tr>
+              <Empty colSpan={12}>검색 결과가 없습니다.</Empty>
+            </tr>
+          )}
         </tbody>
       </table>
       <Pagination
@@ -106,4 +112,9 @@ const Ref = styled.div`
   font-size: 13px;
   text-align: right;
   color: ${({ theme }) => theme.palette.GRAY_300};
+`;
+
+const Empty = styled.td`
+  text-align: center;
+  padding: 10px;
 `;

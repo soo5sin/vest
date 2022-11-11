@@ -48,9 +48,15 @@ function Account() {
       <table>
         <Thead type="account" />
         <tbody>
-          {data.slice(20 * (page - 1), 20 * (page - 1) + 20).map((accounts: Accounts, index) => (
-            <Tbody accounts={accounts} key={index} page={page} />
-          ))}
+          {data.length ? (
+            data
+              .slice(20 * (page - 1), 20 * (page - 1) + 20)
+              .map((accounts: Accounts, index) => <Tbody accounts={accounts} key={index} />)
+          ) : (
+            <tr>
+              <Empty colSpan={9}>검색 결과가 없습니다.</Empty>
+            </tr>
+          )}
         </tbody>
       </table>
       <Pagination
@@ -94,4 +100,9 @@ const Ref = styled.div`
   font-size: 13px;
   text-align: right;
   color: ${({ theme }) => theme.palette.GRAY_300};
+`;
+
+const Empty = styled.td`
+  text-align: center;
+  padding: 10px;
 `;
