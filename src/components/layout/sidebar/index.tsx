@@ -1,22 +1,25 @@
 import { ROUTE } from '../../../constants/routes';
-import { Link, Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { UserToken } from '../../../utils/auth';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
 function Sidebar() {
   const siderContent = [
-    { id: 1, name: '메인', keyword: 'main', link: ROUTE.MAIN, icon: faHouse },
+    { id: 1, name: '메인', keyword: '/', link: ROUTE.MAIN, icon: faHouse },
     {
       id: 2,
       name: '계좌 목록',
-      keyword: 'accounts',
+      keyword: '/account',
       link: ROUTE.ACCOUNT,
       icon: faBriefcase,
     },
-    { id: 3, name: '유저 목록', keyword: 'users', link: ROUTE.USER, icon: faUser },
+    { id: 3, name: '유저 목록', keyword: '/user', link: ROUTE.USER, icon: faUser },
   ];
+
   const navigate = useNavigate();
+  const CurrentPage = useLocation().pathname;
 
   const logoutHandler = () => {
     if (!confirm('로그아웃 하시겠습니까?')) return;
@@ -30,13 +33,19 @@ function Sidebar() {
         <h1>fint</h1>
         {siderContent.map((sider) => (
           <Link to={sider.link} key={sider.id}>
-            <div>
-              <FontAwesomeIcon icon={sider.icon} />
-              <Menu>{sider.name}</Menu>
-            </div>
+            {CurrentPage === sider.keyword ? (
+              <ClickedMenu>
+                <FontAwesomeIcon icon={sider.icon} />
+                <Menu>{sider.name}</Menu>
+              </ClickedMenu>
+            ) : (
+              <div>
+                <FontAwesomeIcon icon={sider.icon} />
+                <Menu>{sider.name}</Menu>
+              </div>
+            )}
           </Link>
         ))}
-
         <button onClick={logoutHandler}>
           <FontAwesomeIcon icon={faArrowRight} />
           <Menu>로그아웃</Menu>
@@ -63,7 +72,7 @@ const Aside = styled.aside`
   & div:hover,
   button:hover {
     background: ${({ theme }) => theme.palette.WHITE};
-    color: black;
+    color: ${({ theme }) => theme.palette.MAIN_COLOR};
     border-radius: 5px;
   }
   & div,
@@ -78,4 +87,10 @@ const Aside = styled.aside`
 
 const Menu = styled.span`
   margin-left: 10px;
+`;
+
+const ClickedMenu = styled.div`
+  background: ${({ theme }) => theme.palette.WHITE};
+  color: ${({ theme }) => theme.palette.MAIN_COLOR};
+  border-radius: 5px;
 `;

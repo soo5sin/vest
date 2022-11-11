@@ -48,6 +48,7 @@ function NewUserModal({
     e.preventDefault();
     await dispatch(addUserThunk(newUser));
     setNewUser(INITIAL_USER);
+    setIsOpenModal(false);
     dispatch(getUsersThunk());
   };
 
