@@ -47,7 +47,17 @@ function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
       </td>
       <td>{useGetStatus(status)}</td>
       <td>{name}</td>
-      <td>{useFormatPrice(assets)}</td>
+      <td
+        style={
+          assets > payments
+            ? { color: 'red' }
+            : assets === payments
+            ? { color: 'black' }
+            : { color: 'blue' }
+        }
+      >
+        {useFormatPrice(assets)}
+      </td>
       <td>{useFormatPrice(payments)}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
       <td>{useFormatDate(created_at)}</td>
@@ -56,6 +66,7 @@ function Tbody({ accounts, page }: { accounts: Accounts; page: number }) {
 }
 
 export default Tbody;
+
 const Tr = styled.tr`
   & > td {
     padding: 15px 0;
