@@ -73,7 +73,6 @@ const Aside = styled.aside`
   padding: 30px;
   background: ${({ theme }) => theme.palette.MAIN_COLOR};
   color: ${({ theme }) => theme.palette.WHITE};
-  height: 100vh;
 `;
 
 const Menu = styled.span`
