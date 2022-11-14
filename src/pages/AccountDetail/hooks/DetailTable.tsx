@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Accounts } from '../../../types/accounts';
-import { useGetAccountByUuid } from '../hooks/useGetAccountById';
+import { useGetAccountByUuid } from './useGetAccountById';
 import { useFormatPrice } from '../../Account/hooks/useFormatPrice';
 import { useGetStatus } from '../../Account/hooks/useGetStatus';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
@@ -9,16 +9,34 @@ import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUsersThunk } from '../../../store/reducers/users';
 import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 import styled from 'styled-components';
+import Spinner from '../../../components/shared/spinner/Spinner';
+import ErrorPage from '../../../components/shared/error/Error';
+import { AxiosError } from 'axios';
 
 export function DetailTable() {
-  const { uuid } = useParams();
-  const [account, setAccount] = useState<Accounts>();
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.data);
+  const { uuid } = useParams();
+  const [account, setAccount] = useState<Accounts>();
+  const [isError, setIsError] = useState(false);
 
   const getAccount = async () => {
-    const accountDetail = await useGetAccountByUuid(uuid);
-    setAccount(accountDetail);
+    try {
+      const accountDetail = await useGetAccountByUuid(uuid);
+      setAccount(accountDetail);
+    } catch (error) {
+      setIsError(true);
+      if (error instanceof AxiosError && error.response) {
+        throw new Error(error.response.data);
+      } else {
+        throw new Error('fail to add user information');
+      }
+    }
+  };
+
+  const getUserName = () => {
+    const userName = users.find((user) => user.id === account?.user_id)?.name;
+    return userName ? userName : '-';
   };
 
   useEffect(() => {
@@ -26,12 +44,8 @@ export function DetailTable() {
     dispatch(getUsersThunk());
   }, []);
 
-  const getUserName = () => {
-    const userName = users.find((user) => user.id === account?.user_id)?.name;
-    return userName ? userName : '-';
-  };
-
-  if (!account || !users) return <div>로딩중</div>;
+  if (isError) return <ErrorPage error="fetching error" />;
+  if (!account) return <Spinner />;
 
   return (
     <table>

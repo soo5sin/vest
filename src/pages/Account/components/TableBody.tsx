@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppDispatch, useAppSelector } from '../../../../store';
-import { getUsersThunk } from '../../../../store/reducers/users';
-import { Accounts } from '../../../../types/accounts';
-import { useFormatDate } from '../../../../utils/hooks/useFormatDate';
-import { useGetBrokerName } from '../../../../utils/hooks/useGetBrokerName';
-import { useFormatPrice } from '../../hooks/useFormatPrice';
-import { useGetStatus } from '../../hooks/useGetStatus';
-import { useMaskingNumber } from '../../hooks/useMaskingNumber';
+import { useAppDispatch, useAppSelector } from '../../../store';
+import { getUsersThunk } from '../../../store/reducers/users';
+import { Accounts } from '../../../types/accounts';
+import { useFormatDate } from '../../../utils/hooks/useFormatDate';
+import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
+import { useFormatPrice } from '../hooks/useFormatPrice';
+import { useGetStatus } from '../hooks/useGetStatus';
+import { useMaskingNumber } from '../hooks/useMaskingNumber';
 
-function Tbody({ accounts }: { accounts: Accounts }) {
+function TableBody({ accounts }: { accounts: Accounts }) {
   const {
     uuid,
     id,
@@ -35,7 +35,7 @@ function Tbody({ accounts }: { accounts: Accounts }) {
 
   useEffect(() => {
     dispatch(getUsersThunk());
-  }, [accounts]);
+  }, []);
 
   return (
     <Tr>
@@ -66,7 +66,7 @@ function Tbody({ accounts }: { accounts: Accounts }) {
   );
 }
 
-export default Tbody;
+export default TableBody;
 
 const Tr = styled.tr`
   & > td {

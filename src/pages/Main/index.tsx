@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import mainImage from '../../assets/main_image.png';
+import mainImage from '../../assets/image/main_image.png';
 
 function Main() {
   return (

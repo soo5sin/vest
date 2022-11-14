@@ -4,7 +4,7 @@ import { signIn } from '../../api/auth';
 import { ROUTE } from '../../constants/routes';
 import { UserToken } from '../../utils/auth';
 import styled from 'styled-components';
-import logo from '../../assets/logo.jpg';
+import logo from '../../assets/image/logo.jpg';
 import { AxiosError } from 'axios';
 
 function Login() {

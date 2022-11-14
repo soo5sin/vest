@@ -1,4 +1,4 @@
-import ACCOUNT_STATUS from '../../../assets/accountStatus.json';
+import ACCOUNT_STATUS from '../../../assets/data/accountStatus.json';
 import { AccountStatus } from '../../../types/accounts';
 
 const accountStatus: AccountStatus = ACCOUNT_STATUS;

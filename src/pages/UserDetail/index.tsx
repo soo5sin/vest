@@ -1,32 +1,38 @@
+import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Accounts } from '../../types/accounts';
 import { useGetAccountsById } from '../../utils/hooks/useGetAccountsById';
-import DetailTable from './components/DetailTable';
-import UserAccounts from './components/UserAccounts';
+import AccountDetailTable from './components/AccountDetailTable';
+import UserDetailTable from './components/UserDetailTable';
 
 function UserDetail() {
   const { id } = useParams();
   const [accounts, setAccounts] = useState<Accounts[]>();
 
-  useEffect(() => {
-    const getAccounts = async () => {
-      try {
-        const response = await useGetAccountsById(id);
-        setAccounts(response.data);
-      } catch (error) {
-        console.log(error);
+  const getAccounts = async () => {
+    try {
+      const response = await useGetAccountsById(id);
+      setAccounts(response.data);
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        throw new Error(error.response.data);
+      } else {
+        throw new Error('fail to get account information');
       }
-    };
+    }
+  };
+
+  useEffect(() => {
     getAccounts();
   }, []);
 
   return (
     <Container>
-      <DetailTable />
+      <UserDetailTable />
       {accounts?.map((account, index) => (
-        <UserAccounts account={account} key={index} />
+        <AccountDetailTable account={account} key={index} />
       ))}
     </Container>
   );

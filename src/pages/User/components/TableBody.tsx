@@ -12,7 +12,7 @@ import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function Tbody({ users }: { users: Users }) {
+function TableBody({ users }: { users: Users }) {
   const {
     name,
     id,
@@ -32,6 +32,11 @@ function Tbody({ users }: { users: Users }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(name);
 
+  const getAccounts = async () => {
+    const response = await useGetAccountsById(users.id);
+    setAccountCount(response.data.length);
+  };
+
   const onSubmitNameHandler = () => {
     dispatch(updateUserThunk({ id, newName }));
     setIsEditing(false);
@@ -45,16 +50,8 @@ function Tbody({ users }: { users: Users }) {
   };
 
   useEffect(() => {
-    const getAccounts = async () => {
-      try {
-        const response = await useGetAccountsById(users.id);
-        setAccountCount(response.data.length);
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getAccounts();
-  }, [users.id]);
+  }, []);
 
   if (!users.name) return null;
 
@@ -97,7 +94,7 @@ function Tbody({ users }: { users: Users }) {
   );
 }
 
-export default Tbody;
+export default TableBody;
 
 const Tr = styled.tr`
   & > td {

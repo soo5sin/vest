@@ -71,7 +71,6 @@ function NewUserModal({
           placeholder="김핀트"
           onChange={onChangeInputHandler}
         />
-
         <Select>
           <label htmlFor="gender_origin">성별 코드</label>
           <select name="gender_origin" onChange={onChangeInputHandler} value={gender_origin}>
@@ -81,7 +80,6 @@ function NewUserModal({
             <option value={4}>4</option>
           </select>
         </Select>
-
         <label htmlFor="birth_date">생년월일</label>
         <input
           type="text"
@@ -90,7 +88,6 @@ function NewUserModal({
           placeholder="0000-00-00"
           onChange={onChangeInputHandler}
         />
-
         <label htmlFor="phone_number">휴대폰번호</label>
         <input
           type="text"

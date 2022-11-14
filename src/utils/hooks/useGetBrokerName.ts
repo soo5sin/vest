@@ -1,4 +1,4 @@
-import BrokersJson from '../../assets/brokers.json';
+import BrokersJson from '../../assets/data/brokers.json';
 import { Brokers } from '../../types/accounts';
 
 const brokers: Brokers = BrokersJson;

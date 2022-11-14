@@ -3,13 +3,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { USERS } from '../../constants/user';
 import { extraReducerUtils } from '../../utils/extraReducer';
 import { Users } from '../../types/user';
+import { AxiosError } from 'axios';
 
 export const getUsersThunk = createAsyncThunk(USERS.GET, async (params?: object) => {
   try {
     const response = await api.get(`/users`, { params });
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data);
+    } else {
+      throw new Error('fail to get user information');
+    }
   }
 });
 
@@ -18,7 +23,11 @@ export const addUserThunk = createAsyncThunk(USERS.NEW, async (newUser: Users) =
     const response = await api.post('/users', newUser);
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data);
+    } else {
+      throw new Error('fail to add user information');
+    }
   }
 });
 
@@ -29,7 +38,11 @@ export const updateUserThunk = createAsyncThunk(
       const response = await api.patch(`/users/${id}`, { name: newName });
       return response;
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError && error.response) {
+        throw new Error(error.response.data);
+      } else {
+        throw new Error('fail to update user information');
+      }
     }
   },
 );
@@ -39,7 +52,11 @@ export const deleteUserThunk = createAsyncThunk(USERS.DELETE, async (id: number 
     const response = await api.delete(`/users/${id}`);
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (error instanceof AxiosError && error.response) {
+      throw new Error(error.response.data);
+    } else {
+      throw new Error('fail to delete user information');
+    }
   }
 });
 

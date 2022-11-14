@@ -1,23 +1,32 @@
 import react, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Spinner from '../../../components/shared/spinner/Spinner';
 import { Users } from '../../../types/user';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetUserById } from '../hooks/useGetUserById';
+import Error from '../../../components/shared/error/Error';
 
-function DetailTable() {
+function UserDetailTable() {
   const { id } = useParams();
-  const [user, setUser] = useState<Users | undefined>();
+  const [user, setUser] = useState<Users>();
+  const [isError, setIsError] = useState(false);
 
-  useEffect(() => {
-    const getUser = async () => {
+  const getUser = async () => {
+    try {
       const user = await useGetUserById(id);
       setUser(user);
-    };
+    } catch (error) {
+      setIsError(true);
+    }
+  };
+
+  useEffect(() => {
     getUser();
   }, []);
 
-  if (!user) return <Error>고객 정보가 없습니다.</Error>;
+  if (isError) return <Error error="fetching error" />;
+  if (!user) return <Spinner />;
 
   return (
     <>
@@ -65,13 +74,7 @@ function DetailTable() {
   );
 }
 
-export default DetailTable;
-
-const Error = styled.div`
-  text-align: center;
-  min-height: 100vh;
-  margin-top: 10rem;
-`;
+export default UserDetailTable;
 
 const Img = styled.div`
   margin: 20px auto;

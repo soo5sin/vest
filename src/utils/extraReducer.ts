@@ -1,10 +1,11 @@
 import { AsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
 import { Users } from '../types/user';
+import { Accounts } from '../types/accounts';
 
 export interface State {
   isLoading: boolean;
-  data: Users[];
+  data: Users[] | Accounts[];
   error: null;
 }
 
