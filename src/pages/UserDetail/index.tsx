@@ -2,14 +2,14 @@ import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { Accounts } from '../../types/accounts';
+import { Account } from '../../types/account';
 import { useGetAccountsById } from '../../utils/hooks/useGetAccountsById';
 import AccountDetailTable from './components/AccountDetailTable';
 import UserDetailTable from './components/UserDetailTable';
 
 function UserDetail() {
   const { id } = useParams();
-  const [accounts, setAccounts] = useState<Accounts[]>();
+  const [accounts, setAccounts] = useState<Account[]>();
 
   const getAccounts = async () => {
     try {

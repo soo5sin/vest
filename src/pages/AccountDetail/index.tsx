@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { DetailTable } from './hooks/DetailTable';
+import { DetailTable } from './components/DetailTable';
 
 function AccountDetail() {
   return (

@@ -1,8 +1,8 @@
 import api from '../../api/instance';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { USERS } from '../../constants/user';
+import { USERS } from '../../constants/users';
 import { extraReducerUtils } from '../../utils/extraReducer';
-import { Users } from '../../types/user';
+import { User } from '../../types/user';
 import { AxiosError } from 'axios';
 
 export const getUsersThunk = createAsyncThunk(USERS.GET, async (params?: object) => {
@@ -18,7 +18,7 @@ export const getUsersThunk = createAsyncThunk(USERS.GET, async (params?: object)
   }
 });
 
-export const addUserThunk = createAsyncThunk(USERS.NEW, async (newUser: Users) => {
+export const addUserThunk = createAsyncThunk(USERS.NEW, async (newUser: User) => {
   try {
     const response = await api.post('/users', newUser);
     return response.data;
@@ -68,7 +68,7 @@ const initialState: InitialState = {
 
 interface InitialState {
   isLoading: boolean;
-  data: Users[];
+  data: User[];
   error: null;
 }
 

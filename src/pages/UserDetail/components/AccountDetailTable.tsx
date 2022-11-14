@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import { Accounts } from '../../../types/accounts';
+import { Account } from '../../../types/account';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 import { useFormatPrice } from '../../Account/hooks/useFormatPrice';
 import { useGetStatus } from '../../Account/hooks/useGetStatus';
 
-function AccountDetailTable({ account }: { account: Accounts }) {
+function AccountDetailTable({ account }: { account: Account }) {
   return (
     <>
       <Title>유저 계좌 목록</Title>

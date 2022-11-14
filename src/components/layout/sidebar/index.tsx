@@ -1,4 +1,4 @@
-import { ROUTE } from '../../../constants/routes';
+import { ROUTE } from '../../../constants/route';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { UserToken } from '../../../utils/auth';
 import styled from 'styled-components';

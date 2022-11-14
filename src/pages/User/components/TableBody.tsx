@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ROUTE } from '../../../constants/routes';
+import { ROUTE } from '../../../constants/route';
 import { useAppDispatch } from '../../../store';
 import { deleteUserThunk, getUsersThunk, updateUserThunk } from '../../../store/reducers/users';
-import { Users } from '../../../types/user';
+import { User } from '../../../types/user';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetAccountsById } from '../../../utils/hooks/useGetAccountsById';
 import { useMaskingName } from '../hooks/useMaskingName';
@@ -12,7 +12,7 @@ import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 
-function TableBody({ users }: { users: Users }) {
+function TableBody({ user }: { user: User }) {
   const {
     name,
     id,
@@ -25,7 +25,7 @@ function TableBody({ users }: { users: Users }) {
     is_staff,
     is_active,
     created_at,
-  } = users;
+  } = user;
 
   const dispatch = useAppDispatch();
   const [accountCount, setAccountCount] = useState(0);
@@ -33,7 +33,7 @@ function TableBody({ users }: { users: Users }) {
   const [newName, setNewName] = useState(name);
 
   const getAccounts = async () => {
-    const response = await useGetAccountsById(users.id);
+    const response = await useGetAccountsById(user.id);
     setAccountCount(response.data.length);
   };
 
@@ -53,7 +53,7 @@ function TableBody({ users }: { users: Users }) {
     getAccounts();
   }, []);
 
-  if (!users.name) return null;
+  if (!user.name) return null;
 
   return (
     <Tr>
@@ -73,7 +73,7 @@ function TableBody({ users }: { users: Users }) {
           </>
         ) : (
           <>
-            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(users.name)}</Link>}
+            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(user.name)}</Link>}
             <Edit onClick={() => setIsEditing(true)}>
               <FontAwesomeIcon icon={faPen} />
             </Edit>

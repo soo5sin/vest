@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUsersThunk } from '../../../store/reducers/users';
-import { Accounts } from '../../../types/accounts';
+import { Account } from '../../../types/account';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 import { useFormatPrice } from '../hooks/useFormatPrice';
 import { useGetStatus } from '../hooks/useGetStatus';
 import { useMaskingNumber } from '../hooks/useMaskingNumber';
 
-function TableBody({ accounts }: { accounts: Accounts }) {
+function TableBody({ accounts }: { accounts: Account }) {
   const {
     uuid,
     id,

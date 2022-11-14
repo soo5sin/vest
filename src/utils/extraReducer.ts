@@ -1,11 +1,11 @@
 import { AsyncThunk } from '@reduxjs/toolkit';
 import { AxiosResponse } from 'axios';
-import { Users } from '../types/user';
-import { Accounts } from '../types/accounts';
+import { User } from '../types/user';
+import { Account } from '../types/account';
 
 export interface State {
   isLoading: boolean;
-  data: Users[] | Accounts[];
+  data: User[] | Account[];
   error: null;
 }
 
@@ -27,7 +27,7 @@ export const extraReducerUtils = (
   thunk:
     | AsyncThunk<AxiosResponse<any, any> | undefined, number, {}>
     | AsyncThunk<AxiosResponse<any, any> | undefined, void, {}>
-    | AsyncThunk<AxiosResponse<any, any> | undefined, Users, {}>
+    | AsyncThunk<AxiosResponse<any, any> | undefined, User, {}>
     | AsyncThunk<any, object | undefined, {}>,
 ) => {
   return {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Accounts } from '../../../types/accounts';
-import { useGetAccountByUuid } from './useGetAccountById';
+import { Account } from '../../../types/account';
+import { useGetAccountByUuid } from '../hooks/useGetAccountById';
 import { useFormatPrice } from '../../Account/hooks/useFormatPrice';
 import { useGetStatus } from '../../Account/hooks/useGetStatus';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
@@ -17,7 +17,7 @@ export function DetailTable() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.data);
   const { uuid } = useParams();
-  const [account, setAccount] = useState<Accounts>();
+  const [account, setAccount] = useState<Account>();
   const [isError, setIsError] = useState(false);
 
   const getAccount = async () => {

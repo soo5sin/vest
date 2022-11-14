@@ -2,14 +2,14 @@ import react, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../../components/shared/spinner/Spinner';
-import { Users } from '../../../types/user';
+import { User } from '../../../types/user';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetUserById } from '../hooks/useGetUserById';
 import Error from '../../../components/shared/error/Error';
 
 function UserDetailTable() {
   const { id } = useParams();
-  const [user, setUser] = useState<Users>();
+  const [user, setUser] = useState<User>();
   const [isError, setIsError] = useState(false);
 
   const getUser = async () => {

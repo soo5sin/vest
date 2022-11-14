@@ -1,8 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import api from '../../api/instance';
-import { ACCOUNTS } from '../../constants/account';
-import { Accounts } from '../../types/accounts';
+import { ACCOUNTS } from '../../constants/accounts';
+import { Account } from '../../types/account';
 
 import { extraReducerUtils } from '../../utils/extraReducer';
 
@@ -27,7 +27,7 @@ const initialState: InitialState = {
 
 interface InitialState {
   isLoading: boolean;
-  data: Accounts[];
+  data: Account[];
   error: null;
 }
 

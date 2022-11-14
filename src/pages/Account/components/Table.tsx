@@ -6,7 +6,7 @@ import Spinner from '../../../components/shared/spinner/Spinner';
 import Thead from '../../../components/shared/table/Thead';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getAccountsThunk } from '../../../store/reducers/accounts';
-import { Accounts } from '../../../types/accounts';
+import { Account } from '../../../types/account';
 import TableBody from './TableBody';
 
 function Table() {
@@ -33,7 +33,7 @@ function Table() {
           {data.length ? (
             data
               .slice(20 * (page - 1), 20 * (page - 1) + 20)
-              .map((accounts: Accounts, index) => <TableBody accounts={accounts} key={index} />)
+              .map((accounts: Account, index) => <TableBody accounts={accounts} key={index} />)
           ) : (
             <tr>
               <Empty colSpan={9}>검색 결과가 없습니다.</Empty>

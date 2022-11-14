@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { signIn } from '../../api/auth';
-import { ROUTE } from '../../constants/routes';
+import { ROUTE } from '../../constants/route';
 import { UserToken } from '../../utils/auth';
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.jpg';
 import { AxiosError } from 'axios';
+import api from '../../api/instance';
+import { Sign } from '../../types/auth';
 
 function Login() {
   const navigate = useNavigate();
@@ -15,6 +16,13 @@ function Login() {
   };
 
   const [loginInput, setLoginInput] = useState(INITIAL_LOGIN);
+
+  const signIn = ({ email, password }: Sign) => {
+    return api.post('/login', {
+      email,
+      password,
+    });
+  };
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;

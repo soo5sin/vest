@@ -1,6 +1,6 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Sidebar from '../components/layout/sidebar';
-import { ROUTE } from '../constants/routes';
+import { ROUTE } from '../constants/route';
 import Account from '../pages/Account';
 import AccountDetail from '../pages/AccountDetail';
 import Login from '../pages/Login';
