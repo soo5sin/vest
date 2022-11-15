@@ -46,10 +46,12 @@ function Sidebar() {
             )}
           </Link>
         ))}
-        <button onClick={logoutHandler}>
-          <FontAwesomeIcon icon={faArrowRight} />
-          <Menu>로그아웃</Menu>
-        </button>
+        <div>
+          <button onClick={logoutHandler}>
+            <FontAwesomeIcon icon={faArrowRight} />
+            <Menu>로그아웃</Menu>
+          </button>
+        </div>
       </Aside>
       <Outlet />
     </Container>
@@ -69,14 +71,12 @@ const Aside = styled.aside`
     margin: 0 30px 20px 40px;
     font-weight: bold;
   }
-  & div:hover,
-  button:hover {
+  & div:hover {
     background: ${({ theme }) => theme.palette.WHITE};
     color: ${({ theme }) => theme.palette.MAIN_COLOR};
     border-radius: 5px;
   }
-  & div,
-  button {
+  & div {
     margin-bottom: 10px;
     padding: 10px;
   }
