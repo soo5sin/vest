@@ -4,13 +4,14 @@ import styled from 'styled-components';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUsersThunk } from '../../../store/reducers/users';
 import { Account } from '../../../types/account';
+import { useFindUserNameById } from '../../../utils/hooks/useFindUserNameById';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 import { useFormatPrice } from '../hooks/useFormatPrice';
 import { useGetStatus } from '../hooks/useGetStatus';
 import { useMaskingNumber } from '../hooks/useMaskingNumber';
 
-function TableBody({ accounts }: { accounts: Account }) {
+function TableBody({ account }: { account: Account }) {
   const {
     uuid,
     id,
@@ -23,15 +24,10 @@ function TableBody({ accounts }: { accounts: Account }) {
     payments,
     is_active,
     created_at,
-  } = accounts;
+  } = account;
 
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users.data);
-
-  const getUserName = (userId: number) => {
-    const userName = users.find((user) => user.id === userId)?.name;
-    return userName ? userName : '-';
-  };
 
   useEffect(() => {
     dispatch(getUsersThunk());
@@ -40,7 +36,7 @@ function TableBody({ accounts }: { accounts: Account }) {
   return (
     <Tr>
       <td>
-        <Link to={`/user-detail/${id}`}>{getUserName(user_id)}</Link>
+        <Link to={`/user-detail/${id}`}>{useFindUserNameById(users, user_id)}</Link>
       </td>
       <td>{useGetBrokerName(broker_id)}</td>
       <td>

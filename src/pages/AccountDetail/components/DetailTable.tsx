@@ -12,6 +12,7 @@ import styled from 'styled-components';
 import Spinner from '../../../components/shared/spinner/Spinner';
 import ErrorPage from '../../../components/shared/error/Error';
 import { AxiosError } from 'axios';
+import { useFindUserNameById } from '../../../utils/hooks/useFindUserNameById';
 
 export function DetailTable() {
   const dispatch = useAppDispatch();
@@ -34,11 +35,6 @@ export function DetailTable() {
     }
   };
 
-  const getUserName = () => {
-    const userName = users.find((user) => user.id === account?.user_id)?.name;
-    return userName ? userName : '-';
-  };
-
   useEffect(() => {
     getAccount();
     dispatch(getUsersThunk());
@@ -52,7 +48,7 @@ export function DetailTable() {
       <tbody>
         <Tr>
           <th>고객명</th>
-          <td>{getUserName()}</td>
+          <td>{useFindUserNameById(users, account?.user_id)}</td>
           <th>계좌명</th>
           <td>{account.name}</td>
           <th>브로커명</th>
