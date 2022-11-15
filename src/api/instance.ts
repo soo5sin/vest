@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ROUTE } from '../constants/routes';
+import { ROUTE } from '../constants/route';
 import { UserToken } from '../utils/auth';
 
 const api = axios.create({
@@ -28,7 +28,6 @@ api.interceptors.response.use(
     if (errorStatus === 401) {
       UserToken.remove();
       window.location.replace(ROUTE.LOGIN);
-      alert('유효한 인증 정보가 없습니다. 다시 로그인해 주세요.');
     }
 
     return Promise.reject(error);
