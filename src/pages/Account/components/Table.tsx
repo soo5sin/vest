@@ -1,4 +1,4 @@
-import react, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Pagination from 'react-js-pagination';
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';

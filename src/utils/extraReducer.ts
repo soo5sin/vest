@@ -1,5 +1,4 @@
-import { AsyncThunk } from '@reduxjs/toolkit';
-import { AxiosResponse } from 'axios';
+import { AsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../types/user';
 import { Account } from '../types/account';
 
@@ -13,7 +12,7 @@ export const extraReducerStatus = {
   pending: (state: State) => {
     state.isLoading = true;
   },
-  fulfilled: (state: State, action: any) => {
+  fulfilled: (state: State, action: PayloadAction<User[] | Account[]>) => {
     state.isLoading = false;
     state.data = action.payload;
   },

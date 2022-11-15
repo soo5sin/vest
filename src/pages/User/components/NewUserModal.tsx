@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../store';
 import { addUserThunk, getUsersThunk } from '../../../store/reducers/users';
