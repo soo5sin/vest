@@ -1,7 +1,7 @@
-import BrokersJson from '../../assets/data/brokers.json';
+import BROKERS_JSON from '../../assets/data/brokers.json';
 import { Brokers } from '../../types/account';
 
-const brokers: Brokers = BrokersJson;
+const brokers: Brokers = BROKERS_JSON;
 
 export const useGetBrokerName = (brokerId: number) => {
   return brokers[brokerId];

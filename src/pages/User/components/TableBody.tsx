@@ -26,13 +26,12 @@ function TableBody({ user }: { user: User }) {
     is_active,
     created_at,
   } = user;
-
   const dispatch = useAppDispatch();
   const [accountCount, setAccountCount] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
   const [newName, setNewName] = useState(name);
 
-  const getAccounts = async () => {
+  const getAccountCount = async () => {
     const response = await useGetAccountsById(user.id);
     setAccountCount(response.data.length);
   };
@@ -50,7 +49,7 @@ function TableBody({ user }: { user: User }) {
   };
 
   useEffect(() => {
-    getAccounts();
+    getAccountCount();
   }, []);
 
   if (!user.name) return null;

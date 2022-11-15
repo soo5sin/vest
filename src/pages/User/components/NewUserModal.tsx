@@ -30,7 +30,7 @@ function NewUserModal({
     is_active: false,
     is_staff: false,
   };
-
+  const dispatch = useAppDispatch();
   const [newUser, setNewUser] = useState(INITIAL_USER);
   const {
     name,
@@ -42,7 +42,6 @@ function NewUserModal({
     allow_marketing_push,
     is_staff,
   } = newUser;
-  const dispatch = useAppDispatch();
 
   const onSubmitNewUserHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

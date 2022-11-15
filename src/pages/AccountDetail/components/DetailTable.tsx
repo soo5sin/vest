@@ -48,7 +48,7 @@ export function DetailTable() {
       <tbody>
         <Tr>
           <th>고객명</th>
-          <td>{useFindUserNameById(users, account?.user_id)}</td>
+          <td>{useFindUserNameById(users, account.user_id)}</td>
           <th>계좌명</th>
           <td>{account.name}</td>
           <th>브로커명</th>

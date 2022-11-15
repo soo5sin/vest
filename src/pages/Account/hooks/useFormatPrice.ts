@@ -1,3 +1,4 @@
 export const useFormatPrice = (price: string) => {
-  return Math.floor(Number(price)).toLocaleString();
+  const formattedPrice = Math.floor(Number(price)).toLocaleString();
+  return formattedPrice;
 };

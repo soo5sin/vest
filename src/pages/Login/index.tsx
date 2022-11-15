@@ -9,12 +9,11 @@ import api from '../../api/instance';
 import { Sign } from '../../types/auth';
 
 function Login() {
-  const navigate = useNavigate();
   const INITIAL_LOGIN = {
     email: '',
     password: '',
   };
-
+  const navigate = useNavigate();
   const [loginInput, setLoginInput] = useState(INITIAL_LOGIN);
 
   const signIn = ({ email, password }: Sign) => {
@@ -33,7 +32,8 @@ function Login() {
     e.preventDefault();
     try {
       const response = await signIn(loginInput);
-      UserToken.set(response.data.accessToken);
+      const receivedToken = response.data.accessToken;
+      UserToken.set(receivedToken);
       navigate(ROUTE.MAIN);
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
