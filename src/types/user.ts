@@ -1,11 +1,11 @@
 export interface User {
   id: number | null;
-  uuid: string | null;
+  uuid: string;
   photo: string;
   name: string;
   email: string;
   age: number | null;
-  gender_origin: number | null;
+  gender_origin: number;
   birth_date: string;
   phone_number: string;
   address: string;
@@ -13,8 +13,8 @@ export interface User {
   last_login: string;
   created_at: string;
   updated_at: string;
-  allow_marketing_push: boolean | string;
-  allow_invest_push: boolean | string;
-  is_active: boolean | string;
-  is_staff: boolean | string;
+  allow_marketing_push: boolean;
+  allow_invest_push: boolean;
+  is_active: boolean;
+  is_staff: boolean;
 }

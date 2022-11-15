@@ -23,13 +23,7 @@ export const extraReducerStatus = {
   },
 };
 
-export const extraReducerUtils = (
-  thunk:
-    | AsyncThunk<AxiosResponse<any, any> | undefined, number, {}>
-    | AsyncThunk<AxiosResponse<any, any> | undefined, void, {}>
-    | AsyncThunk<AxiosResponse<any, any> | undefined, User, {}>
-    | AsyncThunk<any, object | undefined, {}>,
-) => {
+export const extraReducerUtils = (thunk: AsyncThunk<any, object | undefined, {}>) => {
   return {
     [thunk.pending.type]: extraReducerStatus.pending,
     [thunk.fulfilled.type]: extraReducerStatus.fulfilled,

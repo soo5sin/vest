@@ -1,4 +1,4 @@
-export const useMaskingNumber = (number: string | undefined) => {
+export const useMaskingNumber = (number: string) => {
   if (!number) return;
 
   const first = number.slice(0, 1);
