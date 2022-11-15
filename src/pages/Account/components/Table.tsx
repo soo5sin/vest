@@ -7,6 +7,7 @@ import Thead from '../../../components/shared/table/Thead';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getAccountsThunk } from '../../../store/reducers/accounts';
 import { Account } from '../../../types/account';
+import { sliceArrayForPagenation } from '../../../utils/hooks/useSliceArrayForPagination';
 import TableBody from './TableBody';
 
 function Table() {
@@ -31,9 +32,9 @@ function Table() {
         <Thead type="account" />
         <tbody>
           {data.length ? (
-            data
-              .slice(20 * (page - 1), 20 * (page - 1) + 20)
-              .map((accounts: Account, index) => <TableBody accounts={accounts} key={index} />)
+            sliceArrayForPagenation(data, page).map((account: Account, index) => (
+              <TableBody account={account} key={index} />
+            ))
           ) : (
             <tr>
               <Empty colSpan={9}>검색 결과가 없습니다.</Empty>
@@ -47,7 +48,7 @@ function Table() {
         totalItemsCount={data.length - 1}
         pageRangeDisplayed={5}
         onChange={handlePageChange}
-      ></Pagination>
+      />
     </>
   );
 }
