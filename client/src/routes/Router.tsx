@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
-import Sidebar from '../components/layout/sidebar';
+import Layout from '../components/layout';
 import { ROUTE } from '../constants/route';
 import Account from '../pages/Account';
 import AccountDetail from '../pages/AccountDetail';
@@ -19,7 +19,7 @@ function Router() {
     <Routes>
       <Route path={ROUTE.LOGIN} element={<Login />} />
       <Route element={<Auth />}>
-        <Route element={<Sidebar />}>
+        <Route element={<Layout />}>
           <Route path={ROUTE.MAIN} element={<Main />} />
           <Route path={ROUTE.USER} element={<User />} />
           <Route path={`${ROUTE.USER_DETAIL}/:id`} element={<UserDetail />} />

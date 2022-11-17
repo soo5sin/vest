@@ -2,17 +2,17 @@ import { AsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { User } from '../types/user';
 import { Account } from '../types/account';
 
-export interface State {
+interface State {
   isLoading: boolean;
   data: User[] | Account[] | User | Account;
   error: null | string;
 }
 
-export const extraReducerStatus = {
+const extraReducerStatus = {
   pending: (state: State) => {
     state.isLoading = true;
   },
-  fulfilled: (state: State, action: PayloadAction<User[] | Account[]>) => {
+  fulfilled: (state: State, action: PayloadAction<User[] | Account[] | User | Account>) => {
     state.isLoading = false;
     state.data = action.payload;
   },

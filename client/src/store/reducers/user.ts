@@ -81,17 +81,17 @@ const INITIAL_USER = {
   is_staff: false,
 };
 
-const initialState: InitialState = {
-  isLoading: false,
-  data: INITIAL_USER,
-  error: null,
-};
-
 interface InitialState {
   isLoading: boolean;
   data: User;
   error: null;
 }
+
+const initialState: InitialState = {
+  isLoading: false,
+  data: INITIAL_USER,
+  error: null,
+};
 
 const userSlice = createSlice({
   name: 'users',

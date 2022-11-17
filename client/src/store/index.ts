@@ -5,6 +5,7 @@ import logger from 'redux-logger';
 import accountsReducer from './reducers/accounts';
 import userReducer from './reducers/user';
 import accountReducer from './reducers/account';
+import authReducer from './reducers/auth';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     accounts: accountsReducer,
     user: userReducer,
     account: accountReducer,
+    auth: authReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

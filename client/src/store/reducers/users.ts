@@ -18,17 +18,17 @@ export const getUsersThunk = createAsyncThunk(USERS.GET, async (params?: object)
   }
 });
 
-const initialState: InitialState = {
-  isLoading: false,
-  data: [],
-  error: null,
-};
-
 interface InitialState {
   isLoading: boolean;
   data: User[];
   error: null;
 }
+
+const initialState: InitialState = {
+  isLoading: false,
+  data: [],
+  error: null,
+};
 
 const usersSlice = createSlice({
   name: 'users',

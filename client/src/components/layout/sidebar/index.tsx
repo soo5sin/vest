@@ -1,23 +1,11 @@
 import { ROUTE } from '../../../constants/route';
-import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { UserToken } from '../../../utils/userToken';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
-  const siderContent = [
-    { id: 1, name: '메인', keyword: '/', link: ROUTE.MAIN, icon: faHouse },
-    {
-      id: 2,
-      name: '계좌 목록',
-      keyword: '/account',
-      link: ROUTE.ACCOUNT,
-      icon: faBriefcase,
-    },
-    { id: 3, name: '유저 목록', keyword: '/user', link: ROUTE.USER, icon: faUser },
-  ];
-
   const navigate = useNavigate();
   const CurrentPage = useLocation().pathname;
 
@@ -29,42 +17,47 @@ function Sidebar() {
 
   return (
     <Container>
-      <Aside>
-        <h1>fint</h1>
-        {siderContent.map((sider) => (
-          <Link to={sider.link} key={sider.id}>
-            {CurrentPage === sider.keyword ? (
-              <ClickedMenu>
-                <FontAwesomeIcon icon={sider.icon} />
-                <Menu>{sider.name}</Menu>
-              </ClickedMenu>
-            ) : (
-              <div>
-                <FontAwesomeIcon icon={sider.icon} />
-                <Menu>{sider.name}</Menu>
-              </div>
-            )}
-          </Link>
-        ))}
-        <div>
-          <button onClick={logoutHandler}>
-            <FontAwesomeIcon icon={faArrowRight} />
-            <Menu>로그아웃</Menu>
-          </button>
-        </div>
-      </Aside>
-      <Outlet />
+      <h1>fint</h1>
+      {siderContent.map((sider) => (
+        <Link to={sider.link} key={sider.id}>
+          {CurrentPage === sider.keyword ? (
+            <ClickedMenu>
+              <FontAwesomeIcon icon={sider.icon} />
+              <Menu>{sider.name}</Menu>
+            </ClickedMenu>
+          ) : (
+            <div>
+              <FontAwesomeIcon icon={sider.icon} />
+              <Menu>{sider.name}</Menu>
+            </div>
+          )}
+        </Link>
+      ))}
+      <div>
+        <button onClick={logoutHandler}>
+          <FontAwesomeIcon icon={faArrowRight} />
+          <Menu>로그아웃</Menu>
+        </button>
+      </div>
     </Container>
   );
 }
 
 export default Sidebar;
 
-const Container = styled.div`
-  display: flex;
-`;
+export const siderContent = [
+  { id: 1, name: '메인', keyword: '/', link: ROUTE.MAIN, icon: faHouse },
+  {
+    id: 2,
+    name: '계좌 목록',
+    keyword: '/account',
+    link: ROUTE.ACCOUNT,
+    icon: faBriefcase,
+  },
+  { id: 3, name: '유저 목록', keyword: '/user', link: ROUTE.USER, icon: faUser },
+];
 
-const Aside = styled.aside`
+const Container = styled.aside`
   & > h1 {
     font-size: 30px;
     text-align: center;

@@ -7,13 +7,15 @@ import logo from '../../assets/image/logo.jpg';
 import { AxiosError } from 'axios';
 import api from '../../api/instance';
 import { Sign } from '../../types/auth';
-
+import { useAppDispatch } from '../../store';
+import { getUserId } from '../../store/reducers/auth';
 function Login() {
   const INITIAL_LOGIN = {
     email: '',
     password: '',
   };
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [loginInput, setLoginInput] = useState(INITIAL_LOGIN);
 
   const signIn = ({ email, password }: Sign) => {
@@ -33,7 +35,9 @@ function Login() {
     try {
       const response = await signIn(loginInput);
       const receivedToken = response.data.accessToken;
+      const receivedId = response.data.user.email;
       UserToken.set(receivedToken);
+      dispatch(getUserId(receivedId));
       navigate(ROUTE.MAIN);
     } catch (error) {
       if (error instanceof AxiosError && error.response) {

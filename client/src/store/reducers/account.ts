@@ -34,17 +34,17 @@ const INITIAL_ACCOUNT = {
   updated_at: '',
 };
 
-const initialState: InitialState = {
-  isLoading: false,
-  data: INITIAL_ACCOUNT,
-  error: null,
-};
-
 interface InitialState {
   isLoading: boolean;
   data: Account;
   error: null;
 }
+
+const initialState: InitialState = {
+  isLoading: false,
+  data: INITIAL_ACCOUNT,
+  error: null,
+};
 
 const accountSlice = createSlice({
   name: 'accounts',
