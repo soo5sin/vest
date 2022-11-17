@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { ROUTE } from '../../../constants/route';
 import { useAppDispatch } from '../../../store';
-import { deleteUserThunk, getUsersThunk, updateUserThunk } from '../../../store/reducers/users';
+import { deleteUserThunk, updateUserThunk } from '../../../store/reducers/user';
 import { User } from '../../../types/user';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetAccountsById } from '../../../utils/hooks/useGetAccountsById';
@@ -11,6 +11,8 @@ import { useMaskingName } from '../hooks/useMaskingName';
 import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { getUsersThunk } from '../../../store/reducers/users';
+import { AxiosError } from 'axios';
 
 function TableBody({ user }: { user: User }) {
   const {
@@ -32,8 +34,16 @@ function TableBody({ user }: { user: User }) {
   const [newName, setNewName] = useState(name);
 
   const getAccountCount = async () => {
-    const response = await useGetAccountsById(user.id);
-    setAccountCount(response.data.length);
+    try {
+      const response = await useGetAccountsById(user.id);
+      setAccountCount(response.data.length);
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        throw new Error(error.response.data);
+      } else {
+        throw new Error('fail to get accounts');
+      }
+    }
   };
 
   const onSubmitNameHandler = () => {

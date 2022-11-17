@@ -4,8 +4,8 @@ import { Account } from '../types/account';
 
 export interface State {
   isLoading: boolean;
-  data: User[] | Account[];
-  error: null;
+  data: User[] | Account[] | User | Account;
+  error: null | string;
 }
 
 export const extraReducerStatus = {
@@ -22,7 +22,20 @@ export const extraReducerStatus = {
   },
 };
 
-export const extraReducerUtils = (thunk: AsyncThunk<any, object | undefined, {}>) => {
+export const extraReducerUtils = (
+  thunk:
+    | AsyncThunk<any, object | undefined, {}>
+    | AsyncThunk<
+        any,
+        {
+          id: number | null;
+          newName: string;
+        },
+        {}
+      >
+    | AsyncThunk<any, number | null, {}>
+    | AsyncThunk<any, User, {}>,
+) => {
   return {
     [thunk.pending.type]: extraReducerStatus.pending,
     [thunk.fulfilled.type]: extraReducerStatus.fulfilled,

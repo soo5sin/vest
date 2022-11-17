@@ -1,14 +1,15 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import api from '../../api/instance';
-import { ACCOUNTS } from '../../constants/account';
+import { ACCOUNT } from '../../constants/account';
 import { Account } from '../../types/account';
+
 import { extraReducerUtils } from '../../utils/extraReducer';
 
-export const getAccountsThunk = createAsyncThunk(ACCOUNTS.GET, async (params?: object) => {
+export const getAccountThunk = createAsyncThunk(ACCOUNT.GET, async (params?: object) => {
   try {
     const response = await api.get(`/accounts`, { params });
-    return response.data;
+    return response.data[0];
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
       throw new Error(error.response.data);
@@ -18,25 +19,40 @@ export const getAccountsThunk = createAsyncThunk(ACCOUNTS.GET, async (params?: o
   }
 });
 
+const INITIAL_ACCOUNT = {
+  id: 0,
+  user_id: 0,
+  uuid: '',
+  broker_id: 0,
+  status: 0,
+  number: '',
+  name: '',
+  assets: '',
+  payments: '',
+  is_active: false,
+  created_at: '',
+  updated_at: '',
+};
+
 const initialState: InitialState = {
   isLoading: false,
-  data: [],
+  data: INITIAL_ACCOUNT,
   error: null,
 };
 
 interface InitialState {
   isLoading: boolean;
-  data: Account[];
+  data: Account;
   error: null;
 }
 
-const accountsSlice = createSlice({
+const accountSlice = createSlice({
   name: 'accounts',
   initialState,
   reducers: {},
   extraReducers: {
-    ...extraReducerUtils(getAccountsThunk),
+    ...extraReducerUtils(getAccountThunk),
   },
 });
 
-export default accountsSlice.reducer;
+export default accountSlice.reducer;
