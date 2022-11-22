@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Pagination from 'react-js-pagination';
+import Pagenation from '../../../components/shared/pagenation/Pagenation';
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
 import Spinner from '../../../components/shared/spinner/Spinner';
@@ -14,14 +14,12 @@ function Table() {
   const dispatch = useAppDispatch();
   const { data, isLoading, error } = useAppSelector((state) => state.accounts);
   const [page, setPage] = useState(1);
-
-  const handlePageChange = (page: number) => {
-    setPage(page);
-  };
+  const limit = 20;
+  const totalCount = data.length;
 
   useEffect(() => {
     dispatch(getAccountsThunk());
-  }, []);
+  }, [page]);
 
   if (isLoading) return <Spinner />;
   if (error) return <Error error={error} />;
@@ -32,7 +30,7 @@ function Table() {
         <Thead type="account" />
         <tbody>
           {data.length ? (
-            sliceArrayForPagenation(data, page).map((account: Account, index) => (
+            sliceArrayForPagenation(data, page, limit).map((account: Account, index) => (
               <TableBody account={account} key={index} />
             ))
           ) : (
@@ -42,13 +40,7 @@ function Table() {
           )}
         </tbody>
       </table>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={20}
-        totalItemsCount={data.length - 1}
-        pageRangeDisplayed={5}
-        onChange={handlePageChange}
-      />
+      <Pagenation page={page} setPage={setPage} limit={limit} totalCount={totalCount} />
     </>
   );
 }

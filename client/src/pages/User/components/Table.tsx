@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Pagination from 'react-js-pagination';
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
+import Pagenation from '../../../components/shared/pagenation/Pagenation';
 import Spinner from '../../../components/shared/spinner/Spinner';
 import Thead from '../../../components/shared/table/Thead';
 import { useAppDispatch, useAppSelector } from '../../../store';
@@ -14,10 +14,8 @@ function Table() {
   const { data, isLoading, error } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
-
-  const handlePageChange = (page: number) => {
-    setPage(page);
-  };
+  const limit = 20;
+  const totalCount = data.length;
 
   useEffect(() => {
     dispatch(getUsersThunk());
@@ -32,7 +30,7 @@ function Table() {
         <Thead type="user" />
         <tbody>
           {data.length ? (
-            sliceArrayForPagenation(data, page).map((user: User, index) => (
+            sliceArrayForPagenation(data, page, limit).map((user: User, index) => (
               <TableBody user={user} key={index} />
             ))
           ) : (
@@ -42,13 +40,7 @@ function Table() {
           )}
         </tbody>
       </table>
-      <Pagination
-        activePage={page}
-        itemsCountPerPage={20}
-        totalItemsCount={data.length - 1}
-        pageRangeDisplayed={5}
-        onChange={handlePageChange}
-      />
+      <Pagenation page={page} setPage={setPage} limit={limit} totalCount={totalCount} />
     </>
   );
 }
