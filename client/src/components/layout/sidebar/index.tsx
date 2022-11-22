@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-function Sidebar() {
+export default function Sidebar() {
   const navigate = useNavigate();
   const CurrentPage = useLocation().pathname;
 
@@ -42,8 +42,6 @@ function Sidebar() {
     </Container>
   );
 }
-
-export default Sidebar;
 
 export const siderContent = [
   { id: 1, name: '메인', keyword: '/', link: ROUTE.MAIN, icon: faHouse },

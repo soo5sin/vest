@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import mainImage from '../../assets/image/main_image.png';
 
-function Main() {
+export default function Main() {
   return (
     <Container>
       <Img src={mainImage} />
@@ -9,8 +9,6 @@ function Main() {
     </Container>
   );
 }
-
-export default Main;
 
 const Container = styled.section`
   width: 100%;

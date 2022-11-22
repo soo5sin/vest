@@ -5,7 +5,7 @@ import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 import { useFormatPrice } from '../../Account/hooks/useFormatPrice';
 import { useGetStatus } from '../../Account/hooks/useGetStatus';
 
-function AccountDetailTable({ account }: { account: Account }) {
+export default function AccountDetailTable({ account }: { account: Account }) {
   return (
     <>
       <Title>유저 계좌 목록</Title>
@@ -40,8 +40,6 @@ function AccountDetailTable({ account }: { account: Account }) {
     </>
   );
 }
-
-export default AccountDetailTable;
 
 const Title = styled.div`
   font-size: 20px;

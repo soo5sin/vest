@@ -9,7 +9,8 @@ import api from '../../api/instance';
 import { Sign } from '../../types/auth';
 import { useAppDispatch } from '../../store';
 import { getUserId } from '../../store/reducers/auth';
-function Login() {
+
+export default function Login() {
   const INITIAL_LOGIN = {
     email: '',
     password: '',
@@ -75,8 +76,6 @@ function Login() {
     </>
   );
 }
-
-export default Login;
 
 const Img = styled.img`
   margin: 0 auto;

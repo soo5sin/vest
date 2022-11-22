@@ -5,7 +5,7 @@ import { addUserThunk } from '../../../store/reducers/user';
 import { getUsersThunk } from '../../../store/reducers/users';
 import { useStringToBoolean } from '../hooks/useStringToBoolean';
 
-function NewUserModal({
+export default function NewUserModal({
   setIsOpenModal,
 }: {
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -140,8 +140,6 @@ function NewUserModal({
     </>
   );
 }
-
-export default NewUserModal;
 
 const Background = styled.div`
   position: fixed;

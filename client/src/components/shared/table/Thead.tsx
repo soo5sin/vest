@@ -5,7 +5,7 @@ export interface TableType {
   type: 'account' | 'user';
 }
 
-const Thead = ({ type }: TableType) => {
+export default function Thead({ type }: TableType) {
   return (
     <thead>
       <tr>
@@ -15,8 +15,7 @@ const Thead = ({ type }: TableType) => {
       </tr>
     </thead>
   );
-};
-export default Thead;
+}
 
 const Th = styled.th`
   padding: 10px 0;

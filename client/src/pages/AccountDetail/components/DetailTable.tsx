@@ -12,7 +12,7 @@ import ErrorPage from '../../../components/shared/error/Error';
 import { useFindUserNameById } from '../../../utils/hooks/useFindUserNameById';
 import { getAccountThunk } from '../../../store/reducers/account';
 
-export function DetailTable() {
+export default function DetailTable() {
   const dispatch = useAppDispatch();
   const users = useAppSelector((state) => state.users);
   const account = useAppSelector((state) => state.account);

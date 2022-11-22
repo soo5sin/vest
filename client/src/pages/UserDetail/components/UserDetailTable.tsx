@@ -7,7 +7,7 @@ import Error from '../../../components/shared/error/Error';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUserThunk } from '../../../store/reducers/user';
 
-function UserDetailTable() {
+export default function UserDetailTable() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const { data, isLoading, error } = useAppSelector((state) => state.user);
@@ -65,8 +65,6 @@ function UserDetailTable() {
     </>
   );
 }
-
-export default UserDetailTable;
 
 const Img = styled.div`
   margin: 20px auto;

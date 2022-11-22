@@ -1,10 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
-function Spinner() {
+export default function Spinner() {
   return <LoadingSpinner />;
 }
-
-export default Spinner;
 
 const spin = keyframes`
 to{

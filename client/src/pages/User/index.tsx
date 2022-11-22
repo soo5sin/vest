@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import SearchBar from '../../components/shared/searchBar/SearchBar';
 import Table from './components/Table';
 
-function User() {
+export default function User() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
@@ -19,8 +19,6 @@ function User() {
     </Container>
   );
 }
-
-export default User;
 
 const Container = styled.main`
   display: flex;

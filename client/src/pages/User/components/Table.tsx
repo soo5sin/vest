@@ -10,7 +10,7 @@ import { User } from '../../../types/user';
 import { sliceArrayForPagenation } from '../../../utils/hooks/useSliceArrayForPagination';
 import TableBody from './TableBody';
 
-function Table() {
+export default function Table() {
   const { data, isLoading, error } = useAppSelector((state) => state.users);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState(1);
@@ -44,8 +44,6 @@ function Table() {
     </>
   );
 }
-
-export default Table;
 
 const Empty = styled.td`
   text-align: center;

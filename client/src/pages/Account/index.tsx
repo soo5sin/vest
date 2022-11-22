@@ -3,7 +3,7 @@ import SearchBar from '../../components/shared/searchBar/SearchBar';
 import Table from './components/Table';
 import { getAccountsThunk } from '../../store/reducers/accounts';
 
-function Account() {
+export default function Account() {
   return (
     <Container>
       <SearchBar getDataThunk={getAccountsThunk} />
@@ -13,8 +13,6 @@ function Account() {
     </Container>
   );
 }
-
-export default Account;
 
 const Container = styled.main`
   display: flex;

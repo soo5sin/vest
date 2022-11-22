@@ -14,7 +14,7 @@ const Auth = () => {
   return token ? <Outlet /> : <Navigate to={ROUTE.LOGIN} replace />;
 };
 
-function Router() {
+export default function Router() {
   return (
     <Routes>
       <Route path={ROUTE.LOGIN} element={<Login />} />
@@ -30,5 +30,3 @@ function Router() {
     </Routes>
   );
 }
-
-export default Router;

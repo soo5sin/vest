@@ -3,7 +3,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../../store';
 
-function SearchBar({ getDataThunk }: { getDataThunk: AsyncThunk<any, object | undefined, {}> }) {
+export default function SearchBar({
+  getDataThunk,
+}: {
+  getDataThunk: AsyncThunk<any, object | undefined, {}>;
+}) {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState('');
 
@@ -28,8 +32,6 @@ function SearchBar({ getDataThunk }: { getDataThunk: AsyncThunk<any, object | un
     </Form>
   );
 }
-
-export default SearchBar;
 
 const Form = styled.form`
   & > input {

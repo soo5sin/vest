@@ -11,7 +11,7 @@ import { useFormatPrice } from '../hooks/useFormatPrice';
 import { useGetStatus } from '../hooks/useGetStatus';
 import { useMaskingNumber } from '../hooks/useMaskingNumber';
 
-function TableBody({ account }: { account: Account }) {
+export default function TableBody({ account }: { account: Account }) {
   const {
     uuid,
     id,
@@ -61,8 +61,6 @@ function TableBody({ account }: { account: Account }) {
     </Tr>
   );
 }
-
-export default TableBody;
 
 const Tr = styled.tr`
   & > td {

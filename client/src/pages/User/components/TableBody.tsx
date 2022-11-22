@@ -14,7 +14,7 @@ import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { getUsersThunk } from '../../../store/reducers/users';
 import { AxiosError } from 'axios';
 
-function TableBody({ user }: { user: User }) {
+export default function TableBody({ user }: { user: User }) {
   const {
     name,
     id,
@@ -102,8 +102,6 @@ function TableBody({ user }: { user: User }) {
     </Tr>
   );
 }
-
-export default TableBody;
 
 const Tr = styled.tr`
   & > td {

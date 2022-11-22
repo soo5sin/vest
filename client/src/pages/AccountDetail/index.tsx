@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { DetailTable } from './components/DetailTable';
+import DetailTable from './components/DetailTable';
 
-function AccountDetail() {
+export default function AccountDetail() {
   return (
     <Container>
       <Title>계좌 상세</Title>
@@ -9,8 +9,6 @@ function AccountDetail() {
     </Container>
   );
 }
-
-export default AccountDetail;
 
 const Container = styled.div`
   display: flex;

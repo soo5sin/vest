@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import errorImage from '../../../assets/image/error.png';
 
-function Error({ error }: { error: string }) {
+export default function Error({ error }: { error: string }) {
   return (
     <>
       <Img src={errorImage} alt="error image" />
@@ -10,8 +10,6 @@ function Error({ error }: { error: string }) {
     </>
   );
 }
-
-export default Error;
 
 const Img = styled.img`
   width: 2rem;

@@ -7,7 +7,7 @@ import { useGetAccountsById } from '../../utils/hooks/useGetAccountsById';
 import AccountDetailTable from './components/AccountDetailTable';
 import UserDetailTable from './components/UserDetailTable';
 
-function UserDetail() {
+export default function UserDetail() {
   const { id } = useParams();
   const [accounts, setAccounts] = useState<Account[]>();
 
@@ -37,8 +37,6 @@ function UserDetail() {
     </Container>
   );
 }
-
-export default UserDetail;
 
 const Container = styled.div`
   display: flex;
