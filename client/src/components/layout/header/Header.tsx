@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppSelector } from '../../../store';
-import { siderContent } from '../sidebar';
+import { siderContent } from '../sidebar/Sidebar';
 
 export default function Header() {
   const CurrentPage = useLocation().pathname;
