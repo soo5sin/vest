@@ -3,13 +3,17 @@ import errorImage from '../../../assets/image/error.png';
 
 export default function Error({ error }: { error: string }) {
   return (
-    <>
+    <Container>
       <Img src={errorImage} alt="error image" />
       <div>Error Message: {error}</div>
-      <div>해당 페이지의 컨텐츠 모두 불러오기를 실패했습니다. 다시 시도해주세요.</div>
-    </>
+      <div>해당 페이지를 표시할 수 없습니다. 다시 시도해주세요.</div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  padding: 1rem;
+`;
 
 const Img = styled.img`
   width: 2rem;

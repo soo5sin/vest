@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import Layout from '../components/layout';
+import Error from '../components/shared/error/Error';
 import { ROUTE } from '../constants/route';
 import Account from '../pages/Account';
 import AccountDetail from '../pages/AccountDetail';
@@ -18,6 +19,7 @@ export default function Router() {
   return (
     <Routes>
       <Route path={ROUTE.LOGIN} element={<Login />} />
+      <Route path={ROUTE.NOT_FOUND} element={<Error error="NOT FOUND" />} />
       <Route element={<Auth />}>
         <Route element={<Layout />}>
           <Route path={ROUTE.MAIN} element={<Main />} />
