@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import '../../styles/paging.css';
+import { useState } from 'react';
 import { getUsersThunk } from '../../store/reducers/users';
 import NewUserModal from './components/NewUserModal';
 import styled from 'styled-components';
