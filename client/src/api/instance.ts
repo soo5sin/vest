@@ -2,11 +2,11 @@ import axios from 'axios';
 import { ROUTE } from '../constants/route';
 import { UserToken } from '../utils/userToken';
 
-const api = axios.create({
+const instance = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
 });
 
-api.interceptors.request.use((config) => {
+instance.interceptors.request.use((config) => {
   const token = UserToken.get();
   config.headers = {
     Authorization: `Bearer ${token}`,
@@ -19,7 +19,7 @@ api.interceptors.request.use((config) => {
   return config;
 });
 
-api.interceptors.response.use(
+instance.interceptors.response.use(
   (response) => {
     return response;
   },
@@ -34,4 +34,4 @@ api.interceptors.response.use(
   },
 );
 
-export default api;
+export default instance;
