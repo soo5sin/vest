@@ -29,18 +29,11 @@ export default function UserDetail() {
   }, []);
 
   return (
-    <Container>
+    <>
       <UserDetailTable />
       {accounts?.map((account, index) => (
         <AccountDetailTable account={account} key={index} />
       ))}
-    </Container>
+    </>
   );
 }
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 30px;
-`;

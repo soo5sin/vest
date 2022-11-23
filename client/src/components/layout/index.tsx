@@ -10,12 +10,21 @@ export default function Layout() {
       <Sidebar />
       <Content>
         <Header />
-        <Outlet />
+        <Main>
+          <Outlet />
+        </Main>
         <Footer />
       </Content>
     </Container>
   );
 }
+
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  min-height: 100vh;
+`;
 
 const Container = styled.div`
   display: flex;

@@ -9,23 +9,15 @@ export default function User() {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
   return (
-    <Container>
+    <>
       <SearchBar getDataThunk={getUsersThunk} />
       <AddButton onClick={() => setIsOpenModal(true)}>고객 추가</AddButton>
       <Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</Ref>
       <Table />
       {isOpenModal && <NewUserModal setIsOpenModal={setIsOpenModal} />}
-    </Container>
+    </>
   );
 }
-
-const Container = styled.main`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 30px;
-  min-height: 100vh;
-`;
 
 const AddButton = styled.button`
   background: ${({ theme }) => theme.palette.SUB_100};
