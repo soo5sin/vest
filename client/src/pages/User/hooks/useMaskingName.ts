@@ -1,4 +1,5 @@
 export const useMaskingName = (name: string) => {
+  if (name.length === 1) return;
   if (name.length === 2) {
     return name.replace(name.slice(-1), '*');
   } else if (name.length === 3) {

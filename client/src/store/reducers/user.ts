@@ -28,6 +28,7 @@ export const addUserThunk = createAsyncThunk(USER.NEW, async (newUser: User) => 
     return response.data.user;
   } catch (error) {
     if (error instanceof AxiosError && error.response) {
+      alert(error.response.data);
       throw new Error(error.response.data);
     } else {
       throw new Error('fail to add user information');

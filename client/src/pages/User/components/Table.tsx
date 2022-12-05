@@ -20,7 +20,7 @@ export default function Table() {
 
   useEffect(() => {
     dispatch(getUsersThunk());
-  }, [currentPage]);
+  }, []);
 
   if (isLoading) return <Spinner />;
   if (error) return <Error error={error} />;
