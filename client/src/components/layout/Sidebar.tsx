@@ -1,9 +1,13 @@
-import { ROUTE } from '../../../constants/route';
+import { ROUTE } from '../../constants/route';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { UserToken } from '../../../utils/userToken';
+import { UserToken } from '../../utils/userToken';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+
+interface Menu {
+  active?: boolean;
+}
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -20,23 +24,16 @@ export default function Sidebar() {
       <h1>fint</h1>
       {siderContent.map((sider) => (
         <Link to={sider.link} key={sider.id}>
-          {CurrentPage === sider.keyword ? (
-            <ClickedMenu>
-              <FontAwesomeIcon icon={sider.icon} />
-              <Menu>{sider.name}</Menu>
-            </ClickedMenu>
-          ) : (
-            <div>
-              <FontAwesomeIcon icon={sider.icon} />
-              <Menu>{sider.name}</Menu>
-            </div>
-          )}
+          <MenuWrapper active={CurrentPage === sider.keyword}>
+            <FontAwesomeIcon icon={sider.icon} />
+            <Name>{sider.name}</Name>
+          </MenuWrapper>
         </Link>
       ))}
       <div>
         <button onClick={logoutHandler}>
           <FontAwesomeIcon icon={faArrowRight} />
-          <Menu>로그아웃</Menu>
+          <Name>로그아웃</Name>
         </button>
       </div>
     </Container>
@@ -76,12 +73,12 @@ const Container = styled.aside`
   color: ${({ theme }) => theme.palette.WHITE};
 `;
 
-const Menu = styled.span`
+const Name = styled.span`
   margin-left: 10px;
 `;
 
-const ClickedMenu = styled.div`
-  background: ${({ theme }) => theme.palette.WHITE};
-  color: ${({ theme }) => theme.palette.MAIN_COLOR};
+const MenuWrapper = styled.div<Menu>`
+  background: ${({ active, theme }) => active && theme.palette.WHITE};
+  color: ${({ active, theme }) => active && theme.palette.MAIN_COLOR};
   border-radius: 5px;
 `;

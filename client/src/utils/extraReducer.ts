@@ -24,7 +24,8 @@ const extraReducerStatus = {
 
 export const extraReducerUtils = (
   thunk:
-    | AsyncThunk<any, object | undefined, {}>
+    | AsyncThunk<any, Record<string, string | undefined> | undefined, {}>
+    | AsyncThunk<any, Record<string, string> | undefined, {}>
     | AsyncThunk<
         any,
         {

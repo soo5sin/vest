@@ -5,18 +5,22 @@ import { extraReducerUtils } from '../../utils/extraReducer';
 import { User } from '../../types/user';
 import { AxiosError } from 'axios';
 
-export const getUserThunk = createAsyncThunk(USER.GET, async (params?: object) => {
-  try {
-    const response = await api.get(`/users`, { params });
-    return response.data[0];
-  } catch (error) {
-    if (error instanceof AxiosError && error.response) {
-      throw new Error(error.response.data);
-    } else {
-      throw new Error('fail to get user information');
+export const getUserThunk = createAsyncThunk(
+  USER.GET,
+  async (params?: Record<string, string | undefined>) => {
+    try {
+      const response = await api.get(`/users`, { params });
+      const user = response.data[0];
+      return user;
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        throw new Error(error.response.data);
+      } else {
+        throw new Error('fail to get user information');
+      }
     }
-  }
-});
+  },
+);
 
 export const addUserThunk = createAsyncThunk(USER.NEW, async (newUser: User) => {
   try {

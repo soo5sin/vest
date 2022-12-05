@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SearchBar from '../../components/shared/searchBar/SearchBar';
+import SearchBar from '../../components/shared/SearchBar';
 import Table from './components/Table';
 import { getAccountsThunk } from '../../store/reducers/accounts';
 

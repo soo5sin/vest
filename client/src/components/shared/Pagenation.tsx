@@ -6,31 +6,34 @@ interface PageButton {
 }
 
 export default function Pagenation({
-  setPage,
+  setCurrentPage,
   limit,
   totalCount,
-  page,
+  currentPage,
 }: {
-  setPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   limit: number;
   totalCount: number;
-  page: number;
+  currentPage: number;
 }) {
   const totalPage = Math.ceil(totalCount / limit);
+  const totalPageLengthArray = Array(totalPage).fill(0);
 
-  const handlePageChange = (i: number) => {
-    setPage(i + 1);
+  const changeCurrentPage = (buttonNumber: number) => () => {
+    setCurrentPage(buttonNumber);
   };
 
   return (
     <Container>
-      {Array(totalPage)
-        .fill(0)
-        .map((_, i) => (
-          <Page onClick={() => handlePageChange(i)} active={page === i + 1} key={i}>
-            {i + 1}
+      {totalPageLengthArray.map((_, index) => {
+        const buttonNumber = index + 1;
+        const isClicked = currentPage === buttonNumber;
+        return (
+          <Page onClick={changeCurrentPage(buttonNumber)} active={isClicked} key={index}>
+            {buttonNumber}
           </Page>
-        ))}
+        );
+      })}
     </Container>
   );
 }

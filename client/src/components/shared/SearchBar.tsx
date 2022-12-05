@@ -1,31 +1,31 @@
 import { AsyncThunk } from '@reduxjs/toolkit';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../../store';
+import { useAppDispatch } from '../../store';
 
 export default function SearchBar({
   getDataThunk,
 }: {
-  getDataThunk: AsyncThunk<any, object | undefined, {}>;
+  getDataThunk: AsyncThunk<any, Record<string, string> | undefined, {}>;
 }) {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState('');
 
-  const onChangeSearchHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const searchInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
   };
 
-  const onSubmitSearchFormHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitSearchForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(getDataThunk({ q: search }));
   };
 
   return (
-    <Form onSubmit={onSubmitSearchFormHandler}>
+    <Form onSubmit={submitSearchForm}>
       <input
         type="text"
         value={search}
-        onChange={onChangeSearchHandler}
+        onChange={searchInputHandler}
         placeholder="검색어를 입력해주세요."
       />
       <button type="submit">검색</button>

@@ -1,4 +1,6 @@
 export const sliceArrayForPagenation = (array: any[], Currentpage: number, limit: number) => {
-  const slicedArray = array.slice(limit * (Currentpage - 1), limit * (Currentpage - 1) + limit);
+  const beginIndex = limit * (Currentpage - 1);
+  const endIndex = beginIndex + limit;
+  const slicedArray = array.slice(beginIndex, endIndex);
   return slicedArray;
 };

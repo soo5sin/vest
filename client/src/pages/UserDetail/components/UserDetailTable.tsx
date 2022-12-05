@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import Spinner from '../../../components/shared/spinner/Spinner';
+import Spinner from '../../../components/shared/Spinner';
 import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import Error from '../../../components/shared/error/Error';
 import { useAppDispatch, useAppSelector } from '../../../store';

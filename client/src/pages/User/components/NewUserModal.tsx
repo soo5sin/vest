@@ -44,7 +44,7 @@ export default function NewUserModal({
     is_staff,
   } = newUser;
 
-  const onSubmitNewUserHandler = async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitNewUserForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     await dispatch(addUserThunk(newUser));
     setNewUser(INITIAL_USER);
@@ -60,7 +60,7 @@ export default function NewUserModal({
   return (
     <>
       <Background />
-      <Form onSubmit={onSubmitNewUserHandler}>
+      <Form onSubmit={submitNewUserForm}>
         <label htmlFor="name">고객명</label>
         <input
           type="text"
@@ -156,7 +156,6 @@ const Form = styled.form`
     margin: 5px 0 10px 0;
     padding: 3px;
   }
-
   position: fixed;
   background: white;
   top: 50%;

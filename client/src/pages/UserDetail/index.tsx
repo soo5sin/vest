@@ -1,7 +1,5 @@
-import { AxiosError } from 'axios';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import { Account } from '../../types/account';
 import { useGetAccountsById } from '../../utils/hooks/useGetAccountsById';
 import AccountDetailTable from './components/AccountDetailTable';
@@ -12,16 +10,8 @@ export default function UserDetail() {
   const [accounts, setAccounts] = useState<Account[]>();
 
   const getAccounts = async () => {
-    try {
-      const response = await useGetAccountsById(id);
-      setAccounts(response.data);
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
-        throw new Error(error.response.data);
-      } else {
-        throw new Error('fail to get account information');
-      }
-    }
+    const accounts = await useGetAccountsById(id);
+    setAccounts(accounts);
   };
 
   useEffect(() => {

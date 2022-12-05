@@ -5,10 +5,9 @@ import { UserToken } from '../../utils/userToken';
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.jpg';
 import { AxiosError } from 'axios';
-import api from '../../api/instance';
-import { Sign } from '../../types/auth';
 import { useAppDispatch } from '../../store';
 import { getUserId } from '../../store/reducers/auth';
+import { signIn } from './hooks/useSignIn';
 
 export default function Login() {
   const INITIAL_LOGIN = {
@@ -19,24 +18,12 @@ export default function Login() {
   const dispatch = useAppDispatch();
   const [loginInput, setLoginInput] = useState(INITIAL_LOGIN);
 
-  const signIn = ({ email, password }: Sign) => {
-    return api.post('/login', {
-      email,
-      password,
-    });
-  };
-
-  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginInput({ ...loginInput, [name]: value });
-  };
-
   const onSubmitLoginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       const response = await signIn(loginInput);
-      const receivedToken = response.data.accessToken;
-      const receivedId = response.data.user.email;
+      const receivedToken = response.accessToken;
+      const receivedId = response.user.email;
       UserToken.set(receivedToken);
       dispatch(getUserId(receivedId));
       navigate(ROUTE.MAIN);
@@ -47,6 +34,11 @@ export default function Login() {
         alert('로그인에 실패했습니다.');
       }
     }
+  };
+
+  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setLoginInput({ ...loginInput, [name]: value });
   };
 
   return (
@@ -64,7 +56,7 @@ export default function Login() {
           required
         />
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           placeholder="비밀번호"

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUsersThunk } from '../../../store/reducers/users';
 import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
 import styled from 'styled-components';
-import Spinner from '../../../components/shared/spinner/Spinner';
+import Spinner from '../../../components/shared/Spinner';
 import ErrorPage from '../../../components/shared/error/Error';
 import { useFindUserNameById } from '../../../utils/hooks/useFindUserNameById';
 import { getAccountThunk } from '../../../store/reducers/account';
@@ -20,9 +20,12 @@ export default function DetailTable() {
     account.data;
   const { uuid } = useParams();
 
+  const getUsersAccount = async () => {
+    await Promise.all([dispatch(getUsersThunk()), dispatch(getAccountThunk({ uuid: uuid }))]);
+  };
+
   useEffect(() => {
-    dispatch(getUsersThunk());
-    dispatch(getAccountThunk({ uuid: uuid }));
+    getUsersAccount();
   }, []);
 
   if (account.error || users.error) return <ErrorPage error="fetching error" />;

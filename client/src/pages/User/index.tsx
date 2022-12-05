@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { getUsersThunk } from '../../store/reducers/users';
 import NewUserModal from './components/NewUserModal';
 import styled from 'styled-components';
-import SearchBar from '../../components/shared/searchBar/SearchBar';
+import SearchBar from '../../components/shared/SearchBar';
 import Table from './components/Table';
 
 export default function User() {

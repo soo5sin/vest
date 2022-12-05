@@ -1,24 +1,24 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useAppSelector } from '../../../store';
-import { siderContent } from '../sidebar/Sidebar';
+import { useAppSelector } from '../../store';
+import { siderContent } from './Sidebar';
 
 export default function Header() {
   const CurrentPage = useLocation().pathname;
   const email = useAppSelector((state) => state.auth.userId);
 
   const getCurrentMenuName = () => {
-    const menuName = siderContent.find((sider) => sider.link.includes(CurrentPage))?.name;
-    return menuName ? menuName : 'fint';
+    const currentMenuName = siderContent.find((sider) => sider.link.includes(CurrentPage))?.name;
+    return currentMenuName ? currentMenuName : 'fint';
   };
 
-  const menuName = useMemo(() => getCurrentMenuName(), [CurrentPage]);
+  const currentMenuName = useMemo(() => getCurrentMenuName(), [CurrentPage]);
 
   return (
     <>
       <Container>
-        {menuName}
+        {currentMenuName}
         <Email>{email}</Email>
       </Container>
     </>

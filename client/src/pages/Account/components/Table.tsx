@@ -1,37 +1,44 @@
 import { useState, useEffect } from 'react';
-import Pagenation from '../../../components/shared/pagenation/Pagenation';
+import Pagenation from '../../../components/shared/Pagenation';
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
-import Spinner from '../../../components/shared/spinner/Spinner';
+import Spinner from '../../../components/shared/Spinner';
 import Thead from '../../../components/shared/table/Thead';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getAccountsThunk } from '../../../store/reducers/accounts';
 import { Account } from '../../../types/account';
 import { sliceArrayForPagenation } from '../../../utils/hooks/useSliceArrayForPagination';
-import TableBody from './TableBody';
+import TbodyRow from './TbodyRow';
+import { getUsersThunk } from '../../../store/reducers/users';
 
 export default function Table() {
   const dispatch = useAppDispatch();
-  const { data, isLoading, error } = useAppSelector((state) => state.accounts);
-  const [page, setPage] = useState(1);
+  const accounts = useAppSelector((state) => state.accounts);
+  const users = useAppSelector((state) => state.users);
+  const [currentPage, setCurrentPage] = useState(1);
   const limit = 20;
-  const totalCount = data.length;
+  const slicedAccounts = sliceArrayForPagenation(accounts.data, currentPage, limit);
+  const totalCount = accounts.data.length;
+
+  const getUsersAccounts = async () => {
+    await Promise.all([dispatch(getAccountsThunk()), dispatch(getUsersThunk())]);
+  };
 
   useEffect(() => {
-    dispatch(getAccountsThunk());
-  }, [page]);
+    getUsersAccounts();
+  }, [dispatch, currentPage]);
 
-  if (isLoading) return <Spinner />;
-  if (error) return <Error error={error} />;
+  if (accounts.isLoading || users.isLoading) return <Spinner />;
+  if (accounts.error || users.error) return <Error error="data fetching error" />;
 
   return (
     <>
       <table>
         <Thead type="account" />
         <tbody>
-          {data.length ? (
-            sliceArrayForPagenation(data, page, limit).map((account: Account, index) => (
-              <TableBody account={account} key={index} />
+          {accounts.data.length ? (
+            slicedAccounts.map((account: Account, index) => (
+              <TbodyRow account={account} key={index} users={users.data} />
             ))
           ) : (
             <tr>
@@ -40,7 +47,12 @@ export default function Table() {
           )}
         </tbody>
       </table>
-      <Pagenation page={page} setPage={setPage} limit={limit} totalCount={totalCount} />
+      <Pagenation
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        limit={limit}
+        totalCount={totalCount}
+      />
     </>
   );
 }

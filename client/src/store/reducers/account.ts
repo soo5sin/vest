@@ -6,18 +6,22 @@ import { Account } from '../../types/account';
 
 import { extraReducerUtils } from '../../utils/extraReducer';
 
-export const getAccountThunk = createAsyncThunk(ACCOUNT.GET, async (params?: object) => {
-  try {
-    const response = await api.get(`/accounts`, { params });
-    return response.data[0];
-  } catch (error) {
-    if (error instanceof AxiosError && error.response) {
-      throw new Error(error.response.data);
-    } else {
-      throw new Error('fail to get account information');
+export const getAccountThunk = createAsyncThunk(
+  ACCOUNT.GET,
+  async (params?: Record<string, string | undefined>) => {
+    try {
+      const response = await api.get(`/accounts`, { params });
+      const account = response.data[0];
+      return account;
+    } catch (error) {
+      if (error instanceof AxiosError && error.response) {
+        throw new Error(error.response.data);
+      } else {
+        throw new Error('fail to get account information');
+      }
     }
-  }
-});
+  },
+);
 
 const INITIAL_ACCOUNT = {
   id: 0,

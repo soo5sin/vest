@@ -12,9 +12,8 @@ import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { getUsersThunk } from '../../../store/reducers/users';
-import { AxiosError } from 'axios';
 
-export default function TableBody({ user }: { user: User }) {
+export default function TbodyRow({ user }: { user: User }) {
   const {
     name,
     id,
@@ -34,33 +33,25 @@ export default function TableBody({ user }: { user: User }) {
   const [newName, setNewName] = useState(name);
 
   const getAccountCount = async () => {
-    try {
-      const response = await useGetAccountsById(user.id);
-      setAccountCount(response.data.length);
-    } catch (error) {
-      if (error instanceof AxiosError && error.response) {
-        throw new Error(error.response.data);
-      } else {
-        throw new Error('fail to get accounts');
-      }
-    }
+    const accounts = await useGetAccountsById(user.id);
+    setAccountCount(accounts.length);
   };
 
-  const onSubmitNameHandler = () => {
-    dispatch(updateUserThunk({ id, newName }));
+  const onSubmitNameHandler = async () => {
+    await dispatch(updateUserThunk({ id, newName }));
     setIsEditing(false);
     dispatch(getUsersThunk());
   };
 
-  const deleteUserHandler = () => {
+  const deleteUserHandler = async () => {
     if (!confirm('정말로 해당 고객을 삭제하시겠습니까?')) return;
-    dispatch(deleteUserThunk(id));
+    await dispatch(deleteUserThunk(id));
     dispatch(getUsersThunk());
   };
 
   useEffect(() => {
     getAccountCount();
-  }, []);
+  }, [user]);
 
   if (!user.name) return null;
 
