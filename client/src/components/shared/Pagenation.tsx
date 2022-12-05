@@ -21,6 +21,9 @@ export default function Pagenation({
 
   const changeCurrentPage = (buttonNumber: number) => () => {
     setCurrentPage(buttonNumber);
+    window.scrollTo({
+      top: 0,
+    });
   };
 
   return (

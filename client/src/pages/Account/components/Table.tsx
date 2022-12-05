@@ -26,7 +26,7 @@ export default function Table() {
 
   useEffect(() => {
     getUsersAccounts();
-  }, [dispatch, currentPage]);
+  }, []);
 
   if (accounts.isLoading || users.isLoading) return <Spinner />;
   if (accounts.error || users.error) return <Error error="data fetching error" />;
