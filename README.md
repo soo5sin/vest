@@ -78,6 +78,12 @@ $ npm install
 $ npm start
 ```
 
+> 로그인
+
+`아이디(email): test@test.com`
+
+`비밀번호(password): test`
+
 <br/>
 
 ## 구현 요구 사항
