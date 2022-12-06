@@ -28,6 +28,10 @@ export default function Table() {
     getUsersAccounts();
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [totalCount]);
+
   if (accounts.isLoading || users.isLoading) return <Spinner />;
   if (accounts.error || users.error) return <Error error="data fetching error" />;
 

@@ -22,6 +22,10 @@ export default function Table() {
     dispatch(getUsersThunk());
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [totalCount]);
+
   if (isLoading) return <Spinner />;
   if (error) return <Error error={error} />;
 

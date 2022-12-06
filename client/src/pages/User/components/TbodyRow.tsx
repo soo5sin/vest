@@ -49,6 +49,11 @@ export default function TbodyRow({ user }: { user: User }) {
     dispatch(getUsersThunk());
   };
 
+  const editCancelHandler = () => {
+    setIsEditing(false);
+    setNewName(user.name);
+  };
+
   useEffect(() => {
     getAccountCount();
   }, [user]);
@@ -64,7 +69,7 @@ export default function TbodyRow({ user }: { user: User }) {
         {isEditing ? (
           <>
             <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
-            <Button onClick={() => setIsEditing(false)}>
+            <Button onClick={editCancelHandler}>
               <FontAwesomeIcon icon={faXmark} />
             </Button>
             <Button onClick={onSubmitNameHandler}>
