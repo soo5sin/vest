@@ -17,6 +17,8 @@ export default function Login() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [loginInput, setLoginInput] = useState(INITIAL_LOGIN);
+  const [isEmail, setIsEmail] = useState<boolean>(false);
+  const [isPassword, setIsPassword] = useState<boolean>(false);
 
   const onSubmitLoginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ export default function Login() {
       const receivedId = response.user.email;
       UserToken.set(receivedToken);
       dispatch(getUserId(receivedId));
+      setLoginInput(INITIAL_LOGIN);
       navigate(ROUTE.MAIN);
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
@@ -36,9 +39,24 @@ export default function Login() {
     }
   };
 
-  const onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setLoginInput({ ...loginInput, [name]: value });
+  const emailInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value.includes('@') && value.includes('.')) {
+      setIsEmail(true);
+    } else {
+      setIsEmail(false);
+    }
+    setLoginInput({ ...loginInput, email: value });
+  };
+
+  const passwordInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    if (value.length >= 4) {
+      setIsPassword(true);
+    } else {
+      setIsPassword(false);
+    }
+    setLoginInput({ ...loginInput, password: value });
   };
 
   return (
@@ -51,19 +69,23 @@ export default function Login() {
           id="email"
           name="email"
           placeholder="이메일"
-          onChange={onChangeInputHandler}
+          onChange={emailInputHandler}
           value={loginInput.email}
           required
         />
+        {!isEmail && <div>이메일 형식이 아닙니다(@과 . 포함)</div>}
         <input
           type="password"
           id="password"
           name="password"
           placeholder="비밀번호"
-          onChange={onChangeInputHandler}
+          onChange={passwordInputHandler}
           required
         />
-        <button type="submit">로그인</button>
+        {!isPassword && <div>비밀번호는 4글자 이상입니다</div>}
+        <Button type="submit" disabled={!isEmail || !isPassword}>
+          로그인
+        </Button>
       </Form>
     </>
   );
@@ -80,19 +102,24 @@ const Form = styled.form`
     text-align: center;
     font-weight: bold;
     font-size: 1.3rem;
-    margin-bottom: 1.5rem;
   }
   & > input {
-    margin-bottom: 1.5rem;
+    margin: 1rem 0 1rem 0;
     padding: 7px;
-  }
-  & > button {
-    background: ${({ theme }) => theme.palette.MAIN_COLOR};
-    height: 50px;
-    color: ${({ theme }) => theme.palette.WHITE};
   }
   display: flex;
   flex-direction: column;
   width: 20rem;
   margin: 0 auto;
+`;
+
+const Button = styled.button`
+  &:disabled {
+    cursor: default;
+    background: ${({ theme }) => theme.palette.GRAY_100};
+  }
+  background: ${({ theme }) => theme.palette.MAIN_COLOR};
+  height: 50px;
+  margin-top: 1rem;
+  color: ${({ theme }) => theme.palette.WHITE};
 `;
