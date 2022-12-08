@@ -3,7 +3,6 @@ import { AxiosError } from 'axios';
 import api from '../../api/instance';
 import { ACCOUNT } from '../../constants/account';
 import { Account } from '../../types/account';
-
 import { extraReducerUtils } from '../../utils/extraReducer';
 
 export const getAccountThunk = createAsyncThunk(
