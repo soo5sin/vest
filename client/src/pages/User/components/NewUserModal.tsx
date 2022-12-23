@@ -83,6 +83,7 @@ export default function NewUserModal({
         <label htmlFor="birth_date">생년월일</label>
         <input
           type="text"
+          id="birth_date"
           name="birth_date"
           value={birth_date}
           placeholder="0000-00-00"
