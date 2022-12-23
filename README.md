@@ -315,6 +315,30 @@ instance.interceptors.request.use((config) => {
 
 > 문제
 
+유저 삭제가 제대로 되지 않는 현상. 삭제가 되었음에도 view에 반영이 되지 않음.
+
+> 해결
+
+redux-logger를 살펴보니 이와 같은 상황일 때 오류가 발생했다.
+
+<img width="270" alt="logger" src="https://user-images.githubusercontent.com/104069346/209355415-b5e0a1f0-26e5-4b6c-9e3f-636c512df638.png">
+
+`deleteUser`보다 `getUsers`가 먼저 처리가 되어 삭제되기 전에 고객 리스트를 받아온 것이다.
+
+그래서 아래와 같이 `deleteUser` dispatch 앞에 await를 붙여 코드를 수정했고, 문제가 해결됐다.
+
+```javascript
+const deleteUserHandler = async () => {
+  if (!confirm("정말로 해당 고객을 삭제하시겠습니까?")) return;
+  await dispatch(deleteUserThunk(id));
+  dispatch(getUsersThunk());
+};
+```
+
+<br>
+
+> 문제
+
 검색 결과가 없을 때 사용자에게 피드백을 주기 위해 다음과 같이 코드를 작성했다. 그런데 검색 결과가 없음에도, 데이터가 있을 때의 로직을 실행했다.
 
 **data === Array**
