@@ -22,9 +22,7 @@ export default function UserDetailTable() {
 
   return (
     <>
-      <Img>
-        <img src={data.photo} alt={`${data.name}님의 사진`} />
-      </Img>
+      <Img src={data.photo} alt={`${data.name}님의 사진`} />
       <Title>유저 상세</Title>
       <Table>
         <tbody>
@@ -66,12 +64,15 @@ export default function UserDetailTable() {
   );
 }
 
-const Img = styled.div`
+const Img = styled.img`
   margin: 20px auto;
+  width: 100px;
+  height: 100px;
 `;
 
 const Table = styled.table`
-  margin-bottom: 20px;
+  margin-bottom: 70px;
+  width: 900px;
 `;
 
 const Tr = styled.tr`

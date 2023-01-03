@@ -4,7 +4,7 @@ import mainImage from '../../assets/image/main_image.png';
 export default function Main() {
   return (
     <Container>
-      <Img src={mainImage} />
+      <Img src={mainImage} alt="서핑을 하는 여성" />
       <Text>핀트 고객들의 정보를 관리할 수 있는 웹페이지 입니다.</Text>
     </Container>
   );

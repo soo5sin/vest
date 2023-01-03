@@ -9,8 +9,6 @@ import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import { useGetAccountsById } from '../../../utils/hooks/useGetAccountsById';
 import { useMaskingName } from '../hooks/useMaskingName';
 import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPen, faXmark, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { getUsersThunk } from '../../../store/reducers/users';
 
 export default function TbodyRow({ user }: { user: User }) {
@@ -69,19 +67,13 @@ export default function TbodyRow({ user }: { user: User }) {
         {isEditing ? (
           <>
             <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
-            <Button onClick={editCancelHandler}>
-              <FontAwesomeIcon icon={faXmark} />
-            </Button>
-            <Button onClick={onSubmitNameHandler}>
-              <FontAwesomeIcon icon={faCheck} />
-            </Button>
+            <Button onClick={editCancelHandler}>취소</Button>
+            <Button onClick={onSubmitNameHandler}>완료</Button>
           </>
         ) : (
           <>
             {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(user.name)}</Link>}
-            <Edit onClick={() => setIsEditing(true)}>
-              <FontAwesomeIcon icon={faPen} />
-            </Edit>
+            <Button onClick={() => setIsEditing(true)}>수정</Button>
           </>
         )}
       </td>
@@ -117,10 +109,9 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
+  background: ${({ theme }) => theme.palette.MAIN_COLOR};
+  border-radius: 5px;
+  color: white;
   padding: 5px;
-  margin: 5px;
-`;
-
-const Edit = styled.button`
-  padding: 5px;
+  margin-left: 5px;
 `;

@@ -1,6 +1,4 @@
-import dayjs from 'dayjs';
-
 export const useFormatDate = (date: string) => {
-  const formattedDate = dayjs(date).format('YYYY-MM-DD');
+  const formattedDate = date.substring(0, 10);
   return formattedDate !== 'Invalid Date' ? formattedDate : '입력 없음';
 };

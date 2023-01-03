@@ -60,5 +60,6 @@ const Tr = styled.tr`
 `;
 
 const Table = styled.table`
-  margin-bottom: 20px;
+  margin-bottom: 70px;
+  width: 900px;
 `;

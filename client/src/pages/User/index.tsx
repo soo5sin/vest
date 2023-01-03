@@ -34,5 +34,5 @@ const AddButton = styled.button`
 const Ref = styled.div`
   font-size: 13px;
   text-align: right;
-  color: ${({ theme }) => theme.palette.GRAY_300};
+  color: ${({ theme }) => theme.palette.GRAY_500};
 `;

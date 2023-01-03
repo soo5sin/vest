@@ -11,7 +11,7 @@ import { sliceArrayForPagenation } from '../../../utils/hooks/useSliceArrayForPa
 import TbodyRow from './TbodyRow';
 import { getUsersThunk } from '../../../store/reducers/users';
 
-export default function Table() {
+export default function AccountListBox() {
   const dispatch = useAppDispatch();
   const accounts = useAppSelector((state) => state.accounts);
   const users = useAppSelector((state) => state.users);

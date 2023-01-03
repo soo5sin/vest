@@ -40,11 +40,11 @@ const Form = styled.form`
     margin-right: 10px;
   }
   & > button {
-    background-color: ${({ theme }) => theme.palette.SUB_200};
+    background-color: ${({ theme }) => theme.palette.SUB_100};
     height: 100%;
     padding: 5px;
     border-radius: 5px;
-    color: ${({ theme }) => theme.palette.WHITE};
+    color: ${({ theme }) => theme.palette.BLACK};
   }
   margin: 0 auto 20px auto;
 `;

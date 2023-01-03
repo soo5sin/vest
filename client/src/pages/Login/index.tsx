@@ -94,6 +94,7 @@ export default function Login() {
 const Img = styled.img`
   margin: 0 auto;
   height: 10rem;
+  width: 10rem;
   object-fit: cover;
 `;
 
