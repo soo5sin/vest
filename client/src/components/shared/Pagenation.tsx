@@ -27,33 +27,35 @@ export default function Pagenation({
   };
 
   return (
-    <Container>
+    <S.Container>
       {totalPageLengthArray.map((_, index) => {
         const buttonNumber = index + 1;
         const isClicked = currentPage === buttonNumber;
         return (
-          <Page onClick={changeCurrentPage(buttonNumber)} active={isClicked} key={index}>
+          <S.Page onClick={changeCurrentPage(buttonNumber)} active={isClicked} key={index}>
             {buttonNumber}
-          </Page>
+          </S.Page>
         );
       })}
-    </Container>
+    </S.Container>
   );
 }
 
-const Container = styled.div`
-  margin: 1rem auto;
-`;
+const S = {
+  Container: styled.div`
+    margin: 1rem auto;
+  `,
 
-const Page = styled.button<PageButton>`
-  padding: 0.5rem 0.75rem;
-  margin-right: 5px;
-  border-radius: 0.25rem;
-  border: 1px solid ${({ theme }) => theme.palette.GRAY_200};
-  ${({ active }) =>
-    active &&
-    `
+  Page: styled.button<PageButton>`
+    padding: 0.5rem 0.75rem;
+    margin-right: 5px;
+    border-radius: 0.25rem;
+    border: 1px solid ${({ theme }) => theme.palette.GRAY_200};
+    ${({ active }) =>
+      active &&
+      `
         background: #091E3B;
         color: #fff;
   `}
-`;
+  `,
+};

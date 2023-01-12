@@ -10,14 +10,16 @@ export default function Thead({ type }: TableType) {
     <thead>
       <tr>
         {type === 'user'
-          ? USER_TITLE.map((title, index) => <Th key={index}>{title}</Th>)
-          : ACCOUNT_TITLE.map((title, index) => <Th key={index}>{title}</Th>)}
+          ? USER_TITLE.map((title, index) => <S.Th key={index}>{title}</S.Th>)
+          : ACCOUNT_TITLE.map((title, index) => <S.Th key={index}>{title}</S.Th>)}
       </tr>
     </thead>
   );
 }
 
-const Th = styled.th`
-  padding: 10px 0;
-  border-bottom: 1px solid #444444;
-`;
+const S = {
+  Th: styled.th`
+    padding: 10px 0;
+    border-bottom: 1px solid #444444;
+  `,
+};

@@ -59,21 +59,21 @@ export default function TbodyRow({ user }: { user: User }) {
   if (!user.name) return null;
 
   return (
-    <Tr>
+    <S.Tr>
       <td>
-        <Xbutton onClick={deleteUserHandler}>X</Xbutton>
+        <S.Xbutton onClick={deleteUserHandler}>X</S.Xbutton>
       </td>
       <td>
         {isEditing ? (
           <>
-            <Input value={newName} onChange={(e) => setNewName(e.target.value)} />
-            <Button onClick={editCancelHandler}>취소</Button>
-            <Button onClick={onSubmitNameHandler}>완료</Button>
+            <S.Input value={newName} onChange={(e) => setNewName(e.target.value)} />
+            <S.Button onClick={editCancelHandler}>취소</S.Button>
+            <S.Button onClick={onSubmitNameHandler}>완료</S.Button>
           </>
         ) : (
           <>
             {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(user.name)}</Link>}
-            <Button onClick={() => setIsEditing(true)}>수정</Button>
+            <S.Button onClick={() => setIsEditing(true)}>수정</S.Button>
           </>
         )}
       </td>
@@ -87,31 +87,33 @@ export default function TbodyRow({ user }: { user: User }) {
       <td>{is_staff ? 'O' : 'X'}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
       <td>{useFormatDate(created_at)}</td>
-    </Tr>
+    </S.Tr>
   );
 }
 
-const Tr = styled.tr`
-  & > td {
-    padding: 10px 0;
-    text-align: center;
-    border-bottom: 1px solid #444444;
-  }
-`;
+const S = {
+  Tr: styled.tr`
+    & > td {
+      padding: 10px 0;
+      text-align: center;
+      border-bottom: 1px solid #444444;
+    }
+  `,
 
-const Xbutton = styled.button`
-  color: ${({ theme }) => theme.palette.RED};
-  padding: 0 10px;
-`;
+  Xbutton: styled.button`
+    color: ${({ theme }) => theme.palette.RED};
+    padding: 0 10px;
+  `,
 
-const Input = styled.input`
-  width: 100px;
-`;
+  Input: styled.input`
+    width: 100px;
+  `,
 
-const Button = styled.button`
-  background: ${({ theme }) => theme.palette.MAIN_COLOR};
-  border-radius: 5px;
-  color: white;
-  padding: 5px;
-  margin-left: 5px;
-`;
+  Button: styled.button`
+    background: ${({ theme }) => theme.palette.MAIN_COLOR};
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    margin-left: 5px;
+  `,
+};

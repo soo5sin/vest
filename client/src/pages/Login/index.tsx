@@ -61,8 +61,8 @@ export default function Login() {
 
   return (
     <>
-      <Img src={logo} alt="fint logo" />
-      <Form onSubmit={onSubmitLoginHandler}>
+      <S.Img src={logo} alt="fint logo" />
+      <S.Form onSubmit={onSubmitLoginHandler}>
         <h1>LOGIN</h1>
         <input
           type="text"
@@ -83,44 +83,46 @@ export default function Login() {
           required
         />
         {!isPassword && <div>비밀번호는 4글자 이상입니다</div>}
-        <Button type="submit" disabled={!isEmail || !isPassword}>
+        <S.Button type="submit" disabled={!isEmail || !isPassword}>
           로그인
-        </Button>
-      </Form>
+        </S.Button>
+      </S.Form>
     </>
   );
 }
 
-const Img = styled.img`
-  margin: 0 auto;
-  height: 10rem;
-  width: 10rem;
-  object-fit: cover;
-`;
+const S = {
+  Img: styled.img`
+    margin: 0 auto;
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+  `,
 
-const Form = styled.form`
-  & > h1 {
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.3rem;
-  }
-  & > input {
-    margin: 1rem 0 1rem 0;
-    padding: 7px;
-  }
-  display: flex;
-  flex-direction: column;
-  width: 20rem;
-  margin: 0 auto;
-`;
+  Form: styled.form`
+    & > h1 {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.3rem;
+    }
+    & > input {
+      margin: 1rem 0 1rem 0;
+      padding: 7px;
+    }
+    display: flex;
+    flex-direction: column;
+    width: 20rem;
+    margin: 0 auto;
+  `,
 
-const Button = styled.button`
-  &:disabled {
-    cursor: default;
-    background: ${({ theme }) => theme.palette.GRAY_100};
-  }
-  background: ${({ theme }) => theme.palette.MAIN_COLOR};
-  height: 50px;
-  margin-top: 1rem;
-  color: ${({ theme }) => theme.palette.WHITE};
-`;
+  Button: styled.button`
+    &:disabled {
+      cursor: default;
+      background: ${({ theme }) => theme.palette.GRAY_100};
+    }
+    background: ${({ theme }) => theme.palette.MAIN_COLOR};
+    height: 50px;
+    margin-top: 1rem;
+    color: ${({ theme }) => theme.palette.WHITE};
+  `,
+};

@@ -7,7 +7,7 @@ const DetailTable = lazy(() => import('./components/DetailTable'));
 export default function AccountDetail() {
   return (
     <>
-      <Title>계좌 상세</Title>
+      <S.Title>계좌 상세</S.Title>
       <Suspense fallback={<Spinner />}>
         <DetailTable />
       </Suspense>
@@ -15,8 +15,10 @@ export default function AccountDetail() {
   );
 }
 
-const Title = styled.div`
-  font-size: 20px;
-  font-weight: bold;
-  margin: 20px 0;
-`;
+const S = {
+  Title: styled.div`
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
+  `,
+};

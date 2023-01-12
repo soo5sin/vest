@@ -59,8 +59,8 @@ export default function NewUserModal({
 
   return (
     <>
-      <Background />
-      <Form onSubmit={submitNewUserForm}>
+      <S.Background />
+      <S.Form onSubmit={submitNewUserForm}>
         <label htmlFor="name">고객명</label>
         <input
           type="text"
@@ -71,7 +71,7 @@ export default function NewUserModal({
           placeholder="김핀트"
           onChange={onChangeInputHandler}
         />
-        <Select>
+        <S.Select>
           <label htmlFor="gender_origin">성별 코드</label>
           <select name="gender_origin" onChange={onChangeInputHandler} value={gender_origin}>
             <option value={1}>1</option>
@@ -79,7 +79,7 @@ export default function NewUserModal({
             <option value={3}>3</option>
             <option value={4}>4</option>
           </select>
-        </Select>
+        </S.Select>
         <label htmlFor="birth_date">생년월일</label>
         <input
           type="text"
@@ -108,7 +108,7 @@ export default function NewUserModal({
           placeholder="example@email.com"
           onChange={onChangeInputHandler}
         />
-        <Select>
+        <S.Select>
           <label htmlFor="allow_marketing_push">마케팅 수신 동의</label>
           <select
             name="allow_marketing_push"
@@ -118,81 +118,83 @@ export default function NewUserModal({
             <option value="true">O</option>
             <option value="false">X</option>
           </select>
-        </Select>
-        <Select>
+        </S.Select>
+        <S.Select>
           <label htmlFor="is_staff">임직원 여부</label>
           <select name="is_staff" onChange={onChangeInputHandler} value={String(is_staff)}>
             <option value="true">O</option>
             <option value="false">X</option>
           </select>
-        </Select>
-        <Select>
+        </S.Select>
+        <S.Select>
           <label htmlFor="is_active">활성화 여부</label>
           <select name="is_active" onChange={onChangeInputHandler} value={String(is_active)}>
             <option value="true">O</option>
             <option value="false">X</option>
           </select>
-        </Select>
-        <Wrapper>
-          <Cancel onClick={() => setIsOpenModal(false)}>취소</Cancel>
-          <Submit type="submit">등록</Submit>
-        </Wrapper>
-      </Form>
+        </S.Select>
+        <S.Wrapper>
+          <S.Cancel onClick={() => setIsOpenModal(false)}>취소</S.Cancel>
+          <S.Submit type="submit">등록</S.Submit>
+        </S.Wrapper>
+      </S.Form>
     </>
   );
 }
 
-const Background = styled.div`
-  position: fixed;
-  background: black;
-  opacity: 60%;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
+const S = {
+  Background: styled.div`
+    position: fixed;
+    background: black;
+    opacity: 60%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  `,
 
-const Form = styled.form`
-  & > input {
+  Form: styled.form`
+    & > input {
+      margin: 5px 0 10px 0;
+      padding: 3px;
+    }
+    position: fixed;
+    background: white;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    padding: 25px 30px;
+    width: 25%;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+  `,
+
+  Select: styled.div`
+    & > label {
+      margin-right: 10px;
+    }
     margin: 5px 0 10px 0;
-    padding: 3px;
-  }
-  position: fixed;
-  background: white;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  flex-direction: column;
-  padding: 25px 30px;
-  width: 25%;
-  border-radius: 10px;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-`;
+  `,
 
-const Select = styled.div`
-  & > label {
-    margin-right: 10px;
-  }
-  margin: 5px 0 10px 0;
-`;
+  Wrapper: styled.div`
+    & > button {
+      margin-top: 15px;
+      height: 35px;
+      width: 45%;
+      border-radius: 5px;
+    }
+    display: flex;
+    justify-content: space-between;
+  `,
 
-const Wrapper = styled.div`
-  & > button {
-    margin-top: 15px;
-    height: 35px;
-    width: 45%;
-    border-radius: 5px;
-  }
-  display: flex;
-  justify-content: space-between;
-`;
+  Cancel: styled.button`
+    background: ${({ theme }) => theme.palette.GRAY_100};
+  `,
 
-const Cancel = styled.button`
-  background: ${({ theme }) => theme.palette.GRAY_100};
-`;
-
-const Submit = styled.button`
-  background: ${({ theme }) => theme.palette.SUB_200};
-  color: ${({ theme }) => theme.palette.WHITE};
-`;
+  Submit: styled.button`
+    background: ${({ theme }) => theme.palette.SUB_200};
+    color: ${({ theme }) => theme.palette.WHITE};
+  `,
+};

@@ -21,7 +21,7 @@ export default function SearchBar({
   };
 
   return (
-    <Form onSubmit={submitSearchForm}>
+    <S.Form onSubmit={submitSearchForm}>
       <input
         type="text"
         value={search}
@@ -29,22 +29,25 @@ export default function SearchBar({
         placeholder="검색어를 입력해주세요."
       />
       <button type="submit">검색</button>
-    </Form>
+    </S.Form>
   );
 }
 
-const Form = styled.form`
-  & > input {
-    padding: 3px;
-    width: 26rem;
-    margin-right: 10px;
-  }
-  & > button {
-    background-color: ${({ theme }) => theme.palette.SUB_100};
-    height: 100%;
-    padding: 5px;
-    border-radius: 5px;
-    color: ${({ theme }) => theme.palette.BLACK};
-  }
-  margin: 0 auto 20px auto;
-`;
+const S = {
+  Form: styled.form`
+    & > input {
+      padding: 3px;
+      width: 26rem;
+      margin-right: 10px;
+    }
+
+    & > button {
+      background-color: ${({ theme }) => theme.palette.SUB_100};
+      height: 100%;
+      padding: 5px;
+      border-radius: 5px;
+      color: ${({ theme }) => theme.palette.BLACK};
+    }
+    margin: 0 auto 20px auto;
+  `,
+};

@@ -34,43 +34,45 @@ export default function DetailTable() {
   return (
     <table>
       <tbody>
-        <Tr>
+        <S.Tr>
           <th>고객명</th>
           <td>{useFindUserNameById(users.data, user_id)}</td>
           <th>계좌명</th>
           <td>{name}</td>
           <th>브로커명</th>
           <td>{useGetBrokerName(broker_id)}</td>
-        </Tr>
-        <Tr>
+        </S.Tr>
+        <S.Tr>
           <th>계좌번호</th>
           <td>{number}</td>
           <th>평가금액</th>
           <td>{useFormatPrice(assets)}</td>
           <th>입금금액</th>
           <td>{useFormatPrice(payments)}</td>
-        </Tr>
-        <Tr>
+        </S.Tr>
+        <S.Tr>
           <th>계좌상태</th>
           <td>{useGetStatus(status)}</td>
           <th>계좌활성화여부</th>
           <td>{is_active ? '활성화' : '비활성화'}</td>
           <th>계좌개설일</th>
           <td>{useFormatDate(created_at)}</td>
-        </Tr>
+        </S.Tr>
       </tbody>
     </table>
   );
 }
 
-const Tr = styled.tr`
-  & th {
-    padding: 10px 0;
-    font-weight: bold;
-  }
-  & > td {
-    text-align: center;
-    width: 13rem;
-    border-bottom: 1px solid #999999;
-  }
-`;
+const S = {
+  Tr: styled.tr`
+    & th {
+      padding: 10px 0;
+      font-weight: bold;
+    }
+    & > td {
+      text-align: center;
+      width: 13rem;
+      border-bottom: 1px solid #999999;
+    }
+  `,
+};

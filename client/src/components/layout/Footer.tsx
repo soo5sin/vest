@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export default function Footer() {
-  return <Container>Copyright © December and Company Inc.</Container>;
+  return <S.Container>Copyright © December and Company Inc.</S.Container>;
 }
 
-const Container = styled.footer`
-  padding: 10px;
-  text-align: center;
-  background: ${({ theme }) => theme.palette.GRAY_50};
-`;
+const S = {
+  Container: styled.footer`
+    padding: 10px;
+    text-align: center;
+    background: ${({ theme }) => theme.palette.GRAY_50};
+  `,
+};

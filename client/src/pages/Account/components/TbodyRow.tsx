@@ -25,7 +25,7 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
   } = account;
 
   return (
-    <Tr>
+    <S.Tr>
       <td>
         <Link to={`/user-detail/${id}`}>{useFindUserNameById(users, user_id)}</Link>
       </td>
@@ -49,14 +49,16 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
       <td>{useFormatPrice(payments)}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
       <td>{useFormatDate(created_at)}</td>
-    </Tr>
+    </S.Tr>
   );
 }
 
-const Tr = styled.tr`
-  & > td {
-    padding: 15px 0;
-    text-align: center;
-    border-bottom: 1px solid #444444;
-  }
-`;
+const S = {
+  Tr: styled.tr`
+    & > td {
+      padding: 15px 0;
+      text-align: center;
+      border-bottom: 1px solid #444444;
+    }
+  `,
+};

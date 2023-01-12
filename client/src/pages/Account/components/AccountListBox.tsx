@@ -46,7 +46,7 @@ export default function AccountListBox() {
             ))
           ) : (
             <tr>
-              <Empty colSpan={9}>검색 결과가 없습니다.</Empty>
+              <S.Empty colSpan={9}>검색 결과가 없습니다.</S.Empty>
             </tr>
           )}
         </tbody>
@@ -61,7 +61,9 @@ export default function AccountListBox() {
   );
 }
 
-const Empty = styled.td`
-  text-align: center;
-  padding: 10px;
-`;
+const S = {
+  Empty: styled.td`
+    text-align: center;
+    padding: 10px;
+  `,
+};

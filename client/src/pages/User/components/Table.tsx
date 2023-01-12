@@ -38,7 +38,7 @@ export default function Table() {
             slicedUsers.map((user: User, index) => <TbodyRow user={user} key={index} />)
           ) : (
             <tr>
-              <Empty colSpan={12}>검색 결과가 없습니다.</Empty>
+              <S.Empty colSpan={12}>검색 결과가 없습니다.</S.Empty>
             </tr>
           )}
         </tbody>
@@ -53,7 +53,9 @@ export default function Table() {
   );
 }
 
-const Empty = styled.td`
-  text-align: center;
-  padding: 10px;
-`;
+const S = {
+  Empty: styled.td`
+    text-align: center;
+    padding: 10px;
+  `,
+};

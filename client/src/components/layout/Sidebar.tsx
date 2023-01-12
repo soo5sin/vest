@@ -20,21 +20,21 @@ export default function Sidebar() {
   };
 
   return (
-    <Container>
+    <S.Container>
       <h1>fint</h1>
       {siderContent.map((sider) => (
         <Link to={sider.link} key={sider.id}>
-          <MenuWrapper active={CurrentPage === sider.keyword}>
+          <S.MenuWrapper active={CurrentPage === sider.keyword}>
             <FontAwesomeIcon icon={sider.icon} />
-            <Name>{sider.name}</Name>
-          </MenuWrapper>
+            <S.Name>{sider.name}</S.Name>
+          </S.MenuWrapper>
         </Link>
       ))}
       <button onClick={logoutHandler}>
         <FontAwesomeIcon icon={faArrowRight} />
-        <Name>로그아웃</Name>
+        <S.Name>로그아웃</S.Name>
       </button>
-    </Container>
+    </S.Container>
   );
 }
 
@@ -50,39 +50,41 @@ export const siderContent = [
   { id: 3, name: '유저 목록', keyword: '/user', link: ROUTE.USER, icon: faUser },
 ];
 
-const Container = styled.aside`
-  & > h1 {
-    font-size: 30px;
-    text-align: center;
-    margin: 0 30px 20px 40px;
-    font-weight: bold;
-  }
-  & div:hover,
-  button:hover {
-    background: ${({ theme }) => theme.palette.WHITE};
-    color: ${({ theme }) => theme.palette.MAIN_COLOR};
+const S = {
+  Container: styled.aside`
+    & > h1 {
+      font-size: 30px;
+      text-align: center;
+      margin: 0 30px 20px 40px;
+      font-weight: bold;
+    }
+    & div:hover,
+    button:hover {
+      background: ${({ theme }) => theme.palette.WHITE};
+      color: ${({ theme }) => theme.palette.MAIN_COLOR};
+      border-radius: 5px;
+    }
+    & div {
+      margin-bottom: 10px;
+      padding: 10px;
+    }
+    & button {
+      width: 100%;
+      padding: 10px;
+      text-align: left;
+    }
+    padding: 30px;
+    background: ${({ theme }) => theme.palette.MAIN_COLOR};
+    color: ${({ theme }) => theme.palette.WHITE};
+  `,
+
+  Name: styled.span`
+    margin-left: 10px;
+  `,
+
+  MenuWrapper: styled.div<Menu>`
+    background: ${({ active, theme }) => active && theme.palette.WHITE};
+    color: ${({ active, theme }) => active && theme.palette.MAIN_COLOR};
     border-radius: 5px;
-  }
-  & div {
-    margin-bottom: 10px;
-    padding: 10px;
-  }
-  & button {
-    width: 100%;
-    padding: 10px;
-    text-align: left;
-  }
-  padding: 30px;
-  background: ${({ theme }) => theme.palette.MAIN_COLOR};
-  color: ${({ theme }) => theme.palette.WHITE};
-`;
-
-const Name = styled.span`
-  margin-left: 10px;
-`;
-
-const MenuWrapper = styled.div<Menu>`
-  background: ${({ active, theme }) => active && theme.palette.WHITE};
-  color: ${({ active, theme }) => active && theme.palette.MAIN_COLOR};
-  border-radius: 5px;
-`;
+  `,
+};

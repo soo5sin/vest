@@ -17,21 +17,23 @@ export default function Header() {
 
   return (
     <>
-      <Container>
+      <S.Container>
         {currentMenuName}
-        <Email>{email}</Email>
-      </Container>
+        <S.Email>{email}</S.Email>
+      </S.Container>
     </>
   );
 }
 
-const Container = styled.footer`
-  padding: 10px;
-  text-align: center;
-  border-bottom: 1px solid ${({ theme }) => theme.palette.GRAY_100};
-`;
+const S = {
+  Container: styled.footer`
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid ${({ theme }) => theme.palette.GRAY_100};
+  `,
 
-const Email = styled.span`
-  position: absolute;
-  right: 10px;
-`;
+  Email: styled.span`
+    position: absolute;
+    right: 10px;
+  `,
+};

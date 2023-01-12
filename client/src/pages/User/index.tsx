@@ -13,8 +13,8 @@ export default function User() {
   return (
     <>
       <SearchBar getDataThunk={getUsersThunk} />
-      <AddButton onClick={() => setIsOpenModal(true)}>고객 추가</AddButton>
-      <Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</Ref>
+      <S.AddButton onClick={() => setIsOpenModal(true)}>고객 추가</S.AddButton>
+      <S.Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
       <Suspense fallback={<Spinner />}>
         <Table />
       </Suspense>
@@ -23,16 +23,17 @@ export default function User() {
   );
 }
 
-const AddButton = styled.button`
-  background: ${({ theme }) => theme.palette.SUB_100};
-  padding: 3px 9px;
-  text-align: center;
-  margin: 0 0 5px auto;
-  border-radius: 5px;
-`;
-
-const Ref = styled.div`
-  font-size: 13px;
-  text-align: right;
-  color: ${({ theme }) => theme.palette.GRAY_500};
-`;
+const S = {
+  AddButton: styled.button`
+    background: ${({ theme }) => theme.palette.SUB_100};
+    padding: 3px 9px;
+    text-align: center;
+    margin: 0 0 5px auto;
+    border-radius: 5px;
+  `,
+  Ref: styled.div`
+    font-size: 13px;
+    text-align: right;
+    color: ${({ theme }) => theme.palette.GRAY_500};
+  `,
+};

@@ -6,32 +6,34 @@ import Sidebar from './Sidebar';
 
 export default function Layout() {
   return (
-    <Container>
+    <S.Container>
       <Sidebar />
-      <Content>
+      <S.Content>
         <Header />
-        <Main>
+        <S.Main>
           <Outlet />
-        </Main>
+        </S.Main>
         <Footer />
-      </Content>
-    </Container>
+      </S.Content>
+    </S.Container>
   );
 }
 
-const Main = styled.main`
-  display: flex;
-  flex-direction: column;
-  padding: 30px;
-  min-height: 100vh;
-`;
+const S = {
+  Main: styled.main`
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    min-height: 100vh;
+  `,
 
-const Container = styled.div`
-  display: flex;
-`;
+  Container: styled.div`
+    display: flex;
+  `,
 
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-`;
+  Content: styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  `,
+};

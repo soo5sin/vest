@@ -22,17 +22,19 @@ export default function UserDetail() {
   }, []);
 
   return (
-    <Container>
+    <S.Container>
       <Suspense fallback={<Spinner />}>
         <UserDetailTable />
         {accounts?.map((account, index) => (
           <AccountDetailTable account={account} key={index} />
         ))}
       </Suspense>
-    </Container>
+    </S.Container>
   );
 }
 
-const Container = styled.div`
-  margin: 0 auto;
-`;
+const S = {
+  Container: styled.div`
+    margin: 0 auto;
+  `,
+};
