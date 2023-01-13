@@ -8,6 +8,7 @@
 
 ## 목차
 
+- [배포 링크](#배포-링크)
 - [구현 화면](#구현-화면)
 - [프로젝트 실행](#프로젝트-실행)
 - [구현 요구 사항](#구현-요구-사항)
@@ -18,6 +19,18 @@
 - [한계점 및 개선 사항](#한계점-및-개선-사항)
 
 <br/>
+
+## 배포 링크
+
+### [👉 LINK](https://app.netlify.com/sites/investment-service-administrator/overview)
+
+> 로그인
+
+`아이디(email): test@test.com`
+
+`비밀번호(password): test`
+
+<br>
 
 ## 구현 화면
 
@@ -77,12 +90,6 @@ $ npm start
 $ npm install
 $ npm start
 ```
-
-> 로그인
-
-`아이디(email): test@test.com`
-
-`비밀번호(password): test`
 
 <br/>
 
@@ -164,8 +171,6 @@ tailwind는 코드의 가독성을 많이 해치기도 하고 관심사의 분�
 <br>
 
 💡 그 외 사용 라이브러리
-
-dayjs: 시간 데이터를 원하는 형식으로 간편히 변환하기 위해 사용했습니다.
 
 redux-logger: 액션을 dispatch 할 때 데이터의 상태를 간편하게 볼 수 있어서 사용했습니다.
 
