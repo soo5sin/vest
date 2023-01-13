@@ -22,7 +22,7 @@
 
 ## 배포 링크
 
-### [👉 LINK](https://app.netlify.com/sites/investment-service-administrator/overview)
+### [👉 LINK](https://investment-service-administrator.netlify.app/)
 
 > 로그인
 
