@@ -24,10 +24,13 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
     created_at,
   } = account;
 
+  const userName = useFindUserNameById(users, user_id);
+  if (!userName) return null;
+
   return (
     <S.Tr>
       <td>
-        <Link to={`/user-detail/${id}`}>{useFindUserNameById(users, user_id)}</Link>
+        <Link to={`/user-detail/${id}`}>{userName}</Link>
       </td>
       <td>{useGetBrokerName(broker_id)}</td>
       <td>
