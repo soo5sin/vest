@@ -1,7 +1,6 @@
 import api from '../../api/instance';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { USERS } from '../../constants/user';
-import { extraReducerUtils } from '../../utils/extraReducer';
 import { User } from '../../types/user';
 import { AxiosError } from 'axios';
 
@@ -39,7 +38,17 @@ const usersSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    ...extraReducerUtils(getUsersThunk),
+    [getUsersThunk.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getUsersThunk.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.data = [...state.data, ...action.payload];
+    },
+    [getUsersThunk.rejected.type]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    },
   },
 });
 

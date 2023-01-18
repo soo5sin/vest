@@ -1,32 +1,35 @@
 import { useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
-import Pagenation from '../../../components/shared/Pagenation';
-import Spinner from '../../../components/shared/Spinner';
 import Thead from '../../../components/shared/table/Thead';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUsersThunk } from '../../../store/reducers/users';
 import { User } from '../../../types/user';
-import { sliceArrayForPagenation } from '../../../utils/hooks/useSliceArrayForPagination';
 import TbodyRow from './TbodyRow';
 
 export default function Table() {
   const dispatch = useAppDispatch();
   const { data, isLoading, error } = useAppSelector((state) => state.users);
-  const [currentPage, setCurrentPage] = useState(1);
-  const limit = 20;
-  const slicedUsers = sliceArrayForPagenation(data, currentPage, limit);
-  const totalCount = data.length;
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [ref, inView] = useInView();
+
+  const getUsers = async () => {
+    const response = await dispatch(getUsersThunk({ _page: page, _limit: 20 }));
+    const length = response.payload.length;
+    setHasMore(length === 20);
+  };
 
   useEffect(() => {
-    dispatch(getUsersThunk());
-  }, []);
+    if (!inView || !hasMore || isLoading) return;
+    setPage((prev) => prev + 1);
+  }, [inView, hasMore]);
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [totalCount]);
+    getUsers();
+  }, [page]);
 
-  if (isLoading) return <Spinner />;
   if (error) return <Error error={error} />;
 
   return (
@@ -35,7 +38,7 @@ export default function Table() {
         <Thead type="user" />
         <tbody>
           {data.length ? (
-            slicedUsers.map((user: User, index) => <TbodyRow user={user} key={index} />)
+            data.map((user: User, index) => <TbodyRow user={user} key={index} />)
           ) : (
             <tr>
               <S.Empty colSpan={12}>검색 결과가 없습니다.</S.Empty>
@@ -43,12 +46,8 @@ export default function Table() {
           )}
         </tbody>
       </table>
-      <Pagenation
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        limit={limit}
-        totalCount={totalCount}
-      />
+      <div ref={ref} />
+      {isLoading && <S.Loading>Loading...</S.Loading>}
     </>
   );
 }
@@ -57,5 +56,10 @@ const S = {
   Empty: styled.td`
     text-align: center;
     padding: 10px;
+  `,
+  Loading: styled.div`
+    text-align: center;
+    margin: 30px 0 30px 0;
+    font-weight: bold;
   `,
 };

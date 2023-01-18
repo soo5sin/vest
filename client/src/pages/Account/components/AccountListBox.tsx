@@ -17,7 +17,7 @@ export default function AccountListBox() {
   const [hasMore, setHasMore] = useState(true);
   const [ref, inView] = useInView();
 
-  const getUsersAccounts = async () => {
+  const getAccounts = async () => {
     const response = await dispatch(getAccountsThunk({ _page: page, _limit: 20 }));
     const length = response.payload.length;
     setHasMore(length === 20);
@@ -29,7 +29,7 @@ export default function AccountListBox() {
   }, [inView, hasMore]);
 
   useEffect(() => {
-    getUsersAccounts();
+    getAccounts();
   }, [page]);
 
   useEffect(() => {
