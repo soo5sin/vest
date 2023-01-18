@@ -7,7 +7,7 @@ import { AxiosError } from 'axios';
 
 export const getUsersThunk = createAsyncThunk(
   USERS.GET,
-  async (params?: Record<string, string>) => {
+  async (params?: Record<string, string> | Record<string, number>) => {
     try {
       const response = await api.get(`/users`, { params });
       const users = response.data;

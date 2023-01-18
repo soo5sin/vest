@@ -3,11 +3,10 @@ import { AxiosError } from 'axios';
 import api from '../../api/instance';
 import { ACCOUNTS } from '../../constants/account';
 import { Account } from '../../types/account';
-import { extraReducerUtils } from '../../utils/extraReducer';
 
 export const getAccountsThunk = createAsyncThunk(
   ACCOUNTS.GET,
-  async (params?: Record<string, string>) => {
+  async (params?: Record<string, string> | Record<string, number>) => {
     try {
       const response = await api.get(`/accounts`, { params });
       const accounts = response.data;
@@ -39,7 +38,17 @@ const accountsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    ...extraReducerUtils(getAccountsThunk),
+    [getAccountsThunk.pending.type]: (state) => {
+      state.isLoading = true;
+    },
+    [getAccountsThunk.fulfilled.type]: (state, action) => {
+      state.isLoading = false;
+      state.data = [...state.data, ...action.payload];
+    },
+    [getAccountsThunk.rejected.type]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.error.message;
+    },
   },
 });
 

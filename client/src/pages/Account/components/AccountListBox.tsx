@@ -1,38 +1,41 @@
-import { useState, useEffect } from 'react';
-import Pagenation from '../../../components/shared/Pagenation';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
-import Spinner from '../../../components/shared/Spinner';
 import Thead from '../../../components/shared/table/Thead';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getAccountsThunk } from '../../../store/reducers/accounts';
 import { Account } from '../../../types/account';
-import { sliceArrayForPagenation } from '../../../utils/hooks/useSliceArrayForPagination';
 import TbodyRow from './TbodyRow';
 import { getUsersThunk } from '../../../store/reducers/users';
+import { useInView } from 'react-intersection-observer';
 
 export default function AccountListBox() {
   const dispatch = useAppDispatch();
   const accounts = useAppSelector((state) => state.accounts);
   const users = useAppSelector((state) => state.users);
-  const [currentPage, setCurrentPage] = useState(1);
-  const limit = 20;
-  const slicedAccounts = sliceArrayForPagenation(accounts.data, currentPage, limit);
-  const totalCount = accounts.data.length;
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [ref, inView] = useInView();
 
   const getUsersAccounts = async () => {
-    await Promise.all([dispatch(getAccountsThunk()), dispatch(getUsersThunk())]);
+    const response = await dispatch(getAccountsThunk({ _page: page, _limit: 20 }));
+    const length = response.payload.length;
+    setHasMore(length === 20);
   };
 
   useEffect(() => {
-    getUsersAccounts();
-  }, []);
+    if (!inView || !hasMore || accounts.isLoading || users.isLoading) return;
+    setPage((prev) => prev + 1);
+  }, [inView, hasMore]);
 
   useEffect(() => {
-    setCurrentPage(1);
-  }, [totalCount]);
+    getUsersAccounts();
+  }, [page]);
 
-  if (accounts.isLoading || users.isLoading) return <Spinner />;
+  useEffect(() => {
+    dispatch(getUsersThunk());
+  }, []);
+
   if (accounts.error || users.error) return <Error error="data fetching error" />;
 
   return (
@@ -41,7 +44,7 @@ export default function AccountListBox() {
         <Thead type="account" />
         <tbody>
           {accounts.data.length ? (
-            slicedAccounts.map((account: Account, index) => (
+            accounts.data.map((account: Account, index) => (
               <TbodyRow account={account} key={index} users={users.data} />
             ))
           ) : (
@@ -51,12 +54,8 @@ export default function AccountListBox() {
           )}
         </tbody>
       </table>
-      <Pagenation
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        limit={limit}
-        totalCount={totalCount}
-      />
+      <div ref={ref} />
+      {accounts.isLoading && <S.Loading>Loading...</S.Loading>}
     </>
   );
 }
@@ -65,5 +64,10 @@ const S = {
   Empty: styled.td`
     text-align: center;
     padding: 10px;
+  `,
+  Loading: styled.div`
+    text-align: center;
+    margin: 30px 0 30px 0;
+    font-weight: bold;
   `,
 };

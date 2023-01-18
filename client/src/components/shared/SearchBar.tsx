@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../store';
 export default function SearchBar({
   getDataThunk,
 }: {
-  getDataThunk: AsyncThunk<any, Record<string, string> | undefined, {}>;
+  getDataThunk: AsyncThunk<any, Record<string, string> | Record<string, number> | undefined, {}>;
 }) {
   const dispatch = useAppDispatch();
   const [search, setSearch] = useState('');
