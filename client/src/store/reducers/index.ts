@@ -8,9 +8,9 @@ import auth from './auth';
 const rootReducer = combineReducers({
   users,
   user,
+  auth,
   accounts,
   account,
-  auth,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
