@@ -1,8 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import api from '../../api/instance';
-import { ACCOUNTS } from '../../constants/account';
 import { Account } from '../../types/account';
+
+const ACCOUNTS = {
+  GET: 'accounts/getAccounts',
+};
 
 export const getAccountsThunk = createAsyncThunk(
   ACCOUNTS.GET,

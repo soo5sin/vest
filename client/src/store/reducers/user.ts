@@ -1,9 +1,15 @@
 import api from '../../api/instance';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { USER } from '../../constants/user';
 import { extraReducerUtils } from '../../utils/extraReducer';
 import { User } from '../../types/user';
 import { AxiosError } from 'axios';
+
+const USER = {
+  GET: 'user/getUser',
+  NEW: 'user/newUser',
+  UPDATE: 'user/updateUser',
+  DELETE: 'user/deleteUser',
+};
 
 export const getUserThunk = createAsyncThunk(
   USER.GET,

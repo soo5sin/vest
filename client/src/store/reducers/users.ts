@@ -1,8 +1,11 @@
 import api from '../../api/instance';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { USERS } from '../../constants/user';
 import { User } from '../../types/user';
 import { AxiosError } from 'axios';
+
+const USERS = {
+  GET: 'users/getUsers',
+};
 
 export const getUsersThunk = createAsyncThunk(
   USERS.GET,
