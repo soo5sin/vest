@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../../components/shared/Spinner';
-import { useFormatDate } from '../../../utils/hooks/useFormatDate';
 import Error from '../../../components/shared/error/Error';
 import { useAppDispatch, useAppSelector } from '../../../store';
 import { getUserThunk } from '../../../store/reducers/user';
+import { formatDate } from '../../../utils/user';
 
 export default function UserDetailTable() {
   const { id } = useParams();
@@ -38,7 +38,7 @@ export default function UserDetailTable() {
             <th>성별코드</th>
             <td>{data.gender_origin}</td>
             <th>생년월일</th>
-            <td>{useFormatDate(data.birth_date)}</td>
+            <td>{formatDate(data.birth_date)}</td>
             <th>핸드폰 번호</th>
             <td>{data.phone_number}</td>
           </S.Tr>
@@ -46,9 +46,9 @@ export default function UserDetailTable() {
             <th>주소</th>
             <td>{data.address + data.detail_address}</td>
             <th>가입 날짜</th>
-            <td>{useFormatDate(data.created_at)}</td>
+            <td>{formatDate(data.created_at)}</td>
             <th>최근 로그인</th>
-            <td>{useFormatDate(data.last_login)}</td>
+            <td>{formatDate(data.last_login)}</td>
           </S.Tr>
           <S.Tr>
             <th>마케팅 수신 동의</th>

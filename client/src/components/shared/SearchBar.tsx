@@ -1,7 +1,7 @@
 import { AsyncThunk } from '@reduxjs/toolkit';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../store';
-import useInput from '../../utils/hooks/useInput';
+import useInput from '../../hooks/useInput';
 import Button from './Button';
 
 export default function SearchBar({

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import Spinner from '../../components/shared/Spinner';
 import { Account } from '../../types/account';
-import { useGetAccountsById } from '../../utils/hooks/useGetAccountsById';
+import { getAccountsById } from '../../utils/getAccountsById';
 
 const AccountDetailTable = lazy(() => import('./components/AccountDetailTable'));
 const UserDetailTable = lazy(() => import('./components/UserDetailTable'));
@@ -13,7 +13,7 @@ export default function UserDetail() {
   const [accounts, setAccounts] = useState<Account[]>();
 
   const getAccounts = async () => {
-    const accounts = await useGetAccountsById(id);
+    const accounts = await getAccountsById(id);
     setAccounts(accounts);
   };
 

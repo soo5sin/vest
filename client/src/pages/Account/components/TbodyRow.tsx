@@ -2,12 +2,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Account } from '../../../types/account';
 import { User } from '../../../types/user';
-import { useFindUserNameById } from '../../../utils/hooks/useFindUserNameById';
-import { useFormatDate } from '../../../utils/hooks/useFormatDate';
-import { useGetBrokerName } from '../../../utils/hooks/useGetBrokerName';
-import { useFormatPrice } from '../hooks/useFormatPrice';
-import { useGetStatus } from '../hooks/useGetStatus';
-import { useMaskingNumber } from '../hooks/useMaskingNumber';
+import { findUserNameById, formatDate, maskingPhoneNumber } from '../../../utils/user';
+import {
+  formatPrice,
+  getBrokerName,
+  getStatus,
+  maskingAccountNumber,
+} from '../../../utils/account';
 
 export default function TbodyRow({ account, users }: { account: Account; users: User[] }) {
   const {
@@ -24,7 +25,7 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
     created_at,
   } = account;
 
-  const userName = useFindUserNameById(users, user_id);
+  const userName = findUserNameById(users, user_id);
   if (!userName) return null;
 
   return (
@@ -32,11 +33,11 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
       <td>
         <Link to={`/user-detail/${id}`}>{userName}</Link>
       </td>
-      <td>{useGetBrokerName(broker_id)}</td>
+      <td>{getBrokerName(broker_id)}</td>
       <td>
-        <Link to={`/account-detail/${uuid}`}>{useMaskingNumber(number)}</Link>
+        <Link to={`/account-detail/${uuid}`}>{maskingAccountNumber(number)}</Link>
       </td>
-      <td>{useGetStatus(status)}</td>
+      <td>{getStatus(status)}</td>
       <td>{name}</td>
       <td
         style={
@@ -47,11 +48,11 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
             : { color: 'blue' }
         }
       >
-        {useFormatPrice(assets)}
+        {formatPrice(assets)}
       </td>
-      <td>{useFormatPrice(payments)}</td>
+      <td>{formatPrice(payments)}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
-      <td>{useFormatDate(created_at)}</td>
+      <td>{formatDate(created_at)}</td>
     </S.Tr>
   );
 }

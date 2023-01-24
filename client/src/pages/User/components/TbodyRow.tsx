@@ -5,13 +5,11 @@ import { ROUTE } from '../../../constants/route';
 import { useAppDispatch } from '../../../store';
 import { deleteUserThunk, updateUserThunk } from '../../../store/reducers/user';
 import { User } from '../../../types/user';
-import { useFormatDate } from '../../../utils/hooks/useFormatDate';
-import { useGetAccountsById } from '../../../utils/hooks/useGetAccountsById';
-import { useMaskingName } from '../hooks/useMaskingName';
-import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { getUsersThunk } from '../../../store/reducers/users';
-import useInput from '../../../utils/hooks/useInput';
+import useInput from '../../../hooks/useInput';
 import Button from '../../../components/shared/Button';
+import { formatDate, maskingPhoneNumber, maskingUserName } from '../../../utils/user';
+import { getAccountsById } from '../../../utils/getAccountsById';
 
 export default function TbodyRow({ user }: { user: User }) {
   const {
@@ -33,7 +31,7 @@ export default function TbodyRow({ user }: { user: User }) {
   const [newName, onChangeNewName, setNewName] = useInput(name);
 
   const getAccountCount = async () => {
-    const accounts = await useGetAccountsById(user.id);
+    const accounts = await getAccountsById(user.id);
     setAccountCount(accounts.length);
   };
 
@@ -80,7 +78,7 @@ export default function TbodyRow({ user }: { user: User }) {
           </>
         ) : (
           <>
-            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(user.name)}</Link>}
+            {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{maskingUserName(user.name)}</Link>}
             <S.ButtonWrapper>
               <Button
                 onClick={() => setIsEditing(true)}
@@ -97,13 +95,13 @@ export default function TbodyRow({ user }: { user: User }) {
       <td>{accountCount}</td>
       <td>{email}</td>
       <td>{gender_origin}</td>
-      <td>{useFormatDate(birth_date)}</td>
-      <td>{useMaskingPhoneNumber(phone_number)}</td>
-      <td>{useFormatDate(last_login)}</td>
+      <td>{formatDate(birth_date)}</td>
+      <td>{maskingPhoneNumber(phone_number)}</td>
+      <td>{formatDate(last_login)}</td>
       <td>{allow_marketing_push ? 'O' : 'X'}</td>
       <td>{is_staff ? 'O' : 'X'}</td>
       <td>{is_active ? '활성화' : '비활성화'}</td>
-      <td>{useFormatDate(created_at)}</td>
+      <td>{formatDate(created_at)}</td>
     </S.Tr>
   );
 }

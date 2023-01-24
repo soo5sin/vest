@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useAppDispatch } from '../../../store';
 import { addUserThunk } from '../../../store/reducers/user';
 import { getUsersThunk } from '../../../store/reducers/users';
-import { useStringToBoolean } from '../hooks/useStringToBoolean';
+import { stringToBoolean } from '../../../utils/stringToboolean';
 
 export default function NewUserModal({
   setIsOpenModal,
@@ -54,7 +54,7 @@ export default function NewUserModal({
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: useStringToBoolean(value) });
+    setNewUser({ ...newUser, [name]: stringToBoolean(value) });
   };
 
   return (

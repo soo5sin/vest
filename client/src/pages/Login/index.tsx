@@ -2,8 +2,8 @@ import styled from 'styled-components';
 import logo from '../../assets/image/logo.jpg';
 import { useAppDispatch } from '../../store';
 import { signInThunk } from '../../store/reducers/auth';
-import useInput from '../../utils/hooks/useInput';
-import authValidator from '../../utils/hooks/authValidator';
+import useInput from '../../hooks/useInput';
+import authValidator from '../../utils/auth';
 import Button from '../../components/shared/Button';
 
 export default function Login() {

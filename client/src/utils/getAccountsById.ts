@@ -1,7 +1,7 @@
 import { AxiosError } from 'axios';
-import api from '../../api/instance';
+import api from '../api/instance';
 
-export const useGetAccountsById = async (id: number | string | undefined | null) => {
+export const getAccountsById = async (id: number | string | undefined | null) => {
   try {
     const response = await api.get(`/accounts?user_id=${id}`);
     const accounts = response.data;
