@@ -10,6 +10,7 @@ import { useGetAccountsById } from '../../../utils/hooks/useGetAccountsById';
 import { useMaskingName } from '../hooks/useMaskingName';
 import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { getUsersThunk } from '../../../store/reducers/users';
+import useInput from '../../../utils/hooks/useInput';
 
 export default function TbodyRow({ user }: { user: User }) {
   const {
@@ -28,7 +29,7 @@ export default function TbodyRow({ user }: { user: User }) {
   const dispatch = useAppDispatch();
   const [accountCount, setAccountCount] = useState(0);
   const [isEditing, setIsEditing] = useState(false);
-  const [newName, setNewName] = useState(name);
+  const [newName, onChangeNewName, setNewName] = useInput(name);
 
   const getAccountCount = async () => {
     const accounts = await useGetAccountsById(user.id);
@@ -66,7 +67,7 @@ export default function TbodyRow({ user }: { user: User }) {
       <td>
         {isEditing ? (
           <>
-            <S.Input value={newName} onChange={(e) => setNewName(e.target.value)} />
+            <S.Input value={newName} onChange={onChangeNewName} />
             <S.Button onClick={editCancelHandler}>취소</S.Button>
             <S.Button onClick={onSubmitNameHandler}>완료</S.Button>
           </>
