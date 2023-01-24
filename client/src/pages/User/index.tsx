@@ -4,6 +4,7 @@ import NewUserModal from './components/NewUserModal';
 import styled from 'styled-components';
 import SearchBar from '../../components/shared/SearchBar';
 import Spinner from '../../components/shared/Spinner';
+import Button from '../../components/shared/Button';
 
 const Table = lazy(() => import('./components/Table'));
 
@@ -13,7 +14,17 @@ export default function User() {
   return (
     <>
       <SearchBar getDataThunk={getUsersThunk} />
-      <S.AddButton onClick={() => setIsOpenModal(true)}>고객 추가</S.AddButton>
+      <S.ButtonWrapper>
+        <Button
+          type="submit"
+          onClick={() => setIsOpenModal(true)}
+          colorTheme="mint"
+          size="small"
+          borderRadius="5px"
+        >
+          고객추가
+        </Button>
+      </S.ButtonWrapper>
       <S.Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
       <Suspense fallback={<Spinner />}>
         <Table />
@@ -24,16 +35,13 @@ export default function User() {
 }
 
 const S = {
-  AddButton: styled.button`
-    background: ${({ theme }) => theme.palette.SUB_100};
-    padding: 3px 9px;
-    text-align: center;
-    margin: 0 0 5px auto;
-    border-radius: 5px;
-  `,
   Ref: styled.div`
     font-size: 13px;
     text-align: right;
     color: ${({ theme }) => theme.palette.GRAY_500};
+  `,
+  ButtonWrapper: styled.div`
+    width: 5rem;
+    margin: 0 0 0.3rem auto;
   `,
 };

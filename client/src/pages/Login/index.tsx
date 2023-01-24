@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../store';
 import { signInThunk } from '../../store/reducers/auth';
 import useInput from '../../utils/hooks/useInput';
 import authValidator from '../../utils/hooks/authValidator';
+import Button from '../../components/shared/Button';
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -46,7 +47,9 @@ export default function Login() {
         {!authValidator('password', password) && (
           <S.ErrorMessage>⚠️ 비밀번호는 4글자 이상입니다</S.ErrorMessage>
         )}
-        <S.Button type="submit">로그인</S.Button>
+        <Button type="submit" size="medium" colorTheme="default">
+          로그인
+        </Button>
       </S.Form>
     </>
   );
@@ -72,17 +75,17 @@ const S = {
     margin: 0 auto;
   `,
   Label: styled.label`
-    margin-top: 1rem;
     font-weight: bold;
   `,
 
   Input: styled.input`
     margin: 1rem 0 1rem 0;
-    padding: 0.7rem;
+    padding: 0.5rem;
   `,
 
   ErrorMessage: styled.div`
     color: red;
+    margin-bottom: 1rem;
   `,
 
   Button: styled.button`

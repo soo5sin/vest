@@ -11,6 +11,7 @@ import { useMaskingName } from '../hooks/useMaskingName';
 import { useMaskingPhoneNumber } from '../hooks/useMaskingPhoneNumber';
 import { getUsersThunk } from '../../../store/reducers/users';
 import useInput from '../../../utils/hooks/useInput';
+import Button from '../../../components/shared/Button';
 
 export default function TbodyRow({ user }: { user: User }) {
   const {
@@ -68,13 +69,28 @@ export default function TbodyRow({ user }: { user: User }) {
         {isEditing ? (
           <>
             <S.Input value={newName} onChange={onChangeNewName} />
-            <S.Button onClick={editCancelHandler}>취소</S.Button>
-            <S.Button onClick={onSubmitNameHandler}>완료</S.Button>
+            <S.EditButton>
+              <Button onClick={editCancelHandler} size="small" borderRadius="5px">
+                취소
+              </Button>
+              <Button onClick={onSubmitNameHandler} size="small" borderRadius="5px">
+                완료
+              </Button>
+            </S.EditButton>
           </>
         ) : (
           <>
             {<Link to={`${ROUTE.USER_DETAIL}/${id}`}>{useMaskingName(user.name)}</Link>}
-            <S.Button onClick={() => setIsEditing(true)}>수정</S.Button>
+            <S.ButtonWrapper>
+              <Button
+                onClick={() => setIsEditing(true)}
+                colorTheme="default"
+                size="small"
+                borderRadius="5px"
+              >
+                수정
+              </Button>
+            </S.ButtonWrapper>
           </>
         )}
       </td>
@@ -110,11 +126,17 @@ const S = {
     width: 100px;
   `,
 
-  Button: styled.button`
-    background: ${({ theme }) => theme.palette.MAIN_COLOR};
-    border-radius: 5px;
-    color: white;
-    padding: 5px;
-    margin-left: 5px;
+  ButtonWrapper: styled.div`
+    width: 5rem;
+    margin: 0 auto;
+  `,
+
+  EditButton: styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    & button {
+      width: 3rem;
+    }
   `,
 };

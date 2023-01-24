@@ -2,6 +2,7 @@ import { AsyncThunk } from '@reduxjs/toolkit';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../store';
 import useInput from '../../utils/hooks/useInput';
+import Button from './Button';
 
 export default function SearchBar({
   getDataThunk,
@@ -24,7 +25,11 @@ export default function SearchBar({
         onChange={onChangeSearch}
         placeholder="검색어를 입력해주세요."
       />
-      <button type="submit">검색</button>
+      <S.ButtonWrapper>
+        <Button type="submit" colorTheme="mint" size="small" borderRadius="5px">
+          검색
+        </Button>
+      </S.ButtonWrapper>
     </S.Form>
   );
 }
@@ -36,14 +41,9 @@ const S = {
       width: 26rem;
       margin-right: 10px;
     }
-
-    & > button {
-      background-color: ${({ theme }) => theme.palette.SUB_100};
-      height: 100%;
-      padding: 5px;
-      border-radius: 5px;
-      color: ${({ theme }) => theme.palette.BLACK};
-    }
     margin: 0 auto 20px auto;
+  `,
+  ButtonWrapper: styled.span`
+    display: inline-block;
   `,
 };
