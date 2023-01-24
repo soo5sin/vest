@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-type InputType = [string, (e: React.ChangeEvent<HTMLInputElement>) => void];
+type InputType = [
+  string,
+  (e: React.ChangeEvent<HTMLInputElement>) => void,
+  React.Dispatch<React.SetStateAction<string>>,
+];
 
 function useInput(initialValue: string): InputType {
   const [value, setValue] = useState(initialValue);
@@ -9,7 +13,7 @@ function useInput(initialValue: string): InputType {
     setValue(e.target.value);
   };
 
-  return [value, onChangeValueHandler];
+  return [value, onChangeValueHandler, setValue];
 }
 
 export default useInput;
