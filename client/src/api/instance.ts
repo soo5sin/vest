@@ -8,9 +8,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use((config) => {
   const token = UserToken.get();
-  config.headers = {
-    Authorization: `Bearer ${token}`,
-  };
+  config.headers.set('Authorization', `Bearer ${token}`);
   config.paramsSerializer = {
     serialize: (params: Record<string, string>) => {
       return new URLSearchParams(params).toString();
