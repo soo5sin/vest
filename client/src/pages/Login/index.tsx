@@ -3,7 +3,7 @@ import logo from '../../assets/image/logo.jpg';
 import { useAppDispatch } from '../../store';
 import { signInThunk } from '../../store/reducers/auth';
 import useInput from '../../hooks/useInput';
-import authValidator from '../../utils/auth';
+import { authValidator } from '../../utils/auth';
 import Button from '../../components/shared/Button';
 
 export default function Login() {

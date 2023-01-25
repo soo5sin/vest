@@ -1,10 +1,9 @@
 import { ROUTE } from '../../constants/route';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { UserToken } from '../../utils/userToken';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { UserEmail } from '../../utils/userEmail';
+import { clearAuth } from '../../utils/auth';
 
 interface Menu {
   active?: boolean;
@@ -16,8 +15,7 @@ export default function Sidebar() {
 
   const logoutHandler = () => {
     if (!confirm('로그아웃 하시겠습니까?')) return;
-    UserToken.remove();
-    UserEmail.remove();
+    clearAuth();
     navigate(ROUTE.LOGIN);
   };
 

@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ROUTE } from '../constants/route';
+import { clearAuth } from '../utils/auth';
 import { UserToken } from '../utils/userToken';
 
 const instance = axios.create({
@@ -24,7 +25,7 @@ instance.interceptors.response.use(
   (error) => {
     const errorStatus = error.response?.status;
     if (errorStatus === 401) {
-      UserToken.remove();
+      clearAuth();
       window.location.replace(ROUTE.LOGIN);
     }
 
