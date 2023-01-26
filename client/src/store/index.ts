@@ -1,19 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import usersReducer from './reducers/users';
 import { useSelector, TypedUseSelectorHook, useDispatch } from 'react-redux';
 import logger from 'redux-logger';
-import accountsReducer from './reducers/accounts';
-import userReducer from './reducers/user';
-import accountReducer from './reducers/account';
-import authReducer from './reducers/auth';
+import reducers from './reducers/index';
+import persistStore from 'redux-persist/es/persistStore';
 
 const store = configureStore({
   reducer: {
-    users: usersReducer,
-    accounts: accountsReducer,
-    user: userReducer,
-    account: accountReducer,
-    auth: authReducer,
+    reducers,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
@@ -22,7 +15,10 @@ const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
 });
 
+const persistStor = persistStore(store);
+
 export default store;
+export const persistor = persistStor;
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
