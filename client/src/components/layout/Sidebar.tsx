@@ -3,7 +3,8 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import { clearAuth } from '../../utils/auth';
+import { useAppDispatch, useAppSelector } from '../../store';
+import { signOutThunk } from '../../store/reducers/auth';
 
 interface Menu {
   active?: boolean;
@@ -11,12 +12,16 @@ interface Menu {
 
 export default function Sidebar() {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { isAuthorized } = useAppSelector((state) => state.reducers.auth);
   const CurrentPage = useLocation().pathname;
 
-  const logoutHandler = () => {
-    if (!confirm('로그아웃 하시겠습니까?')) return;
-    clearAuth();
-    navigate(ROUTE.LOGIN);
+  const signHandler = () => {
+    if (isAuthorized) {
+      dispatch(signOutThunk());
+    } else {
+      navigate(ROUTE.LOGIN);
+    }
   };
 
   return (
@@ -30,9 +35,9 @@ export default function Sidebar() {
           </S.MenuWrapper>
         </Link>
       ))}
-      <button onClick={logoutHandler}>
+      <button onClick={signHandler}>
         <FontAwesomeIcon icon={faArrowRight} />
-        <S.Name>로그아웃</S.Name>
+        <S.Name>{isAuthorized ? '로그아웃' : '로그인'}</S.Name>
       </button>
     </S.Container>
   );
