@@ -5,9 +5,12 @@ import { UserToken } from '../../utils/userToken';
 import { AxiosError } from 'axios';
 import { UserEmail } from '../../utils/userEmail';
 import { ROUTE } from '../../constants/route';
+import { clearAuth } from '../../utils/auth';
+import { Navigate } from 'react-router-dom';
 
 const AUTH = {
   SIGNIN: 'auth/signIn',
+  SIGNOUT: 'auth/signOut',
 };
 
 export const signInThunk = createAsyncThunk(
@@ -35,6 +38,13 @@ export const signInThunk = createAsyncThunk(
     }
   },
 );
+
+export const signOutThunk = createAsyncThunk(AUTH.SIGNOUT, async () => {
+  if (!confirm('로그아웃 하시겠습니까?')) return;
+  clearAuth();
+  window.location.replace(ROUTE.LOGIN);
+  return initialState.data;
+});
 
 const initialState: InitialState = {
   isAuthorized: false,
@@ -72,6 +82,10 @@ const authSlice = createSlice({
     [signInThunk.rejected.type]: (state, action) => {
       state.isLoading = false;
       state.error = action.error;
+    },
+    [signOutThunk.fulfilled.type]: (state, action) => {
+      state.isAuthorized = false;
+      state.data = action.payload;
     },
   },
 });
