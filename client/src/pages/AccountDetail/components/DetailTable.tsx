@@ -12,8 +12,8 @@ import { formatPrice, getBrokerName, getStatus } from '../../../utils/account';
 
 export default function DetailTable() {
   const dispatch = useAppDispatch();
-  const users = useAppSelector((state) => state.users);
-  const account = useAppSelector((state) => state.account);
+  const users = useAppSelector((state) => state.reducers.users);
+  const account = useAppSelector((state) => state.reducers.account);
   const { broker_id, status, user_id, number, name, assets, payments, is_active, created_at } =
     account.data;
   const { uuid } = useParams();

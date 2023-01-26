@@ -11,8 +11,8 @@ import { useInView } from 'react-intersection-observer';
 
 export default function AccountListBox() {
   const dispatch = useAppDispatch();
-  const accounts = useAppSelector((state) => state.accounts);
-  const users = useAppSelector((state) => state.users);
+  const accounts = useAppSelector((state) => state.reducers.accounts);
+  const users = useAppSelector((state) => state.reducers.users);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [ref, inView] = useInView();

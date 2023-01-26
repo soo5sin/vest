@@ -10,7 +10,7 @@ import { formatDate } from '../../../utils/user';
 export default function UserDetailTable() {
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { data, isLoading, error } = useAppSelector((state) => state.user);
+  const { data, isLoading, error } = useAppSelector((state) => state.reducers.user);
 
   useEffect(() => {
     dispatch(getUserThunk({ id: id }));

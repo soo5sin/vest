@@ -10,7 +10,7 @@ import TbodyRow from './TbodyRow';
 
 export default function Table() {
   const dispatch = useAppDispatch();
-  const { data, isLoading, error } = useAppSelector((state) => state.users);
+  const { data, isLoading, error } = useAppSelector((state) => state.reducers.users);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [ref, inView] = useInView();
