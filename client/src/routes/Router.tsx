@@ -15,14 +15,21 @@ const Auth = () => {
   return token ? <Outlet /> : <Navigate to={ROUTE.LOGIN} replace />;
 };
 
+const UnAuth = () => {
+  const token = UserToken.get();
+  return !token ? <Outlet /> : <Navigate to={ROUTE.ACCOUNT} replace />;
+};
+
 export default function Router() {
   return (
     <Routes>
-      <Route path={ROUTE.LOGIN} element={<Login />} />
-      <Route path={ROUTE.NOT_FOUND} element={<Error error="NOT FOUND" />} />
-      <Route element={<Auth />}>
-        <Route element={<Layout />}>
-          <Route path={ROUTE.MAIN} element={<Main />} />
+      <Route element={<Layout />}>
+        <Route path={ROUTE.MAIN} element={<Main />} />
+        <Route element={<UnAuth />}>
+          <Route path={ROUTE.LOGIN} element={<Login />} />
+        </Route>
+        <Route path={ROUTE.NOT_FOUND} element={<Error error="NOT FOUND" />} />
+        <Route element={<Auth />}>
           <Route path={ROUTE.USER} element={<User />} />
           <Route path={`${ROUTE.USER_DETAIL}/:id`} element={<UserDetail />} />
           <Route path={ROUTE.ACCOUNT} element={<Account />} />
