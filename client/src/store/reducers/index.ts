@@ -4,6 +4,7 @@ import accounts from './accounts';
 import user from './user';
 import account from './account';
 import auth from './auth';
+import search from './search';
 import { PersistConfig } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import persistReducer from 'redux-persist/es/persistReducer';
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   auth,
   accounts,
   account,
+  search,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

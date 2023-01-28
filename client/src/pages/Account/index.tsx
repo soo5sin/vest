@@ -9,7 +9,6 @@ const AccountListBox = lazy(() => import('./components/AccountListBox'));
 export default function Account() {
   return (
     <>
-      <SearchBar getDataThunk={getAccountsThunk} />
       <S.Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
       <S.Ref>※ 계좌 번호를 클릭하면 해당 계좌의 상세 페이지로 이동합니다.</S.Ref>
       <Suspense fallback={<Spinner />}>

@@ -19,8 +19,8 @@ export default function AccountListBox() {
 
   const getAccounts = async () => {
     const response = await dispatch(getAccountsThunk({ _page: page, _limit: 20 }));
-    const length = response.payload.length;
-    setHasMore(length === 20);
+    const newAccounts = response.payload;
+    setHasMore(newAccounts.length === 20);
   };
 
   useEffect(() => {

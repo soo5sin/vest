@@ -13,7 +13,6 @@ export default function User() {
 
   return (
     <>
-      <SearchBar getDataThunk={getUsersThunk} />
       <S.ButtonWrapper>
         <Button
           type="submit"

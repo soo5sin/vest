@@ -2,7 +2,13 @@ import { ROUTE } from '../../constants/route';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faUser, faBriefcase, faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import {
+  faHouse,
+  faUser,
+  faBriefcase,
+  faArrowRight,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { signOutThunk } from '../../store/reducers/auth';
 
@@ -54,6 +60,7 @@ export const siderContent = [
     icon: faBriefcase,
   },
   { id: 3, name: '유저 목록', keyword: '/user', link: ROUTE.USER, icon: faUser },
+  { id: 4, name: '검색', keyword: '/search', link: ROUTE.SEARCH, icon: faSearch },
 ];
 
 const S = {

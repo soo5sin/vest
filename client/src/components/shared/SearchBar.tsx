@@ -3,18 +3,15 @@ import styled from 'styled-components';
 import { useAppDispatch } from '../../store';
 import useInput from '../../hooks/useInput';
 import Button from './Button';
+import { searchUserThunk } from '../../store/reducers/search';
 
-export default function SearchBar({
-  getDataThunk,
-}: {
-  getDataThunk: AsyncThunk<any, Record<string, string> | Record<string, number> | undefined, {}>;
-}) {
+export default function SearchBar() {
   const dispatch = useAppDispatch();
   const [search, onChangeSearch] = useInput('');
 
   const submitSearchForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(getDataThunk({ q: search }));
+    dispatch(searchUserThunk({ q: search }));
   };
 
   return (
