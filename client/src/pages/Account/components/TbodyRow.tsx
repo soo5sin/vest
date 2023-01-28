@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Account } from '../../../types/account';
 import { User } from '../../../types/user';
-import { findUserNameById, formatDate, maskingPhoneNumber } from '../../../utils/user';
+import { findUserNameById, formatDate } from '../../../utils/user';
 import {
   formatPrice,
   getBrokerName,
@@ -31,7 +31,7 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
   return (
     <S.Tr>
       <td>
-        <Link to={`/user-detail/${id}`}>{userName}</Link>
+        <Link to={`/user-detail/${user_id}`}>{userName}</Link>
       </td>
       <td>{getBrokerName(broker_id)}</td>
       <td>
