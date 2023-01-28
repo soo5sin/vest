@@ -40,7 +40,6 @@ export const signInThunk = createAsyncThunk(
 );
 
 export const signOutThunk = createAsyncThunk(AUTH.SIGNOUT, async () => {
-  if (!confirm('로그아웃 하시겠습니까?')) return;
   clearAuth();
   window.location.replace(ROUTE.LOGIN);
   return initialState.data;
