@@ -1,7 +1,5 @@
 import { lazy, Suspense } from 'react';
 import styled from 'styled-components';
-import SearchBar from '../../components/shared/SearchBar';
-import { getAccountsThunk } from '../../store/reducers/accounts';
 import Spinner from '../../components/shared/Spinner';
 
 const AccountListBox = lazy(() => import('./components/AccountListBox'));

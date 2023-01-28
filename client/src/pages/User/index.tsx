@@ -1,8 +1,6 @@
 import { useState, lazy, Suspense } from 'react';
-import { getUsersThunk } from '../../store/reducers/users';
 import NewUserModal from './components/NewUserModal';
 import styled from 'styled-components';
-import SearchBar from '../../components/shared/SearchBar';
 import Spinner from '../../components/shared/Spinner';
 import Button from '../../components/shared/Button';
 
