@@ -25,6 +25,7 @@ export default function UserDetail() {
     <S.Container>
       <Suspense fallback={<Spinner />}>
         <UserDetailTable />
+        <S.Title>유저 계좌 목록</S.Title>
         {accounts?.map((account, index) => (
           <AccountDetailTable account={account} key={index} />
         ))}
@@ -36,5 +37,10 @@ export default function UserDetail() {
 const S = {
   Container: styled.div`
     margin: 0 auto;
+  `,
+  Title: styled.div`
+    font-size: 20px;
+    font-weight: bold;
+    margin: 20px 0;
   `,
 };

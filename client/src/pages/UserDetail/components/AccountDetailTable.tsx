@@ -6,7 +6,6 @@ import { formatPrice, getBrokerName, getStatus } from '../../../utils/account';
 export default function AccountDetailTable({ account }: { account: Account }) {
   return (
     <>
-      <S.Title>유저 계좌 목록</S.Title>
       <S.Table>
         <tbody>
           <S.Tr>
@@ -40,12 +39,6 @@ export default function AccountDetailTable({ account }: { account: Account }) {
 }
 
 const S = {
-  Title: styled.div`
-    font-size: 20px;
-    font-weight: bold;
-    margin: 20px 0;
-  `,
-
   Tr: styled.tr`
     & th {
       padding: 10px 0;
