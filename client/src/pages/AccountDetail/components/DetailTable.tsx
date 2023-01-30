@@ -1,30 +1,14 @@
-import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-
-import { useAppDispatch, useAppSelector } from '../../../store';
-import { getUsersThunk } from '../../../store/reducers/users';
 import styled from 'styled-components';
 import Spinner from '../../../components/shared/Spinner';
 import ErrorPage from '../../../components/shared/error/Error';
-import { getAccountThunk } from '../../../store/reducers/account';
 import { findUserNameById, formatDate } from '../../../utils/user';
 import { formatPrice, getBrokerName, getStatus } from '../../../utils/account';
+import useGetDetailAccount from '../hooks/useGetDetailAccount';
 
 export default function DetailTable() {
-  const dispatch = useAppDispatch();
-  const users = useAppSelector((state) => state.reducers.users);
-  const account = useAppSelector((state) => state.reducers.account);
+  const { users, account } = useGetDetailAccount();
   const { broker_id, status, user_id, number, name, assets, payments, is_active, created_at } =
     account.data;
-  const { uuid } = useParams();
-
-  const getUsersAccount = async () => {
-    await Promise.all([dispatch(getUsersThunk()), dispatch(getAccountThunk({ uuid: uuid }))]);
-  };
-
-  useEffect(() => {
-    getUsersAccount();
-  }, []);
 
   if (account.error || users.error) return <ErrorPage error="fetching error" />;
   if (account.isLoading || users.isLoading) return <Spinner />;
