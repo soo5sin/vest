@@ -1,20 +1,14 @@
 import styled from 'styled-components';
 import logo from '../../assets/image/logo.jpg';
-import { useAppDispatch } from '../../store';
-import { signInThunk } from '../../store/reducers/auth';
 import useInput from '../../hooks/useInput';
 import { authValidator } from '../../utils/auth';
 import Button from '../../components/shared/Button';
+import useLogin from './hooks/useSignIn';
 
 export default function Login() {
-  const dispatch = useAppDispatch();
   const [email, onChangeEmail] = useInput('');
   const [password, onChangePassword] = useInput('');
-
-  const onSubmitLoginHandler = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await dispatch(signInThunk({ email, password }));
-  };
+  const { onSubmitLoginHandler } = useLogin({ email, password });
 
   return (
     <>
