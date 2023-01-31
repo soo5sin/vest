@@ -16,13 +16,10 @@ export default function useAccountList() {
   };
 
   useEffect(() => {
-    if (!inView || !hasMore || accounts.isLoading || users.isLoading) return;
+    if (!inView || !hasMore || accounts.isLoading) return;
+    getAccounts();
     setPage(page + 1);
   }, [inView, hasMore]);
-
-  useEffect(() => {
-    getAccounts();
-  }, [page]);
 
   useEffect(() => {
     dispatch(getUsersThunk());
