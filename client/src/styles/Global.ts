@@ -22,6 +22,7 @@ const GlobalStyle = createGlobalStyle`
     html,
     body {
         height: 100%;
+        background-color: #fafafa;
     }
     img,
     picture,
@@ -36,9 +37,6 @@ const GlobalStyle = createGlobalStyle`
         border: 0;
         cursor: pointer;
     }
-    body::-webkit-scrollbar {
-        display: none;
-    }
     article,
     aside,
     header,
@@ -47,12 +45,6 @@ const GlobalStyle = createGlobalStyle`
     nav,
     section {
         display: block;
-    }
-    button {
-        border: none;
-        outline: none;
-        cursor: pointer;
-        font: inherit;
     }
 `;
 export default GlobalStyle;
