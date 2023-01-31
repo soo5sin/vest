@@ -16,14 +16,14 @@ export default function SearchBar() {
 
   return (
     <S.Form onSubmit={submitSearchForm}>
-      <input
+      <S.Input
         type="text"
         value={search}
         onChange={onChangeSearch}
         placeholder="검색어를 입력해주세요."
       />
       <S.ButtonWrapper>
-        <Button type="submit" colorTheme="mint" size="small" borderRadius="5px">
+        <Button type="submit" colorTheme="default" size="medium" borderRadius="5px">
           검색
         </Button>
       </S.ButtonWrapper>
@@ -33,12 +33,13 @@ export default function SearchBar() {
 
 const S = {
   Form: styled.form`
-    & > input {
-      padding: 3px;
-      width: 26rem;
-      margin-right: 10px;
-    }
     margin: 0 auto 20px auto;
+  `,
+  Input: styled.input`
+    padding: 12px;
+    width: 26rem;
+    margin-right: 10px;
+    outline-color: ${({ theme }) => theme.palette.SUB_100};
   `,
   ButtonWrapper: styled.span`
     display: inline-block;

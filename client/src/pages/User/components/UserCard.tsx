@@ -67,7 +67,7 @@ export default function UserCard({ user, userAccounts }: { user: User; userAccou
 const S = {
   List: styled.span`
     display: inline-block;
-    width: 110px;
+    width: 120px;
     padding: 3px;
     text-align: center;
   `,

@@ -14,7 +14,7 @@ export default function DetailTable() {
   if (account.isLoading || users.isLoading) return <Spinner />;
 
   return (
-    <table>
+    <S.Table>
       <tbody>
         <S.Tr>
           <th>고객명</th>
@@ -41,11 +41,17 @@ export default function DetailTable() {
           <td>{formatDate(created_at)}</td>
         </S.Tr>
       </tbody>
-    </table>
+    </S.Table>
   );
 }
 
 const S = {
+  Table: styled.table`
+    background: ${({ theme }) => theme.palette.WHITE};
+    padding: 40px;
+    border-radius: 20px;
+    color: ${({ theme }) => theme.palette.GRAY_700};
+  `,
   Tr: styled.tr`
     & th {
       padding: 10px 0;

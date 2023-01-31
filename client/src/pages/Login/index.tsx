@@ -12,9 +12,8 @@ export default function Login() {
 
   return (
     <>
-      <S.Img src={logo} alt="fint logo" />
+      <S.Logo>vest🍀</S.Logo>
       <S.Form onSubmit={onSubmitLoginHandler}>
-        <S.title>LOGIN</S.title>
         <S.Label htmlFor="email">이메일</S.Label>
         <S.Input
           type="text"
@@ -50,18 +49,14 @@ export default function Login() {
 }
 
 const S = {
-  Img: styled.img`
-    margin: 0 auto;
-    height: 10rem;
-    width: 10rem;
-  `,
-
-  title: styled.h1`
+  Logo: styled.div`
+    font-size: 50px;
     text-align: center;
+    font-family: fantasy;
+    margin: 30px 0;
+    color: ${({ theme }) => theme.palette.MAIN_COLOR};
     font-weight: bold;
-    font-size: 1.3rem;
   `,
-
   Form: styled.form`
     display: flex;
     flex-direction: column;
@@ -70,13 +65,17 @@ const S = {
   `,
   Label: styled.label`
     font-weight: bold;
+    color: ${({ theme }) => theme.palette.GRAY_500};
   `,
 
   Input: styled.input`
     margin: 1rem 0 1rem 0;
-    padding: 0.5rem;
+    padding: 1rem;
+    border-radius: 5px;
+    &:focus {
+      outline-color: ${({ theme }) => theme.palette.SUB_100};
+    }
   `,
-
   ErrorMessage: styled.div`
     color: red;
     margin-bottom: 1rem;

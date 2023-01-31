@@ -12,7 +12,7 @@ export default function AccountListBox() {
 
   return (
     <>
-      <table>
+      <S.Table>
         <Thead type="account" />
         <tbody>
           {accounts.data.length ? (
@@ -25,7 +25,7 @@ export default function AccountListBox() {
             </tr>
           )}
         </tbody>
-      </table>
+      </S.Table>
       <div ref={ref} />
       {accounts.isLoading && <S.Loading>Loading...</S.Loading>}
     </>
@@ -33,6 +33,12 @@ export default function AccountListBox() {
 }
 
 const S = {
+  Table: styled.table`
+    background-color: ${({ theme }) => theme.palette.WHITE};
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 20px;
+  `,
   Empty: styled.td`
     text-align: center;
     padding: 10px;

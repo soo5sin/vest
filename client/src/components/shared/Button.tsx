@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactElement | string;
-  colorTheme?: 'default' | 'mint' | 'white' | 'gray';
+  colorTheme?: 'default' | 'lightGreen' | 'white' | 'gray';
   size?: 'small' | 'medium' | 'large';
   borderRadius?: string;
 }
@@ -20,12 +20,12 @@ const ButtonStyleOption = {
     large: '1.7rem',
   },
   default: {
-    backgroundColor: '#091E3B',
+    backgroundColor: '#4da64d',
     color: '#ffffff',
   },
-  mint: {
-    backgroundColor: '#00e2ed',
-    color: '#000000',
+  lightGreen: {
+    backgroundColor: '#b3d9b3',
+    color: '#515151',
   },
   white: {
     backgroundColor: '#ffffff',
@@ -53,12 +53,13 @@ const Button = ({
 
 const S = {
   Button: styled.button<ButtonProps>`
-    ${({ colorTheme = 'mint', size = 'medium', borderRadius }) => css`
+    ${({ colorTheme = 'default', size = 'medium', borderRadius }) => css`
       width: 100%;
       padding: ${ButtonStyleOption.size[size]};
       background-color: ${ButtonStyleOption[colorTheme].backgroundColor};
       color: ${ButtonStyleOption[colorTheme].color};
       border-radius: ${borderRadius};
+      font-weight: bold;
     `}
   `,
 };

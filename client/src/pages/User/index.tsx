@@ -12,7 +12,7 @@ export default function User() {
       <S.ButtonWrapper>
         <Button
           onClick={() => setIsOpenModal(true)}
-          colorTheme="mint"
+          colorTheme="lightGreen"
           size="small"
           borderRadius="5px"
         >

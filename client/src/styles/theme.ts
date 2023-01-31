@@ -1,9 +1,10 @@
 import { DefaultTheme } from 'styled-components';
 
 export const palette = {
-  MAIN_COLOR: '#091E3B',
-  SUB_100: '#00e2ed',
-  SUB_200: '#00b8de',
+  MAIN_COLOR: '#4da64d',
+  SUB_50: '#cce6cc',
+  SUB_100: '#66b366',
+  SUB_200: '#80c080',
   WHITE: '#ffffff',
   BLACK: '#000000',
   RED: '#ff0000',

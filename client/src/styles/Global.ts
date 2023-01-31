@@ -32,6 +32,9 @@ const GlobalStyle = createGlobalStyle`
         display: block;
         max-width: 100%;
     }
+    input{
+        border: none;
+    }
     button {
         background: none;
         border: 0;

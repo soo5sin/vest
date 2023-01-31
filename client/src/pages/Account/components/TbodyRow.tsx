@@ -31,11 +31,15 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
   return (
     <S.Tr>
       <td>
-        <Link to={`/user-detail/${user_id}`}>{userName}</Link>
+        <Link to={`/user-detail/${user_id}`}>
+          <S.Highlight>{userName}</S.Highlight>
+        </Link>
       </td>
       <td>{getBrokerName(broker_id)}</td>
       <td>
-        <Link to={`/account-detail/${uuid}`}>{maskingAccountNumber(number)}</Link>
+        <Link to={`/account-detail/${uuid}`}>
+          <S.Highlight>{maskingAccountNumber(number)}</S.Highlight>
+        </Link>
       </td>
       <td>{getStatus(status)}</td>
       <td>{name}</td>
@@ -60,9 +64,16 @@ export default function TbodyRow({ account, users }: { account: Account; users: 
 const S = {
   Tr: styled.tr`
     & > td {
-      padding: 15px 0;
+      padding: 30px 0;
       text-align: center;
       border-bottom: 1px solid #444444;
+    }
+  `,
+  Highlight: styled.span`
+    font-weight: bold;
+    color: ${({ theme }) => theme.palette.GRAY_500};
+    &:hover {
+      color: ${({ theme }) => theme.palette.MAIN_COLOR};
     }
   `,
 };

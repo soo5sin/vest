@@ -55,7 +55,7 @@ export default function NewUserModal({
           onChange={onChangeInputHandler}
         />
         <label htmlFor="phone_number">휴대폰번호</label>
-        <input
+        <S.Input
           type="text"
           id="phone_number"
           name="phone_number"
@@ -106,7 +106,8 @@ export default function NewUserModal({
 const S = {
   Input: styled.input`
     margin: 5px 0 10px 0;
-    padding: 3px;
+    padding: 14px;
+    background-color: ${({ theme }) => theme.palette.GRAY_50};
   `,
   Select: styled.div`
     & > label {

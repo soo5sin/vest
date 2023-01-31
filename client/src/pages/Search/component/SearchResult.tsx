@@ -22,7 +22,7 @@ export default function SearchResult() {
             return <UserCard key={index} user={user} userAccounts={userAccounts} />;
           })
         ) : (
-          <div>검색 결과가 없습니다</div>
+          <div>검색 결과가 없습니다😵‍💫</div>
         )}
         <div ref={ref} />
         {search.isLoading && <S.Loading>Loading...</S.Loading>}

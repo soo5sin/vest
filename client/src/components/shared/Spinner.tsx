@@ -19,7 +19,7 @@ const S = {
     height: 50px;
     border: 4px solid ${({ theme }) => theme.palette.MAIN_COLOR};
     border-radius: 50%;
-    border-top-color: ${({ theme }) => theme.palette.SUB_200};
+    border-top-color: ${({ theme }) => theme.palette.SUB_50};
     animation: ${spin} 1s linear infinite;
   `,
 };
