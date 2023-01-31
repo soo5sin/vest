@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: ReactElement | string;
-  colorTheme?: 'default' | 'mint';
+  colorTheme?: 'default' | 'mint' | 'white' | 'gray';
   size?: 'small' | 'medium' | 'large';
   borderRadius?: string;
 }
@@ -11,7 +11,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const ButtonStyleOption = {
   size: {
     small: '0.4rem',
-    medium: '1rem',
+    medium: '0.8rem',
     large: '1.7rem',
   },
   fontSize: {
@@ -26,6 +26,14 @@ const ButtonStyleOption = {
   mint: {
     backgroundColor: '#00e2ed',
     color: '#000000',
+  },
+  white: {
+    backgroundColor: '#ffffff',
+    color: '#000000',
+  },
+  gray: {
+    backgroundColor: '#f7f7f7',
+    color: '#313131',
   },
 };
 
