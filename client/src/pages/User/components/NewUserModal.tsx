@@ -1,39 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useAppDispatch } from '../../../store';
-import { addUserThunk } from '../../../store/reducers/user';
-import { getUsersThunk } from '../../../store/reducers/users';
-import { stringToBoolean } from '../../../utils/stringToboolean';
+import Modal from '../../../components/shared/Modal';
+import useNewUser from '../hooks/useNewUser';
 
 export default function NewUserModal({
+  isOpenModal,
   setIsOpenModal,
 }: {
+  isOpenModal: boolean;
   setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const INITIAL_USER = {
-    id: null,
-    uuid: '',
-    photo: '',
-    name: '',
-    email: '',
-    password: '0000',
-    age: null,
-    gender_origin: 1,
-    birth_date: '',
-    phone_number: '',
-    address: '',
-    detail_address: '',
-    last_login: '',
-    created_at: '',
-    updated_at: '',
-    allow_marketing_push: false,
-    allow_invest_push: false,
-    is_active: false,
-    is_staff: false,
-  };
-  const dispatch = useAppDispatch();
-  const [newUser, setNewUser] = useState(INITIAL_USER);
   const {
+    onChangeInputHandler,
+    submitForm,
     name,
     email,
     gender_origin,
@@ -42,27 +21,13 @@ export default function NewUserModal({
     is_active,
     allow_marketing_push,
     is_staff,
-  } = newUser;
-
-  const submitNewUserForm = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    await dispatch(addUserThunk(newUser));
-    setNewUser(INITIAL_USER);
-    setIsOpenModal(false);
-    dispatch(getUsersThunk());
-  };
-
-  const onChangeInputHandler = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setNewUser({ ...newUser, [name]: stringToBoolean(value) });
-  };
+  } = useNewUser(setIsOpenModal);
 
   return (
-    <>
-      <S.Background />
-      <S.Form onSubmit={submitNewUserForm}>
+    <Modal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} submitForm={submitForm}>
+      <>
         <label htmlFor="name">고객명</label>
-        <input
+        <S.Input
           type="text"
           id="name"
           name="name"
@@ -81,7 +46,7 @@ export default function NewUserModal({
           </select>
         </S.Select>
         <label htmlFor="birth_date">생년월일</label>
-        <input
+        <S.Input
           type="text"
           id="birth_date"
           name="birth_date"
@@ -99,7 +64,7 @@ export default function NewUserModal({
           onChange={onChangeInputHandler}
         />
         <label htmlFor="email">이메일 주소</label>
-        <input
+        <S.Input
           type="text"
           id="email"
           name="email"
@@ -133,68 +98,20 @@ export default function NewUserModal({
             <option value="false">X</option>
           </select>
         </S.Select>
-        <S.Wrapper>
-          <S.Cancel onClick={() => setIsOpenModal(false)}>취소</S.Cancel>
-          <S.Submit type="submit">등록</S.Submit>
-        </S.Wrapper>
-      </S.Form>
-    </>
+      </>
+    </Modal>
   );
 }
 
 const S = {
-  Background: styled.div`
-    position: fixed;
-    background: black;
-    opacity: 60%;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  Input: styled.input`
+    margin: 5px 0 10px 0;
+    padding: 3px;
   `,
-
-  Form: styled.form`
-    & > input {
-      margin: 5px 0 10px 0;
-      padding: 3px;
-    }
-    position: fixed;
-    background: white;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: flex;
-    flex-direction: column;
-    padding: 25px 30px;
-    width: 25%;
-    border-radius: 10px;
-    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
-  `,
-
   Select: styled.div`
     & > label {
       margin-right: 10px;
     }
     margin: 5px 0 10px 0;
-  `,
-
-  Wrapper: styled.div`
-    & > button {
-      margin-top: 15px;
-      height: 35px;
-      width: 45%;
-      border-radius: 5px;
-    }
-    display: flex;
-    justify-content: space-between;
-  `,
-
-  Cancel: styled.button`
-    background: ${({ theme }) => theme.palette.GRAY_100};
-  `,
-
-  Submit: styled.button`
-    background: ${({ theme }) => theme.palette.SUB_200};
-    color: ${({ theme }) => theme.palette.WHITE};
   `,
 };

@@ -1,10 +1,8 @@
-import { useState, lazy, Suspense } from 'react';
+import { useState } from 'react';
 import NewUserModal from './components/NewUserModal';
 import styled from 'styled-components';
-import Spinner from '../../components/shared/Spinner';
 import Button from '../../components/shared/Button';
-
-const Table = lazy(() => import('./components/Table'));
+import UserCards from './components/UserCards';
 
 export default function User() {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -13,7 +11,6 @@ export default function User() {
     <>
       <S.ButtonWrapper>
         <Button
-          type="submit"
           onClick={() => setIsOpenModal(true)}
           colorTheme="mint"
           size="small"
@@ -22,11 +19,9 @@ export default function User() {
           고객추가
         </Button>
       </S.ButtonWrapper>
-      <S.Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
-      <Suspense fallback={<Spinner />}>
-        <Table />
-      </Suspense>
-      {isOpenModal && <NewUserModal setIsOpenModal={setIsOpenModal} />}
+      <S.Ref>※ 고객 카드를 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
+      <UserCards />
+      <NewUserModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
     </>
   );
 }
