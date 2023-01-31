@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { User } from '../../../types/user';
 
 export default function useSearch() {
-  const { page, setPage, hasMore, setHasMore, ref, inView } = useInfiniteScroll();
+  const { setPage, hasMore, setHasMore, ref, inView } = useInfiniteScroll();
   const search = useAppSelector((state) => state.reducers.search);
   const [result, setResult] = useState<User[]>([]);
 
@@ -16,12 +16,9 @@ export default function useSearch() {
 
   useEffect(() => {
     if (!inView || !hasMore || search.isLoading) return;
+    getUsers();
     setPage((prev) => prev + 1);
   }, [inView, hasMore]);
-
-  useEffect(() => {
-    getUsers();
-  }, [page]);
 
   return {
     search,
