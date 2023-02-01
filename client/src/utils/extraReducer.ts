@@ -22,21 +22,7 @@ const extraReducerStatus = {
   },
 };
 
-export const extraReducerUtils = (
-  thunk:
-    | AsyncThunk<any, Record<string, string | undefined> | undefined, {}>
-    | AsyncThunk<any, Record<string, string> | Record<string, number> | undefined, {}>
-    | AsyncThunk<
-        any,
-        {
-          id: number | null;
-          newName: string;
-        },
-        {}
-      >
-    | AsyncThunk<any, number | null, {}>
-    | AsyncThunk<any, User, {}>,
-) => {
+export const extraReducerUtils = (thunk: any) => {
   return {
     [thunk.pending.type]: extraReducerStatus.pending,
     [thunk.fulfilled.type]: extraReducerStatus.fulfilled,
