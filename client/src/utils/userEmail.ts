@@ -1,4 +1,5 @@
-const storage = localStorage;
+import { storage } from './user';
+
 const USER_EMAIL = 'USER_EMAIL';
 
 export const UserEmail = {

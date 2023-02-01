@@ -1,4 +1,5 @@
-const storage = localStorage;
+import { storage } from './user';
+
 const USER_TOKEN_KEY = 'ACCESS_TOKEN';
 
 export const UserToken = {

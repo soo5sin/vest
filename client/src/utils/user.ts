@@ -1,5 +1,7 @@
 import { User } from '../types/user';
 
+export const storage = localStorage;
+
 export const findUserNameById = (users: User[], id: number) => {
   const userName = users.find((user) => user.id === id)?.name;
   return userName ? userName : false;
