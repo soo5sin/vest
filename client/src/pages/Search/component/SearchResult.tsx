@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
-import Thead from '../../../components/shared/table/Thead';
-import { User } from '../../../types/user';
 import UserCard from '../../User/components/UserCard';
-import UserCards from '../../User/components/UserCards';
 import useAccounts from '../../User/hooks/useAccounts';
 import useSearch from '../hooks';
 
@@ -18,7 +15,7 @@ export default function SearchResult() {
       <S.Container>
         {search.data.length ? (
           search.data.map((user, index) => {
-            const userAccounts = accounts.data.filter((account) => user.id === account.user_id);
+            const userAccounts = accounts.filter((account) => user.id === account.user_id);
             return <UserCard key={index} user={user} userAccounts={userAccounts} />;
           })
         ) : (

@@ -10,7 +10,7 @@ export default function UserCards() {
   return (
     <S.Container>
       {users.data.map((user, index) => {
-        const userAccounts = accounts.data.filter((account) => user.id === account.user_id);
+        const userAccounts = accounts.filter((account) => user.id === account.user_id);
         return <UserCard key={index} user={user} userAccounts={userAccounts} />;
       })}
       <div ref={ref} />
