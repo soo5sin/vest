@@ -4,6 +4,7 @@ import Thead from '../../../components/shared/table/Thead';
 import { Account } from '../../../types/account';
 import TbodyRow from './TbodyRow';
 import useAccountList from '../hooks/useAccountList';
+import Spinner from '../../../components/shared/Spinner';
 
 export default function AccountListBox() {
   const { ref, accounts, users } = useAccountList();
@@ -15,19 +16,14 @@ export default function AccountListBox() {
       <S.Table>
         <Thead type="account" />
         <tbody>
-          {accounts.data.length ? (
+          {accounts.data.length > 0 &&
             accounts.data.map((account: Account, index) => (
               <TbodyRow account={account} key={index} users={users} />
-            ))
-          ) : (
-            <tr>
-              <S.Empty colSpan={9}>검색 결과가 없습니다.</S.Empty>
-            </tr>
-          )}
+            ))}
         </tbody>
       </S.Table>
       <div ref={ref} />
-      {accounts.isLoading && <S.Loading>Loading...</S.Loading>}
+      {accounts.isLoading && <Spinner />}
     </>
   );
 }
@@ -42,10 +38,5 @@ const S = {
   Empty: styled.td`
     text-align: center;
     padding: 10px;
-  `,
-  Loading: styled.div`
-    text-align: center;
-    margin: 30px 0 30px 0;
-    font-weight: bold;
   `,
 };

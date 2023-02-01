@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import Error from '../../../components/shared/error/Error';
+import Spinner from '../../../components/shared/Spinner';
 import UserCard from '../../User/components/UserCard';
 import useAccounts from '../../User/hooks/useAccounts';
-import useSearch from '../hooks';
+import useSearch from '../hooks/useSearch';
 
 export default function SearchResult() {
   const { search, ref } = useSearch();
@@ -22,8 +23,8 @@ export default function SearchResult() {
           <div>검색 결과가 없습니다😵‍💫</div>
         )}
         <div ref={ref} />
-        {search.isLoading && <S.Loading>Loading...</S.Loading>}
       </S.Container>
+      {search.isLoading && <Spinner />}
     </>
   );
 }
@@ -38,10 +39,5 @@ const S = {
   Empty: styled.td`
     text-align: center;
     padding: 10px;
-  `,
-  Loading: styled.div`
-    text-align: center;
-    margin: 30px 0 30px 0;
-    font-weight: bold;
   `,
 };

@@ -1,17 +1,12 @@
-import { lazy, Suspense } from 'react';
 import styled from 'styled-components';
-import Spinner from '../../components/shared/Spinner';
-
-const AccountListBox = lazy(() => import('./components/AccountListBox'));
+import AccountListBox from './components/AccountListBox';
 
 export default function Account() {
   return (
     <>
       <S.Ref>※ 고객명을 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
       <S.Ref>※ 계좌 번호를 클릭하면 해당 계좌의 상세 페이지로 이동합니다.</S.Ref>
-      <Suspense fallback={<Spinner />}>
-        <AccountListBox />
-      </Suspense>
+      <AccountListBox />
     </>
   );
 }

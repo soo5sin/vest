@@ -11,10 +11,7 @@ to{
 
 const S = {
   LoadingSpinner: styled.div`
-    display: block;
-    position: absolute;
-    left: 50%;
-    top: 30%;
+    margin: 0 auto;
     width: 50px;
     height: 50px;
     border: 4px solid ${({ theme }) => theme.palette.MAIN_COLOR};
