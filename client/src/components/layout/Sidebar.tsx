@@ -33,7 +33,7 @@ export default function Sidebar() {
 
   return (
     <S.Container>
-      <h1>fint</h1>
+      <S.Logo>vest</S.Logo>
       {siderContent.map((sider) => (
         <Link to={sider.link} key={sider.id}>
           <S.MenuWrapper active={CurrentPage === sider.keyword}>
@@ -90,7 +90,9 @@ const S = {
     background: ${({ theme }) => theme.palette.MAIN_COLOR};
     color: ${({ theme }) => theme.palette.WHITE};
   `,
-
+  Logo: styled.h1`
+    font-family: fantasy;
+  `,
   Name: styled.span`
     margin-left: 10px;
   `,

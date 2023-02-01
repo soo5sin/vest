@@ -10,7 +10,7 @@ export default function Header() {
 
   const getCurrentMenuName = () => {
     const currentMenuName = siderContent.find((sider) => sider.link.includes(CurrentPage))?.name;
-    return currentMenuName ? currentMenuName : 'fint';
+    return currentMenuName ? currentMenuName : 'vest';
   };
 
   const currentMenuName = useMemo(() => getCurrentMenuName(), [CurrentPage]);
