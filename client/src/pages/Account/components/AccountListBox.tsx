@@ -8,7 +8,7 @@ import useAccountList from '../hooks/useAccountList';
 export default function AccountListBox() {
   const { ref, accounts, users } = useAccountList();
 
-  if (accounts.error || users.error) return <Error error="data fetching error" />;
+  if (accounts.error) return <Error error="data fetching error" />;
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function AccountListBox() {
         <tbody>
           {accounts.data.length ? (
             accounts.data.map((account: Account, index) => (
-              <TbodyRow account={account} key={index} users={users.data} />
+              <TbodyRow account={account} key={index} users={users} />
             ))
           ) : (
             <tr>
