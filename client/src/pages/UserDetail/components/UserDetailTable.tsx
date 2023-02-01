@@ -74,6 +74,10 @@ const S = {
   Table: styled.table`
     margin-bottom: 70px;
     width: 900px;
+    background-color: ${({ theme }) => theme.palette.WHITE};
+    padding: 40px;
+    border-radius: 20px;
+    color: ${({ theme }) => theme.palette.GRAY_700};
   `,
 
   Tr: styled.tr`

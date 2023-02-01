@@ -13,7 +13,7 @@ const USER = {
 
 export const getUserThunk = createAsyncThunk(
   USER.GET,
-  async (params?: Record<string, string | undefined>) => {
+  async (params?: Record<string, number | null | string | undefined>) => {
     try {
       const response = await api.get(`/users`, { params });
       const user = response.data[0];
@@ -76,6 +76,7 @@ const INITIAL_USER = {
   uuid: '',
   photo: '',
   name: '',
+  password: '',
   email: '',
   age: 0,
   gender_origin: 0,
