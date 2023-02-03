@@ -1,27 +1,25 @@
-import { useState } from 'react';
-import NewUserModal from './components/NewUserModal';
 import styled from 'styled-components';
 import Button from '../../components/shared/Button';
 import UserCards from './components/UserCards';
+import NewUserForm from './components/NewUserForm';
+import Modal from '../../components/shared/Modal';
+import useModal from '../../hooks/useModal';
 
 export default function User() {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const { closeModalHandler, openModalHandler, isOpenModal } = useModal();
 
   return (
     <>
       <S.ButtonWrapper>
-        <Button
-          onClick={() => setIsOpenModal(true)}
-          colorTheme="lightGreen"
-          size="small"
-          borderRadius="5px"
-        >
+        <Button onClick={openModalHandler} colorTheme="lightGreen" size="small" borderRadius="5px">
           고객추가
         </Button>
       </S.ButtonWrapper>
       <S.Ref>※ 고객 카드를 클릭하면 해당 고객의 상세 페이지로 이동합니다.</S.Ref>
       <UserCards />
-      <NewUserModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      <Modal isOpenModal={isOpenModal} closeModalHandler={closeModalHandler}>
+        <NewUserForm closeModalHandler={closeModalHandler} />
+      </Modal>
     </>
   );
 }

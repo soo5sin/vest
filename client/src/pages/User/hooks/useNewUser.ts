@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { INITIAL_USER } from '../../../constants/user';
 import { useAppDispatch } from '../../../store';
 import { addUserThunk } from '../../../store/reducers/user';
-import { getUsersThunk } from '../../../store/reducers/users';
 import { stringToBoolean } from '../../../utils/stringToboolean';
 
-export default function useNewUser(setIsOpenModal: React.Dispatch<React.SetStateAction<boolean>>) {
+export default function useNewUser(closeModalHandler: VoidFunction) {
   const dispatch = useAppDispatch();
   const [newUser, setNewUser] = useState(INITIAL_USER);
   const {
@@ -23,8 +22,7 @@ export default function useNewUser(setIsOpenModal: React.Dispatch<React.SetState
     e.preventDefault();
     await dispatch(addUserThunk(newUser));
     setNewUser(INITIAL_USER);
-    setIsOpenModal(false);
-    dispatch(getUsersThunk());
+    closeModalHandler();
   };
 
   const onChangeInputHandler = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -34,7 +32,6 @@ export default function useNewUser(setIsOpenModal: React.Dispatch<React.SetState
 
   return {
     submitForm,
-    setIsOpenModal,
     onChangeInputHandler,
     name,
     email,
