@@ -1,19 +1,18 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
-import { useParams } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 import styled from 'styled-components';
 import Button from '../../components/shared/Button';
+import Modal from '../../components/shared/Modal';
 import Spinner from '../../components/shared/Spinner';
-import { Account } from '../../types/account';
-import { getAccountsById } from '../../utils/getAccountsById';
-import EditUserModal from './components/EditUserModal';
+import useModal from '../../hooks/useModal';
+import EditUserForm from './components/EditUserForm';
 import useAccountsDetail from './hooks/useAccountsDetail';
 
 const AccountDetailTable = lazy(() => import('./components/AccountDetailTable'));
 const UserDetailTable = lazy(() => import('./components/UserDetailTable'));
 
 export default function UserDetail() {
-  const [isOpenModal, setIsOpenModal] = useState(false);
   const { accounts } = useAccountsDetail();
+  const { isOpenModal, closeModalHandler, openModalHandler } = useModal();
 
   return (
     <>
@@ -24,7 +23,7 @@ export default function UserDetail() {
             size="small"
             colorTheme="default"
             borderRadius="8px"
-            onClick={() => setIsOpenModal(true)}
+            onClick={openModalHandler}
           >
             수정
           </Button>
@@ -39,7 +38,9 @@ export default function UserDetail() {
           ))}
         </Suspense>
       </S.Container>
-      <EditUserModal setIsOpenModal={setIsOpenModal} isOpenModal={isOpenModal} />
+      <Modal isOpenModal={isOpenModal} closeModalHandler={closeModalHandler}>
+        <EditUserForm closeModalHandler={closeModalHandler} />
+      </Modal>
     </>
   );
 }
